@@ -11,7 +11,7 @@
   "homepage": "https://github.com/hieupham0206/basecore",
   "keywords": [
     "Laravel",
-    "BaseCore"
+    "Cloudteam"
   ],
   "require": {
     "illuminate/support": "~5",

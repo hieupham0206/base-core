@@ -2,8 +2,6 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
 
 This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
 
@@ -42,7 +40,7 @@ If you discover any security related issues, please email author email instead o
 
 ## License
 
-license. Please see the [license file](license.md) for more information.
+Please see the [license file](license.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/cloudteam/basecore.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/cloudteam/basecore.svg?style=flat-square
