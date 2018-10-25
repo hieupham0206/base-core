@@ -57,7 +57,7 @@ class CrudTableCommand extends GeneratorCommand
         $dataTableNamespace = '';
         if ($namespace) {
             $tableNamespace     = "App\Tables\\" . $namespace;
-            $dataTableNamespace = "use App\Tables\DataTable;";
+            $dataTableNamespace = "use Cloudteam\BaseCore\Tables\DataTable;";
         }
 
         $tableValue  = $tableSort = '';

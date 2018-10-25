@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 /**
  * Class CrudControllerCommand
  *
- * php artisan crud:controller BrandsController --crud=location --model=Brand --namespace=Business --validations=name#required
+ * php artisan crud:controller BrandsController --crud=brands --model=Brand --namespace=Business --validations=name#required
  *
  * @package App\Console\Commands
  */

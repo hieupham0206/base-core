@@ -4,7 +4,7 @@ namespace DummyNamespace;
 
 BaseController
 use App\Models\{{modelName}};
-use App\Tables\TableFacade;
+use Cloudteam\BaseCore\Tables\TableFacade;
 TableNamespace
 use Illuminate\Http\Request;
 

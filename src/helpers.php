@@ -1,30 +1,4 @@
 <?php
-if ( ! function_exists('dateranges')) {
-    /**
-     * @param $start
-     * @param $end
-     * @param string $format
-     *
-     * @return array
-     * @throws Exception
-     */
-    function dateranges($start, $end, $format = 'd-m-Y')
-    {
-        $array    = array();
-        $interval = new DateInterval('P1D');
-
-        $realEnd = new DateTime($end);
-        $realEnd->add($interval);
-
-        $period = new DatePeriod(new DateTime($start), $interval, $realEnd);
-
-        foreach ($period as $date) {
-            $array[] = $date->format($format);
-        }
-
-        return $array;
-    }
-}
 
 if ( ! function_exists('camel2words')) {
     /**
@@ -110,32 +84,6 @@ if ( ! function_exists('getPermissionConfig')) {
     }
 }
 
-if ( ! function_exists('can')) {
-    /**
-     * Check quyền và vai trò
-     *
-     * @param string|array $permissions
-     * @param string $role
-     *
-     * @return bool
-     */
-    function can($permissions, $role = 'Admin')
-    {
-        /** @var \App\Models\User $user */
-        $user = auth()->user();
-
-        if ( ! $user) {
-            return false;
-        }
-
-        if (is_array($permissions)) {
-            return $user->hasRole($role) || $user->hasAnyPermission($permissions);
-        }
-
-        return $user->hasRole($role) || $user->can($permissions);
-    }
-}
-
 if ( ! function_exists('isValueEmpty')) {
     /**
      * Returns a value indicating whether the give value is "empty".
@@ -154,27 +102,5 @@ if ( ! function_exists('isValueEmpty')) {
     function isValueEmpty($value)
     {
         return $value === '' || $value === [] || $value === null || (\is_string($value) && trim($value) === '');
-    }
-}
-
-if ( ! function_exists('setEnvValue')) {
-    /**
-     * Thay đổi giá trị config trong file .env
-     *
-     * @param $envKey
-     * @param $envValue
-     */
-    function setEnvValue($envKey, $envValue)
-    {
-        $envFile = app()->environmentFilePath();
-        $str     = file_get_contents($envFile);
-
-        $oldValue = env($envKey);
-
-        $str = str_replace("{$envKey}={$oldValue}", "{$envKey}={$envValue}", $str);
-
-        $fopen = fopen($envFile, 'wb');
-        fwrite($fopen, $str);
-        fclose($fopen);
     }
 }
