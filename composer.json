@@ -15,7 +15,6 @@
   ],
   "require": {
     "illuminate/support": "~5",
-    "spatie/laravel-activitylog": "^3.0",
     "bensampo/laravel-enum": "^1.15",
     "reliese/laravel": "^0.0.13",
     "barryvdh/laravel-ide-helper": "^2.4"
