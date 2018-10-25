@@ -1,0 +1,49 @@
+{
+  "name": "cloudteam/basecore",
+  "description": ":description",
+  "license": "license",
+  "authors": [
+    {
+      "name": "Phạm Quang Hiếu",
+      "email": "hieu.pham@cloudteam.vn"
+    }
+  ],
+  "homepage": "https://github.com/hieupham0206/basecore",
+  "keywords": [
+    "Laravel",
+    "BaseCore"
+  ],
+  "require": {
+    "illuminate/support": "~5",
+    "spatie/laravel-activitylog": "^3.0",
+    "bensampo/laravel-enum": "^1.15",
+    "reliese/laravel": "^0.0.13",
+    "barryvdh/laravel-ide-helper": "^2.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~7.0",
+    "mockery/mockery": "^1.1",
+    "orchestra/testbench": "~3.0",
+    "sempro/phpunit-pretty-print": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cloudteam\\BaseCore\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Cloudteam\\BaseCore\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Cloudteam\\BaseCore\\BaseCoreServiceProvider"
+      ],
+      "aliases": {
+        "BaseCore": "Cloudteam\\BaseCore\\Facades\\BaseCore"
+      }
+    }
+  }
+}
