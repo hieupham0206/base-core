@@ -272,7 +272,7 @@ class CrudViewCommand extends Command
     public function handle()
     {
         $formHelper              = 'html';
-        $this->viewDirectoryPath = __DIR__ . '/../stubs/views/' . $formHelper . '/';
+        $this->viewDirectoryPath = \dirname(__DIR__) . '/stubs/views/' . $formHelper . '/';
 
         $this->route       = $this->argument('name');
         $this->crudName    = snake_case($this->argument('name'));
@@ -331,9 +331,10 @@ class CrudViewCommand extends Command
                         $enumClassName = collect($options)->last();
                         $enumAttribute = lcfirst(str_plural($enumClassName));
                         $enumVariable  = lcfirst($enumClassName);
+                        $modelEnumField = $this->crudNameSingular . '->'. $this->formFields[$idx]['name'];
 
                         $optionValues .= '@foreach($' . $this->crudNameSingular . '->' . $enumAttribute . ' as $key => $' . $enumVariable . ')' . "\n";
-                        $optionValues .= '<option value="{{ $key }}" {{ $' . $enumVariable . ' == $key ? \' selected\' : \'\' }}>{{ $' . $enumVariable . ' }}</option>' . "\n";
+                        $optionValues .= '<option value="{{ $key }}" {{ $' . $modelEnumField . ' == $key ? \' selected\' : \'\' }}>{{ $' . $enumVariable . ' }}</option>' . "\n";
                         $optionValues .= '@endforeach' . "\n";
 
                         //tạo file class enum

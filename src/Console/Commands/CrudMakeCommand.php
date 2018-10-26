@@ -256,7 +256,7 @@ class CrudMakeCommand extends Command
         foreach ($jsFiles as $jsFile) {
             $fileJsName = str_replace('.stub', '', $jsFile);
             $file       = new Filesystem();
-            $stubPath   = str_replace('\\', '/', app_path() . "/Console/stubs/views/js/{$jsFile}");
+            $stubPath   = str_replace('\\', '/', \dirname(__DIR__) . "/stubs/views/js/{$jsFile}");
             $stub       = $file->get($stubPath);
 
             $this->replaceRoute($stub, $crud)
