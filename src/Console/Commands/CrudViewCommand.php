@@ -52,28 +52,13 @@ class CrudViewCommand extends Command
         'char'       => 'text',
         'varchar'    => 'text',
         'text'       => 'textarea',
-        'mediumtext' => 'textarea',
-        'longtext'   => 'textarea',
-        'json'       => 'textarea',
-        'jsonb'      => 'textarea',
-        'binary'     => 'textarea',
         'password'   => 'password',
         'email'      => 'email',
         'number'     => 'number',
-        'integer'    => 'number',
-        'bigint'     => 'number',
-        'mediumint'  => 'number',
-        'tinyint'    => 'number',
-        'smallint'   => 'number',
-        'decimal'    => 'number',
-        'double'     => 'number',
-        'float'      => 'number',
         'date'       => 'date',
         'datetime'   => 'datetime-local',
-        'timestamp'  => 'datetime-local',
         'time'       => 'time',
         'boolean'    => 'radio',
-        'enum'       => 'select',
         'select'     => 'select',
         'file'       => 'file',
     ];
@@ -103,7 +88,7 @@ class CrudViewCommand extends Command
         'formSearchHtml',
         'viewTemplateDir',
         'formBodyHtmlForShowView',
-        'userViewPath'
+        'userViewPath',
     ];
 
     /**
@@ -327,11 +312,11 @@ class CrudViewCommand extends Command
                     $optionValues = "<option></option>\n";
                     if (starts_with($options, 'enum')) {
                         //options=enum**className
-                        $options       = explode('**', $options);
-                        $enumClassName = collect($options)->last();
-                        $enumAttribute = lcfirst(str_plural($enumClassName));
-                        $enumVariable  = lcfirst($enumClassName);
-                        $modelEnumField = $this->crudNameSingular . '->'. $this->formFields[$idx]['name'];
+                        $options        = explode('**', $options);
+                        $enumClassName  = ucfirst(collect($options)->last());
+                        $enumAttribute  = lcfirst(str_plural($enumClassName));
+                        $enumVariable   = lcfirst($enumClassName);
+                        $modelEnumField = $this->crudNameSingular . '->' . $this->formFields[$idx]['name'];
 
                         $optionValues .= '@foreach($' . $this->crudNameSingular . '->' . $enumAttribute . ' as $key => $' . $enumVariable . ')' . "\n";
                         $optionValues .= '<option value="{{ $key }}" {{ $' . $modelEnumField . ' == $key ? \' selected\' : \'\' }}>{{ $' . $enumVariable . ' }}</option>' . "\n";
@@ -339,7 +324,7 @@ class CrudViewCommand extends Command
 
                         //tạo file class enum
                         $this->call('make:enum', [
-                            'name' => $enumClassName
+                            'name' => $enumClassName,
                         ]);
                     } elseif (\strpos($options, '**', true) !== false) {
                         //options=1_value1**2_value2
@@ -491,14 +476,15 @@ class CrudViewCommand extends Command
         $type = str_replace("'", '', $item['type']);
         switch ($this->typeLookup[$type]) {
             case 'datetime-local':
+            case 'date':
             case 'time':
+            case 'number':
                 return $this->createInputField($item);
             case 'radio':
                 return $this->createRadioField($item);
             case 'textarea':
                 return $this->createTextareaField($item);
             case 'select':
-            case 'enum':
                 return $this->createSelectField($item);
             default: // text
                 return $this->createFormField($item);
@@ -541,10 +527,23 @@ class CrudViewCommand extends Command
     {
         [$start, $end] = $this->delimiter;
 
-        $required = $item['required'] ? 'required' : '';
+        $required    = $item['required'] ? 'required' : '';
+        $customClass = '';
+
+        if ($item['type'] === 'date') {
+            $customClass = 'text-datepicker';
+        } elseif ($item['type'] === 'datetime') {
+            $customClass = 'text-datetimepicker';
+        } elseif ($item['type'] === 'time') {
+            $customClass = 'text-timepicker';
+        } elseif ($item['type'] === 'number') {
+            $customClass = 'numeric';
+        }
 
         $markup = File::get($this->viewDirectoryPath . 'form-fields/input-field.blade.stub');
-        $markup = str_replace([$start . 'required' . $end, $start . 'fieldType' . $end, $start . 'itemName' . $end, $start . 'crudNameSingular' . $end], [$required, $this->typeLookup[$item['type']], $item['name'], $this->crudNameSingular],
+        $markup = str_replace(
+            [$start . 'required' . $end, $start . 'fieldType' . $end, $start . 'itemName' . $end, $start . 'crudNameSingular' . $end, $start . 'customClass' . $end],
+            [$required, $this->typeLookup[$item['type']], $item['name'], $this->crudNameSingular, $customClass],
             $markup);
 
         return $this->wrapField(
