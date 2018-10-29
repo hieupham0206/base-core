@@ -5,7 +5,7 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.index'];
 @extends("$layout.app")
 
 @push('scripts')
-    <script src="{{ asset('js/%%viewTemplateDir%%/index.js') }}"></script>
+    <script src="{{ mix('js/%%viewTemplateDir%%/index.js') }}"></script>
 @endpush
 
 @section('title', $%%crudNameSingular%%->classLabel())
