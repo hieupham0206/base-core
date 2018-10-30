@@ -60,7 +60,7 @@ abstract class DataTable
 
     abstract public function getModels();
 
-    public function getColumn(): string
+    public function getSortColumn(): string
     {
         return $this->column;
     }

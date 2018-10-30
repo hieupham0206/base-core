@@ -6,19 +6,6 @@ use App\Models\{{modelName}};
 TableNamespace
 
 class {{modelName}}Table extends DataTable {
-	public function getColumn(): string {
-		$column = $this->column;
-
-		switch ( $column ) {
-		    {{tableSort}}
-			default:
-				$column = '{{crudName}}.id';
-				break;
-		}
-
-		return $column;
-	}
-
     /**
      * @return array
      * @throws \ReflectionException
@@ -34,31 +21,29 @@ class {{modelName}}Table extends DataTable {
 
 		/** @var {{modelName}}[] ${{crudNameSingular}}s */
 		foreach ( ${{crudNameSingular}}s as ${{crudNameSingular}} ) {
-		    $btnEdit = $btnDelete = '';
-
-		    if ($canUpdate{{modelName}}) {
-		        $btnEdit = ' <a href="' . route( '{{crudName}}.edit', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--pill" title="' . __( 'Edit' ) . '">
-					<i class="fa fa-edit"></i>
-				</a>';
-		    }
-
-		    if ($canDelete{{modelName}}) {
-                $btnDelete = ' <button type="button" data-title="'.__('Delete').' ' . $modelName . ' ' . ${{crudNameSingular}}->name . ' !!!" class="btn btn-sm btn-danger btn-delete m-btn m-btn--icon m-btn--icon-only m-btn--pill"
-                data-url="' . route( '{{crudName}}.destroy', ${{crudNameSingular}}, false ) . '" title="' . __( 'Delete' ). '">
-                    <i class="fa fa-trash"></i>
-                </button>';
-            }
+		    $htmlAction = $this->generateButtonAction($modelName, ${{crudNameSingular}}, $canUpdate{{modelName}}, $canDelete{{modelName}});
 
 			$dataArray[] = [
 				'<label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand"><input type="checkbox" value="'.${{crudNameSingular}}->id.'"><span></span></label>',
 				{{tableValue}}
-				'<a href="' . route( '{{crudName}}.show', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--pill" title="' . __( 'View' ) . '">
-					<i class="fa fa-eye"></i>
-				</a>' . $btnEdit . $btnDelete
+				$htmlAction
 			];
 		}
 
 		return $dataArray;
+	}
+
+	public function getSortColumn(): string {
+		$column = $this->column;
+
+		switch ( $column ) {
+		    {{tableSort}}
+			default:
+				$column = '{{crudName}}.id';
+				break;
+		}
+
+		return $column;
 	}
 
 	/**
@@ -77,5 +62,28 @@ class {{modelName}}Table extends DataTable {
 
 		return ${{crudNameSingular}}s->limit( $this->length )->offset( $this->start )
 		                 ->orderBy( $this->column, $this->direction )->get();
+	}
+
+	protected function generateButtonAction($modelName, ${{crudNameSingular}}, $canUpdate{{modelName}}, $canDelete{{modelName}}): string {
+	    $btnEdit = $btnDelete = '';
+
+        if ($canUpdate{{modelName}}) {
+            $btnEdit = ' <a href="' . route( '{{crudName}}.edit', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-edit btn-primary m-btn m-btn--icon m-btn--icon-only m-btn--pill" title="' . __( 'Edit' ) . '">
+                <i class="fa fa-edit"></i>
+            </a>';
+        }
+
+        if ($canDelete{{modelName}}) {
+            $btnDelete = ' <button type="button" data-title="'.__('Delete').' ' . $modelName . ' ' . ${{crudNameSingular}}->name . ' !!!" class="btn btn-sm btn-delete btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--pill"
+            data-url="' . route( '{{crudName}}.destroy', ${{crudNameSingular}}, false ) . '" title="' . __( 'Delete' ). '">
+                <i class="fa fa-trash"></i>
+            </button>';
+        }
+
+        $htmlAction = '<a href="' . route( '{{crudName}}.show', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-view btn-info m-btn m-btn--icon m-btn--icon-only m-btn--pill" title="' . __( 'View' ) . '">
+                      					<i class="fa fa-eye"></i>
+                      				</a>' . $btnEdit . $btnDelete;
+
+        return $htmlAction;
 	}
 }
