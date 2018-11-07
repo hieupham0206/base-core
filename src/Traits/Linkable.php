@@ -10,7 +10,7 @@ trait Linkable
      *
      * @return string
      */
-    public function getViewLink($text = '', $font = 'brand'): string
+    public function getViewLink($text = null, $font = 'brand'): string
     {
         $modelValName = $text ?? $this->{$this->displayAttribute};
 
@@ -25,7 +25,7 @@ trait Linkable
      *
      * @return string
      */
-    public function getEditLink($text = '', $font = 'brand'): string
+    public function getEditLink($text = null, $font = 'brand'): string
     {
         $modelValName = $text ?? $this->{$this->displayAttribute};
 

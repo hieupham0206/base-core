@@ -17,7 +17,7 @@ trait Responsible
      * Relation user tạo model
      * @return HasOne
      */
-    public function createdBy(): HasOne
+    public function createdBy()
     {
         return $this->hasOne(ActivityLog::class, 'subject_id')
                     ->with(['causer'])
@@ -30,7 +30,7 @@ trait Responsible
      * Relation user update model
      * @return HasOne
      */
-    public function updatedBy(): HasOne
+    public function updatedBy()
     {
         return $this->hasOne(ActivityLog::class, 'subject_id')
                     ->with(['causer'])
@@ -43,7 +43,7 @@ trait Responsible
      * Relation user delete model
      * @return HasOne
      */
-    public function deletedBy(): HasOne
+    public function deletedBy()
     {
         return $this->hasOne(ActivityLog::class, 'subject_id')
                     ->with(['causer'])
