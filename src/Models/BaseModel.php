@@ -33,7 +33,7 @@ class BaseModel extends \Illuminate\Database\Eloquent\Model
     public $message = '';
 
     /**
-     * Route của model dùng cho Linkable trait
+     * Route của model dùng cho Linkable trait (tên table của model)
      * @var string
      */
     public $route = '';

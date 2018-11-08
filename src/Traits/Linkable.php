@@ -14,7 +14,7 @@ trait Linkable
     {
         $modelValName = $text ?? $this->{$this->displayAttribute};
 
-        $route = route("{$this->route}.show", $this);
+        $route = route("{$this->route}.show", $this, false);
 
         return "<a target='_blank' class='m-link m--font-bolder m--font-{$font}' href='$route'>$modelValName</a>";
     }
@@ -29,7 +29,7 @@ trait Linkable
     {
         $modelValName = $text ?? $this->{$this->displayAttribute};
 
-        $route = route("{$this->route}.edit", $this);
+        $route = route("{$this->route}.edit", $this, false);
 
         return "<a target='_blank' class='m-link m--font-bolder m--font-{$font}' href='$route'>$modelValName</a>";
     }
