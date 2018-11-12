@@ -15,7 +15,7 @@ trait Queryable
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    public function scopeAndFilterWhere($query, $conditions): \Illuminate\Database\Query\Builder
+    public function scopeAndFilterWhere($query, $conditions)
     {
         if (isValueEmpty($conditions)) {
             return $query;
@@ -39,7 +39,7 @@ trait Queryable
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    public function scopeOrFilterWhere($query, $conditions): \Illuminate\Database\Query\Builder
+    public function scopeOrFilterWhere($query, $conditions)
     {
         if (isValueEmpty($conditions)) {
             return $query;
@@ -67,7 +67,7 @@ trait Queryable
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    public function scopeDateBetween($query, $dates, $column = 'created_at', $format = 'd-m-Y', $boolean = 'and', $not = false): \Illuminate\Database\Query\Builder
+    public function scopeDateBetween($query, $dates, $column = 'created_at', $format = 'd-m-Y', $boolean = 'and', $not = false)
     {
         [$fromDate, $toDate] = $dates;
         if (isValueEmpty($fromDate) || isValueEmpty($toDate)) {
@@ -85,7 +85,7 @@ trait Queryable
 
     /**
      * @param $query
-     * @param $filterDatas         Data dùng để filter
+     * @param array $filterDatas Dữ liệu dùng để filter
      * @param string $boolean
      * @param array $filterConfigs Custom filter config
      *
