@@ -11,6 +11,7 @@ use Cloudteam\BaseCore\Traits\Responsible;
 /**
  * App\Models\BaseModel
  *
+ * @property-read mixed $created_at_text
  * @method static \Illuminate\Database\Eloquent\Builder|BaseModel andFilterWhere($conditions)
  * @method static \Illuminate\Database\Eloquent\Builder|BaseModel dateBetween($dates, $column = 'created_at', $format = 'd-m-Y', $boolean = 'and', $not = false)
  * @method static \Illuminate\Database\Eloquent\Builder|BaseModel filters($filterDatas, $boolean = 'and', $filterConfigs = null)

@@ -11,7 +11,7 @@ final class Confirmation extends Enum
 
     public static function getDescription($value): string
     {
-        if ($value === self::NO) {
+        if ($value === self::NO || empty($value)) {
             return __('No');
         }
 

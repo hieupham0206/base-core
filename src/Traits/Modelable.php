@@ -10,7 +10,12 @@ namespace Cloudteam\BaseCore\Traits;
 
 trait Modelable
 {
-    public function getCreatedAtAttribute($value): string
+    public function getCreatedAtTextAttribute($value): string
+    {
+        return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
+    }
+
+    public function getUpdatedAtTextAttribute($value): string
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
     }
