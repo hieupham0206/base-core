@@ -15,7 +15,7 @@ trait UserOnlineTrait
 {
     public function getCachedAt()
     {
-        if (empty($cache = Cache::get($this->getCacheKey()))) {
+        if (empty($cache = Cache::get($this->getKeyCache()))) {
             return 0;
         }
 
@@ -24,30 +24,30 @@ trait UserOnlineTrait
 
     public function isOnline()
     {
-        return Cache::has($this->getCacheKey());
+        return Cache::has($this->getKeyCache());
     }
 
-    public function getCacheKey()
+    public function getKeyCache()
     {
         return sprintf('%s-%s', 'UserOnline', $this->id);
     }
 
     public function leastRecentOnline()
     {
-        return $this->allOnline()
+        return $this->getAllOnline()
                     ->sortBy(function ($user) {
                         return $user->getCachedAt();
                     });
     }
 
-    public function allOnline()
+    public function getAllOnline()
     {
         return $this->all()->filter->isOnline();
     }
 
     public function mostRecentOnline()
     {
-        return $this->allOnline()
+        return $this->getAllOnline()
                     ->sortByDesc(function ($user) {
                         return $user->getCachedAt();
                     });
@@ -55,17 +55,17 @@ trait UserOnlineTrait
 
     public function pullCache()
     {
-        Cache::pull($this->getCacheKey());
+        Cache::pull($this->getKeyCache());
     }
 
     public function setCache($minutes = 5)
     {
-        Cache::put($this->getCacheKey(), $this->getCacheContent(), $minutes);
+        Cache::put($this->getKeyCache(), $this->getCacheContent(), $minutes);
     }
 
     public function getCacheContent()
     {
-        if ( ! empty($cache = Cache::get($this->getCacheKey()))) {
+        if ( ! empty($cache = Cache::get($this->getKeyCache()))) {
             return $cache;
         }
         $cachedAt = Carbon::now();
