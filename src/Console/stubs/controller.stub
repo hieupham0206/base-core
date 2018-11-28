@@ -62,7 +62,8 @@ class DummyClass extends Controller
 
         if ($request->wantsJson()) {
             return $this->asJson([
-                'message' => __('Data created successfully')
+                'message' => __('Data created successfully'),
+                'redirect_url' => route('{{routeName}}.show', ${{crudNameSingular}})
             ]);
         }
 
@@ -111,7 +112,8 @@ class DummyClass extends Controller
 
         if ($request->wantsJson()) {
             return $this->asJson([
-                'message' => __('Data edited successfully')
+                'message' => __('Data edited successfully'),
+                'redirect_url' => route('{{routeName}}.show', ${{crudNameSingular}})
             ]);
         }
 
