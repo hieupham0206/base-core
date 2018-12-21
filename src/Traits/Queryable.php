@@ -79,13 +79,13 @@ trait Queryable
 
         return $query->whereBetween($column, [
             $fromDate->toDateString() . ' 00:00:00',
-            $toDate->toDateString() . ' 23:59:59'
+            $toDate->toDateString() . ' 23:59:59',
         ], $boolean, $not);
     }
 
     /**
      * @param $query
-     * @param array $filterDatas Dữ liệu dùng để filter
+     * @param array $filterDatas   Dữ liệu dùng để filter
      * @param string $boolean
      * @param array $filterConfigs Custom filter config
      *
@@ -141,20 +141,20 @@ trait Queryable
             foreach ($this->conditions as $condition) {
                 [$column, $value, $boolean, $operator, $isForeignKey, $relation, $table] = $condition;
                 if ($isForeignKey) {
-                    return $subQuery->whereHas($relation, function (Builder $q) use ($column, $value, $operator, $boolean, $table) {
+                    $subQuery->whereHas($relation, function (Builder $q) use ($column, $value, $operator, $boolean, $table) {
                         if (\is_array($value)) {
                             $q->whereIn($column, $value, $boolean, $operator === '!=');
                         } else {
                             $q->where("$table.$column", $operator, $value, $boolean);
                         }
                     });
-                }
+                } else {
+                    if (\is_array($value) && $value) {
+                        $subQuery->whereIn($column, $value, $boolean, $operator === '!=');
+                    }
 
-                if (\is_array($value) && $value) {
-                    $subQuery->whereIn($column, $value, $boolean, $operator === '!=');
+                    $subQuery->where($column, $operator, $value, $boolean);
                 }
-
-                $subQuery->where($column, $operator, $value, $boolean);
             }
 
             return $subQuery;
