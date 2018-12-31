@@ -46,9 +46,16 @@ abstract class DataTable
         }
         if (array_key_exists('filters', $arguments)) {
             $filters       = json_decode($arguments['filters'], JSON_FORCE_OBJECT);
-            $this->filters = collect($filters)->mapWithKeys(function ($filter) {
-                return [$filter['name'] => $filter['value']];
-            })->toArray();
+            $finalFilters = [];
+            foreach ($filters as $filter) {
+                if (isset($finalFilters[$filter['name']])) {
+                    $currentVal = is_array($finalFilters[$filter['name']]) ? $finalFilters[$filter['name']] : [$finalFilters[$filter['name']]];
+                    $finalFilters[$filter['name']] = array_merge([$filter['value']], $currentVal);
+                } else {
+                    $finalFilters[$filter['name']] = $filter['value'];
+                }
+            }
+            $this->filters = $finalFilters;
         }
 
         $this->isFilterNotEmpty = collect($this->filters)->filter(function ($filter) {
