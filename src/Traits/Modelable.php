@@ -12,12 +12,12 @@ trait Modelable
 {
     public function getCreatedAtTextAttribute(): string
     {
-        return $this->created_at->format(config('core.datetime_format', 'd-m-Y H:i:s'));
+        return $this->created_at->format(config('basecore.datetime_format', 'd-m-Y H:i:s'));
     }
 
     public function getUpdatedAtTextAttribute(): string
     {
-        return $this->updated_at->format(config('core.datetime_format', 'd-m-Y H:i:s'));
+        return $this->updated_at->format(config('basecore.datetime_format', 'd-m-Y H:i:s'));
     }
 
     public function getConfirmationsAttribute()
