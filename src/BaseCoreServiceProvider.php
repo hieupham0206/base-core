@@ -62,9 +62,9 @@ class BaseCoreServiceProvider extends ServiceProvider
     protected function bootForConsole()
     {
         // Publishing the configuration file.
-//        $this->publishes([
-//            __DIR__ . '/../config/basecore.php' => config_path('basecore.php'),
-//        ], 'basecore.config');
+        $this->publishes([
+            __DIR__ . '/../config/basecore.php' => config_path('basecore.php'),
+        ], 'basecore.config');
 
         // Publishing the views.
         /*$this->publishes([
