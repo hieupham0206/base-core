@@ -10,14 +10,14 @@ namespace Cloudteam\BaseCore\Traits;
 
 trait Modelable
 {
-    public function getCreatedAtTextAttribute($value): string
+    public function getCreatedAtTextAttribute(): string
     {
-        return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
+        return $this->created_at->format(config('core.datetime_format', 'd-m-Y H:i:s'));
     }
 
-    public function getUpdatedAtTextAttribute($value): string
+    public function getUpdatedAtTextAttribute(): string
     {
-        return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
+        return $this->updated_at->format(config('core.datetime_format', 'd-m-Y H:i:s'));
     }
 
     public function getConfirmationsAttribute()
