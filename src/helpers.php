@@ -24,8 +24,10 @@ if ( ! function_exists('camel2words')) {
 if ( ! function_exists('humanize')) {
     /**
      * Returns a human-readable string from $word.
+     *
      * @param string $word the string to humanize
-     * @param bool $ucAll whether to set all words to uppercase or not
+     * @param bool $ucAll  whether to set all words to uppercase or not
+     *
      * @return string
      */
     function humanize($word, $ucAll = false)
@@ -58,7 +60,9 @@ if ( ! function_exists('variablize')) {
 if ( ! function_exists('underscore')) {
     /**
      * Converts any "CamelCased" into an "underscored_word".
+     *
      * @param string $words the word(s) to underscore
+     *
      * @return string
      */
     function underscore($words)
@@ -75,7 +79,9 @@ if ( ! function_exists('camelize')) {
      * will remove non alphanumeric character from the word, so
      * "who's online" will be converted to "WhoSOnline".
      * @see variablize()
+     *
      * @param string $word the word to CamelCase
+     *
      * @return string
      */
     function camelize($word)
@@ -88,7 +94,7 @@ if ( ! function_exists('formatBytes')) {
     /**
      * Format and convert "bytes" to its optimal higher metric unit
      *
-     * @param double $bytes number of bytes
+     * @param double $bytes      number of bytes
      * @param integer $precision the number of decimal places to round off
      *
      * @return string
@@ -119,7 +125,8 @@ if ( ! function_exists('numberToWord')) {
      */
     function numberToWord($number)
     {
-        return new class ($number) {
+        return new class ($number)
+        {
             private const DICTIONARY = [
                 0                   => 'không',
                 1                   => 'một',
@@ -157,7 +164,7 @@ if ( ! function_exists('numberToWord')) {
                 1000000000000000    => 'nghìn triệu triệu',
                 1000000000000000000 => 'tỷ tỷ',
             ];
-            private $seperator = ' ', $number, $processedNumber;
+            private $seperator = ' ', $number;
 
             public function __construct($number)
             {
@@ -185,7 +192,7 @@ if ( ! function_exists('numberToWord')) {
                     return 'âm ' . $this->numberToWord(abs($number));
                 }
 
-                return $this->processedNumber = $this->processNumber($number);
+                return $this->processNumber($number);
             }
 
             public function numberToWord($number)
