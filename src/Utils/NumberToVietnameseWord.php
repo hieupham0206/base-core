@@ -2,7 +2,7 @@
 
 namespace Cloudteam\BaseCore\Utils;
 
-class Inflector
+class NumberToVietnameseWord
 {
     private const DICTIONARY = [
         0                   => 'không',
@@ -164,24 +164,5 @@ class Inflector
         }
 
         return $string;
-    }
-
-    /**
-     * Normalizes a user-submitted number for use in code and/or to be saved into the database.
-     *
-     * @param $number
-     * @param string $groupSymbol
-     * @param string $decimalSymbol
-     *
-     * @return mixed
-     */
-    public static function normalizeNUmber($number, $groupSymbol = ',', $decimalSymbol = '.')
-    {
-        if (is_string($number)) {
-            // Remove any group symbols and use a period for the decimal symbol
-            $number = str_replace([$groupSymbol, $decimalSymbol], ['', '.'], $number);
-        }
-
-        return $number;
     }
 }
