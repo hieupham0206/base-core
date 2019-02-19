@@ -27,6 +27,13 @@ class BaseCoreServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+
+        // Load the helpers in app/Http/helpers.php
+//        if (file_exists($file = app_path('Http/helpers.php')))
+//        {
+//            /** @noinspection PhpIncludeInspection */
+//            require $file;
+//        }
     }
 
     /**
