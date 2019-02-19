@@ -106,6 +106,213 @@ if ( ! function_exists('formatBytes')) {
         return round($bytes, $precision) . ' ' . $units[$pow];
     }
 }
+
+if ( ! function_exists('numberToWord')) {
+    /**
+     * Chuyển số sang chữ Tiếng Việt
+     *
+     * Ex: numberToWord(123456)()
+     *
+     * @param $number
+     *
+     * @return string
+     */
+    function numberToWord($number)
+    {
+        return new class ($number) {
+            private const DICTIONARY = [
+                0                   => 'không',
+                1                   => 'một',
+                2                   => 'hai',
+                3                   => 'ba',
+                4                   => 'bốn',
+                5                   => 'năm',
+                6                   => 'sáu',
+                7                   => 'bảy',
+                8                   => 'tám',
+                9                   => 'chín',
+                10                  => 'mười',
+                11                  => 'mười một',
+                12                  => 'mười hai',
+                13                  => 'mười ba',
+                14                  => 'mười bốn',
+                15                  => 'mười năm',
+                16                  => 'mười sáu',
+                17                  => 'mười bảy',
+                18                  => 'mười tám',
+                19                  => 'mười chín',
+                20                  => 'hai mươi',
+                30                  => 'ba mươi',
+                40                  => 'bốn mươi',
+                50                  => 'năm mươi',
+                60                  => 'sáu mươi',
+                70                  => 'bảy mươi',
+                80                  => 'tám mươi',
+                90                  => 'chín mươi',
+                100                 => 'trăm',
+                1000                => 'nghìn',
+                1000000             => 'triệu',
+                1000000000          => 'tỷ',
+                1000000000000       => 'nghìn', //ngìn tỷ
+                1000000000000000    => 'nghìn triệu triệu',
+                1000000000000000000 => 'tỷ tỷ',
+            ];
+            private $seperator = ' ', $number, $processedNumber;
+
+            public function __construct($number)
+            {
+                $this->number = $number;
+            }
+
+            public function __invoke()
+            {
+                $number = str_replace(',', '', $this->number);
+
+                if ( ! is_numeric($number)) {
+                    return false;
+                }
+
+                if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
+                    trigger_error(
+                        'only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX,
+                        E_USER_WARNING
+                    );
+
+                    return false;
+                }
+
+                if ($number < 0) {
+                    return 'âm ' . $this->numberToWord(abs($number));
+                }
+
+                return $this->processedNumber = $this->processNumber($number);
+            }
+
+            public function numberToWord($number)
+            {
+                $number = str_replace(',', '', $number);
+
+                if ( ! is_numeric($number)) {
+                    return false;
+                }
+
+                if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
+                    trigger_error(
+                        'only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX,
+                        E_USER_WARNING
+                    );
+
+                    return false;
+                }
+
+                if ($number < 0) {
+                    return 'âm ' . $this->numberToWord(abs($number));
+                }
+
+                return $this->processNumber($number);
+            }
+
+            private function processNumber($number)
+            {
+                $fraction = null;
+
+                if (strpos($number, '.') !== false) {
+                    [$number, $fraction] = explode('.', $number);
+                }
+
+                switch (true) {
+                    case $number < 21:
+                        $string = self::DICTIONARY[$number];
+                        break;
+                    case $number < 100:
+                        $string = $this->generateOnes($number);
+                        break;
+                    case $number < 1000:
+                        $string = $this->generateHundred($number);
+                        break;
+                    default:
+                        $string = $this->generateBeyondThoundsand($number);
+                        break;
+                }
+
+                if (null !== $fraction && is_numeric($fraction)) {
+                    $string .= ' phẩy ';
+                    $words  = [];
+                    foreach (str_split((string) $fraction) as $num) {
+                        $words[] = self::DICTIONARY[$num];
+                    }
+                    $string .= implode(' ', $words);
+                }
+
+                return $string;
+            }
+
+            private function generateOnes($number): string
+            {
+                $tens   = ((int) ($number / 10)) * 10;
+                $units  = $number % 10;
+                $string = self::DICTIONARY[$tens];
+                if ($units) {
+                    $tmpText = $this->seperator . self::DICTIONARY[$units];
+                    if ($units == 1) {
+                        $tmpText = $this->seperator . 'mốt';
+                    } elseif ($units == 5) {
+                        $tmpText = $this->seperator . 'lăm';
+                    }
+                    $string .= $tmpText;
+                }
+
+                return $string;
+            }
+
+            private function generateHundred($number): string
+            {
+                $hundreds  = $number / 100;
+                $remainder = $number % 100;
+                $string    = self::DICTIONARY[$hundreds] . ' ' . self::DICTIONARY[100];
+                if ($remainder) {
+                    $tmpText = $this->seperator . $this->numberToWord($remainder);
+                    if ($remainder < 10) {
+                        $tmpText = $this->seperator . 'lẻ ' . $this->numberToWord($remainder);
+                    } elseif ($remainder % 10 == 5) {
+                        $tmpText = $this->seperator . $this->numberToWord($remainder - 5) . ' lăm';
+                    }
+
+                    $string .= $tmpText;
+                }
+
+                return $string;
+            }
+
+            private function generateBeyondThoundsand($number): string
+            {
+                $baseUnit         = 1000 ** floor(log($number, 1000));
+                $numBaseUnits     = (int) ($number / $baseUnit);
+                $remainder        = $number % $baseUnit;
+                $hundredRemainder = ($remainder / $baseUnit) * 1000;
+
+                $string = $this->numberToWord($numBaseUnits) . ' ' . self::DICTIONARY[$baseUnit];
+                if ($remainder < 100 && $remainder > 0) {
+                    $string = $this->numberToWord($numBaseUnits) . ' ' . self::DICTIONARY[$baseUnit] . ' không trăm';
+                    if ($remainder < 10) {
+                        $string = $this->numberToWord($numBaseUnits) . ' ' . self::DICTIONARY[$baseUnit] . ' không trăm lẻ';
+                    }
+                } elseif ($hundredRemainder > 0 && $hundredRemainder < 100) {
+                    $string = $this->numberToWord($numBaseUnits) . ' ' . self::DICTIONARY[$baseUnit] . ' không trăm';
+                    if ($hundredRemainder < 10) {
+                        $string = $this->numberToWord($numBaseUnits) . ' ' . self::DICTIONARY[$baseUnit] . ' không trăm lẻ';
+                    }
+                }
+
+                if ($remainder) {
+                    $string .= $this->seperator . $this->numberToWord($remainder);
+                }
+
+                return $string;
+            }
+        };
+    }
+}
 //END STRING HELPER
 
 //NUMBER HELPER
