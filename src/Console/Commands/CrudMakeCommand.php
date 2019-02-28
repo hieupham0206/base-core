@@ -4,6 +4,7 @@ namespace Cloudteam\BaseCore\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 
 /**
  * Class CrudAllCommand
@@ -55,10 +56,10 @@ class CrudMakeCommand extends Command
      */
     public function generateCrud($crud, $namespace): void
     {
-        $model          = studly_case(str_singular($crud));
+        $model          = Str::studly(Str::singular($crud));
         $table          = $crud;
-        $controllerName = str_plural($model) . 'Controller';
-        $route          = str_plural(snake_case($model));
+        $controllerName = Str::plural($model) . 'Controller';
+        $route          = Str::plural(Str::snake($model));
 
         //optional
         $fields = $this->option('fields');
@@ -147,7 +148,7 @@ class CrudMakeCommand extends Command
 
     private function makePermission($namespace, $table, $permissions): bool
     {
-        $table             = str_singular($table);
+        $table             = Str::singular($table);
         $permissions       = $permissions ?? ['view', 'create', 'update', 'delete'];
         $jsonFile          = base_path() . '/database/files/permissions.json';
         $permissionConfigs = getPermissionConfig();

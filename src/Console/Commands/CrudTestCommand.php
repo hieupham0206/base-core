@@ -44,7 +44,7 @@ class CrudTestCommand extends GeneratorCommand
     {
         $stub             = $this->files->get($this->getStub());
         $crudName         = strtolower($this->option('crud'));
-        $crudNameSingular = str_singular($this->option('crud'));
+        $crudNameSingular = Str::singular($this->option('crud'));
         $this->modelName  = $this->option('model');
         $viewName         = $this->option('crud');
 

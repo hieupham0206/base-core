@@ -56,8 +56,8 @@ class CrudControllerCommand extends GeneratorCommand
         $stub            = $this->files->get($this->getStub());
         $this->crudName  = $this->option('crud');
         $this->modelName = $this->option('model');
-        $viewName        = str_plural($this->crudName);
-        $routeName       = str_plural($this->crudName);
+        $viewName        = Str::plural($this->crudName);
+        $routeName       = Str::plural($this->crudName);
 
         //optional
         $namespace = $this->option('namespace');
@@ -107,7 +107,7 @@ class CrudControllerCommand extends GeneratorCommand
             ->replaceViewName($stub, $viewName)
             ->replaceRouteName($stub, $routeName)
             ->replaceCrudName($stub, $this->crudName)
-            ->replaceCrudNameSingular($stub, str_singular(studly_case($this->crudName)))
+            ->replaceCrudNameSingular($stub, Str::singular(Str::studly($this->crudName)))
             ->replaceModelName($stub, $this->modelName)
             ->replaceValidationRules($stub, $validationRules)
             ->replaceClass($stub, $name);

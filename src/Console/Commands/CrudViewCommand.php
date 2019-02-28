@@ -6,6 +6,7 @@ namespace Cloudteam\BaseCore\Console\Commands;
 
 use File;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 /**
  * Class CrudViewCommand
@@ -48,19 +49,19 @@ class CrudViewCommand extends Command
      * @var array
      */
     protected $typeLookup = [
-        'string'     => 'text',
-        'char'       => 'text',
-        'varchar'    => 'text',
-        'text'       => 'textarea',
-        'password'   => 'password',
-        'email'      => 'email',
-        'number'     => 'number',
-        'date'       => 'date',
-        'datetime'   => 'datetime-local',
-        'time'       => 'time',
-        'boolean'    => 'radio',
-        'select'     => 'select',
-        'file'       => 'file',
+        'string'   => 'text',
+        'char'     => 'text',
+        'varchar'  => 'text',
+        'text'     => 'textarea',
+        'password' => 'password',
+        'email'    => 'email',
+        'number'   => 'number',
+        'date'     => 'date',
+        'datetime' => 'datetime-local',
+        'time'     => 'time',
+        'boolean'  => 'radio',
+        'select'   => 'select',
+        'file'     => 'file',
     ];
 
     /**
@@ -260,14 +261,14 @@ class CrudViewCommand extends Command
         $this->viewDirectoryPath = \dirname(__DIR__) . '/stubs/views/' . $formHelper . '/';
 
         $this->route       = $this->argument('name');
-        $this->crudName    = snake_case($this->argument('name'));
+        $this->crudName    = Str::snake($this->argument('name'));
         $this->varName     = lcfirst($this->argument('name'));
         $this->crudNameCap = ucwords($this->crudName);
 
-        $this->modelName    = $this->crudNameSingular = str_singular(variablize($this->argument('name')));
-        $this->modelNameCap = str_singular(studly_case($this->route));
+        $this->modelName    = $this->crudNameSingular = Str::singular((variablize($this->argument('name'))));
+        $this->modelNameCap = Str::singular((Str::studly($this->route)));
 
-        $this->title      = camel2words(str_singular(studly_case($this->argument('name'))));
+        $this->title      = camel2words(Str::singular((Str::studly($this->argument('name')))));
         $this->primaryKey = $this->option('pk');
         $this->viewName   = $this->route;
 
@@ -314,7 +315,7 @@ class CrudViewCommand extends Command
                         //options=enum**className
                         $options        = explode('**', $options);
                         $enumClassName  = ucfirst(collect($options)->last());
-                        $enumAttribute  = lcfirst(str_plural($enumClassName));
+                        $enumAttribute  = lcfirst(Str::singular($enumClassName));
                         $enumVariable   = lcfirst($enumClassName);
                         $modelEnumField = $this->crudNameSingular . '->' . $this->formFields[$idx]['name'];
 

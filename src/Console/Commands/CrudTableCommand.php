@@ -50,7 +50,7 @@ class CrudTableCommand extends GeneratorCommand
     {
         $stub               = $this->files->get($this->getStub());
         $crudName           = strtolower($this->option('crud'));
-        $crudNameSingular   = lcfirst(studly_case(str_singular($this->option('crud'))));
+        $crudNameSingular   = lcfirst(Str::studly(Str::singular($this->option('crud'))));
         $this->modelName    = $this->option('model');
         $namespace          = $this->option('namespace');
         $tableNamespace     = "App\Tables";
