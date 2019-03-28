@@ -133,8 +133,8 @@ class CrudControllerCommand extends GeneratorCommand
         $controllerNamespace .= $namespace !== '' ? "//$namespace/" : '//';
 
         $file = new Filesystem();
-        if ( ! is_dir($controllerNamespace)) {
-            $file->makeDirectory($controllerNamespace, 0777, true);
+        if ( ! is_dir(__DIR__ . $controllerNamespace)) {
+            $file->makeDirectory(__DIR__ . $controllerNamespace, 0777, true);
         }
 
         return base_path() . $controllerNamespace . str_replace('\\', '/', $name) . '.php';
