@@ -8,12 +8,11 @@ $(function() {
 
             $(form).confirmation(result => {
                 if (result && (typeof result === 'object' && result.value)) {
-                    $(form).submitForm({returnEarly: true}).then(result => {
-                        let datas = result.data
-                        let msg = datas.message
-                        let redirectUrl = datas.redirect_url
+                    $(form).submitForm({returnEarly: true}).then(data => {
+                        let msg = data.message
+                        let redirectUrl = data.redirect_url
                         if (redirectUrl !== undefined) {
-                            swal(msg, '', 'success').then(() => {
+                            Swal.fire(msg, '', 'success').then(() => {
                                 location.href = redirectUrl
                             })
                         }
