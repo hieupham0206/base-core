@@ -168,19 +168,36 @@ class DummyClass extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function {{crudName}}() {
-        $query  = request()->get( 'query', '' );
-        $page   = request()->get( 'page', 1 );
-        $excludeIds = request()->get( 'excludeIds', [] );
-        $offset = ( $page - 1 ) * 10;
+        $query      = request()->get('query', '');
+        $page       = request()->get('page', 1);
+        $excludeIds = request()->get('excludeIds', []);
+        $orderBy    = request()->get('orderBy', 'id');
+        $queryBy    = request()->get('queryBy', 'name');
+        $direction  = request()->get('direction', 'desc');
+        $limit      = request()->get('limit', 10);
+
+        $offset = ( $page - 1 ) * $limit;
         ${{crudName}}  = {{modelName}}::query()->select( [ 'id', 'name' ] );
 
-        ${{crudName}}->andFilterWhere( [
-            [ 'name', 'like', $query ],
-            ['id', '!=', $excludeIds]
-        ]);
+        if ($excludeIds) {
+            ${{crudName}}->whereNotIn('id', explode(',', $excludeIds));
+        }
+
+        if ($query) {
+            $filters = explode(',', $queryBy);
+
+            $filters = collect($filters)->mapWithKeys(static function ($key, $idx) use ($query) {
+                return [$idx => [$key, 'like', $query]];
+            })->all();
+
+            ${{crudName}}->orFilterWhere($filters);
+        }
 
         $totalCount = ${{crudName}}->count();
-        ${{crudName}} = ${{crudName}}->offset($offset)->limit(10)->get();
+        ${{crudName}} = ${{crudName}}->offset($offset)
+                                     ->limit($limit)
+                                     ->orderBy($orderBy, $direction)
+                                     ->get();
 
         return $this->asJson( [
             'total_count' => $totalCount,
