@@ -16,10 +16,10 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.index'];
             @include('layouts.partials.index_header', ['modelName' => $%%crudNameSingular%%->classLabel(true), 'model' => '%%crudNameSingular%%', 'createUrl' => route('%%route%%.create')])
             <div class="m-portlet__body">
                 @include('layouts.partials.search', ['form' => view('%%userViewPath%%._search')->with('%%crudNameSingular%%', $%%crudNameSingular%%)])
-                <table class="table table-borderless table-hover nowrap" id="table_%%crudName%%" width="100%">
+                <table class="table table-borderless table-hover nowrap" id="table_%%crudName%%" style="width: 100%">
                     <thead>
                         <tr>
-                            <th width="5%"><label class="m-checkbox m-checkbox--all m-checkbox--solid m-checkbox--brand"><input type="checkbox"><span></span></label></th>
+                            <th style="width: 5%"><label class="m-checkbox m-checkbox--all m-checkbox--solid m-checkbox--brand"><input type="checkbox"><span></span></label></th>
                             %%formHeadingHtml%%
                             <th>@lang('Actions')</th>
                         </tr>
