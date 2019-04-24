@@ -369,7 +369,7 @@ class CrudViewCommand extends Command
                                                     </div>
                                                </div>' . "\n";
             $this->formBodyHtmlForShowView .= '<tr>
-                                                <th> ' . $label . ' </th>
+                                                <th class="w-25"> ' . $label . ' </th>
                                                 <td> ' . $value . ' </td>
                                               </tr>';
         }

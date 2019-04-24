@@ -5,16 +5,32 @@ namespace Cloudteam\BaseCore\Traits;
 trait Linkable
 {
     /**
+     * @return string
+     */
+    public function getViewLink(): string
+    {
+        return route("{$this->route}.show", $this, false);
+    }
+
+    /**
+     * @return string
+     */
+    public function getEditLink(): string
+    {
+        return route("{$this->route}.edit", $this, false);
+    }
+
+    /**
      * @param string $text
      * @param string $font
      *
      * @return string
      */
-    public function getViewLink($text = null, $font = 'brand'): string
+    public function getViewLinkText($text = null, $font = 'brand'): string
     {
         $modelValName = $text ?? $this->{$this->displayAttribute};
 
-        $route = route("{$this->route}.show", $this, false);
+        $route = $this->getViewLink();
 
         return "<a target='_blank' class='m-link m--font-bolder m--font-{$font}' href='$route'>$modelValName</a>";
     }
@@ -25,11 +41,11 @@ trait Linkable
      *
      * @return string
      */
-    public function getEditLink($text = null, $font = 'brand'): string
+    public function getEditLinkText($text = null, $font = 'brand'): string
     {
         $modelValName = $text ?? $this->{$this->displayAttribute};
 
-        $route = route("{$this->route}.edit", $this, false);
+        $route = $this->getEditLink();
 
         return "<a target='_blank' class='m-link m--font-bolder m--font-{$font}' href='$route'>$modelValName</a>";
     }

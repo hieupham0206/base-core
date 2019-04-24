@@ -1,4 +1,4 @@
-<form id="%%crudName%%_search_form">
+<form id="%%crudName%%_search_form" autocomplete="off">
     <div class="form-group m-form__group row">
         %%formSearchHtml%%
         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 m-form__group-sub mt-6">
