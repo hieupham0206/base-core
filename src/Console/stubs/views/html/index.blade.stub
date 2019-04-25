@@ -15,7 +15,7 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.index'];
         <div class="m-portlet">
             @include('layouts.partials.index_header', ['modelName' => $%%crudNameSingular%%->classLabel(true), 'model' => '%%crudNameSingular%%', 'createUrl' => route('%%route%%.create')])
             <div class="m-portlet__body">
-                @include('layouts.partials.search', ['form' => view('%%userViewPath%%._search')->with('%%crudNameSingular%%', $%%crudNameSingular%%)])
+                @include('layouts.partials.search', ['form' => view('%%userViewPath%%._search', ['%%crudNameSingular%%' => $%%crudNameSingular%%])])
                 <table class="table table-borderless table-hover nowrap" id="table_%%crudName%%" style="width: 100%">
                     <thead>
                         <tr>
