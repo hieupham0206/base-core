@@ -59,6 +59,17 @@ trait Labelable
      *
      * @return string
      */
+    public function contextButtonLabel($text, $context = 'success'): string
+    {
+        return '<span class="font-weight-bold btn btn-sm btn-label-' . $context . '">' . $text . '</span>';
+    }
+
+    /**
+     * @param $text
+     * @param string $context
+     *
+     * @return string
+     */
     public function contextBadge($text, $context = 'success'): string
     {
         return '<span class="m-badge m-badge--' . $context . ' m-badge--wide m-badge--rounded">' . $text . '</span>';
