@@ -1,14 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ADMIN
- * Date: 10/2/2018
- * Time: 11:57 AM
- */
 
 namespace Cloudteam\BaseCore\Traits;
-
-use Cloudteam\BaseCore\App\Enums\Confirmation;
 
 trait Modelable
 {
@@ -20,11 +12,6 @@ trait Modelable
     public function getUpdatedAtTextAttribute(): string
     {
         return $this->updated_at->format(config('basecore.datetime_format', 'd-m-Y H:i:s'));
-    }
-
-    public function getConfirmationsAttribute()
-    {
-        return Confirmation::toSelectArray();
     }
 
     /**
