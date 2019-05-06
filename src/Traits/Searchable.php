@@ -3,12 +3,15 @@
 namespace Cloudteam\BaseCore\Traits;
 
 use Cloudteam\BaseCore\Models\QuickSearch;
+use Illuminate\Database\Eloquent\Builder;
+use ReflectionClass;
+use function strlen;
 
 trait Searchable
 {
     public static function bootSearchable(): void
     {
-        static::created(function ($model) {
+        static::created(static function ($model) {
             $searchText = '';
             if ( ! empty($model->name)) {
                 $searchText = $model->name;
@@ -17,7 +20,7 @@ trait Searchable
             } elseif ( ! empty($model->username)) {
                 $searchText = $model->{'username'};
             }
-            $reflect   = new \ReflectionClass($model);
+            $reflect   = new ReflectionClass($model);
             $tableName = str_plural(snake_case($reflect->getShortName()));
 
             if ($searchText !== '') {
@@ -31,8 +34,8 @@ trait Searchable
             }
         });
 
-        static::deleted(function ($model) {
-            $reflect   = new \ReflectionClass($model);
+        static::deleted(static function ($model) {
+            $reflect   = new ReflectionClass($model);
             $tableName = str_plural(snake_case($reflect->getShortName()));
 
             QuickSearch::query()->where([
@@ -62,7 +65,7 @@ trait Searchable
              * applying + operator (required word) only big words
              * because smaller ones are not indexed by mysql
              */
-            if (\strlen($word) >= 3) {
+            if (strlen($word) >= 3) {
                 $words[$key] = '+' . $word . '*';
             }
         }
@@ -73,12 +76,12 @@ trait Searchable
     /**
      * Scope a query that matches a full text search of term.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param string $term
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
-    public function scopeSearch($query, $term): \Illuminate\Database\Eloquent\Builder
+    public function scopeSearch($query, $term): Builder
     {
         $columns = implode(',', $this->searchable);
 

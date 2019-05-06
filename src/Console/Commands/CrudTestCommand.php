@@ -3,6 +3,7 @@
 namespace Cloudteam\BaseCore\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Str;
 
 /**
@@ -38,7 +39,7 @@ class CrudTestCommand extends GeneratorCommand
      * @param  string $name
      *
      * @return string
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public function buildClass($name)
     {

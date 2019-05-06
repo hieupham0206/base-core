@@ -8,6 +8,8 @@
 
 namespace Cloudteam\BaseCore\Traits;
 
+use function get_class;
+
 trait Enumerable
 {
     private $enumAttribute;
@@ -60,7 +62,7 @@ trait Enumerable
     protected function isEnumAttribute($key)
     {
         if ($this->enums) {
-            $filtered   = collect($this->enums)->filter(function ($enum, $enumAttribute) use ($key) {
+            $filtered   = collect($this->enums)->filter(static function ($enum, $enumAttribute) use ($key) {
                 return $key === str_plural($enumAttribute) || $key === "{$enumAttribute}_name";
             });
             $isNotEmpty = $filtered->isNotEmpty();
@@ -94,7 +96,7 @@ trait Enumerable
             if (class_basename($class) == $class) {
                 $class =
                     str_replace_last(
-                        class_basename(\get_class($this)),
+                        class_basename(get_class($this)),
                         $class,
                         self::class
                     );

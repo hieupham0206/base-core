@@ -2,6 +2,12 @@
 
 namespace Cloudteam\BaseCore\Traits;
 
+use function get_class;
+use function is_array;
+use function is_callable;
+use ReflectionClass;
+use ReflectionException;
+
 /**
  * Trait HasLabel
  * @package App\Traits
@@ -11,15 +17,15 @@ trait Labelable
     /**
      * @param $field
      *
-     * @return array|null|string
+     * @return null|string
      */
     public function label($field = '')
     {
         $label = __(ucfirst(camel2words(strtolower($field))));
 
-        if (property_exists(\get_class($this), 'labels') && \is_array($this->labels) && array_key_exists($field, $this->labels)) {
+        if (property_exists(get_class($this), 'labels') && is_array($this->labels) && array_key_exists($field, $this->labels)) {
             $label = $this->labels[$field];
-            $label = \is_callable($label) ? $label($field) : (string) $label;
+            $label = is_callable($label) ? $label($field) : (string) $label;
         }
 
         return $label;
@@ -28,14 +34,14 @@ trait Labelable
     /**
      * @param bool $lcfirst
      *
-     * @return array|null|string
-     * @throws \ReflectionException
+     * @return null|string
+     * @throws ReflectionException
      */
     public function classLabel($lcfirst = false)
     {
-        $reflect   = new \ReflectionClass($this);
+        $reflect   = new ReflectionClass($this);
         $tableName = __(camel2words(studly_case($reflect->getShortName())));
-        if (property_exists(\get_class($this), 'logName')) {
+        if (property_exists(get_class($this), 'logName')) {
             $tableName = __($reflect->getStaticPropertyValue('logName'));
         }
 

@@ -2,8 +2,11 @@
 
 namespace Cloudteam\BaseCore\Models;
 
+use App\Models\User;
 use Cloudteam\BaseCore\Traits\Queryable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\ActivityLog
@@ -16,23 +19,23 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $causer_id
  * @property string|null $causer_type
  * @property string|null $properties
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User|null $causer
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog andFilterWhere($conditions)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog dateBetween($dates, $column = 'created_at', $format = 'd-m-Y', $boolean = 'and', $not = false)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog filters($filterDatas, $boolean = 'and', $filterConfigs = null)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog orFilterWhere($conditions)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereCauserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereCauserType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereLogName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereProperties($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereSubjectId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereSubjectType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereUpdatedAt($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read User|null $causer
+ * @method static Builder|ActivityLog andFilterWhere($conditions)
+ * @method static Builder|ActivityLog dateBetween($dates, $column = 'created_at', $format = 'd-m-Y', $boolean = 'and', $not = false)
+ * @method static Builder|ActivityLog filters($filterDatas, $boolean = 'and', $filterConfigs = null)
+ * @method static Builder|ActivityLog orFilterWhere($conditions)
+ * @method static Builder|ActivityLog whereCauserId($value)
+ * @method static Builder|ActivityLog whereCauserType($value)
+ * @method static Builder|ActivityLog whereCreatedAt($value)
+ * @method static Builder|ActivityLog whereDescription($value)
+ * @method static Builder|ActivityLog whereId($value)
+ * @method static Builder|ActivityLog whereLogName($value)
+ * @method static Builder|ActivityLog whereProperties($value)
+ * @method static Builder|ActivityLog whereSubjectId($value)
+ * @method static Builder|ActivityLog whereSubjectType($value)
+ * @method static Builder|ActivityLog whereUpdatedAt($value)
  */
 class ActivityLog extends Model
 {

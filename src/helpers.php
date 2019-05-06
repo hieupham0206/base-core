@@ -1,5 +1,7 @@
 <?php
 //STRING HELPER
+use Illuminate\Support\Facades\Cache;
+
 if ( ! function_exists('camel2words')) {
     /**
      * For example, 'PostTag' will be converted to 'Post Tag'.
@@ -478,7 +480,7 @@ if ( ! function_exists('version')) {
      */
     function version($url)
     {
-        $timestamp = \Illuminate\Support\Facades\Cache::get('asset_version');
+        $timestamp = Cache::get('asset_version');
 
         return asset($url . "?v={$timestamp}");
     }

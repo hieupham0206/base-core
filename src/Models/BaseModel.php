@@ -7,17 +7,19 @@ use Cloudteam\BaseCore\Traits\Linkable;
 use Cloudteam\BaseCore\Traits\Modelable;
 use Cloudteam\BaseCore\Traits\Queryable;
 use Cloudteam\BaseCore\Traits\Responsible;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\BaseModel
  *
  * @property-read mixed $created_at_text
- * @method static \Illuminate\Database\Eloquent\Builder|BaseModel andFilterWhere($conditions)
- * @method static \Illuminate\Database\Eloquent\Builder|BaseModel dateBetween($dates, $column = 'created_at', $format = 'd-m-Y', $boolean = 'and', $not = false)
- * @method static \Illuminate\Database\Eloquent\Builder|BaseModel filters($filterDatas, $boolean = 'and', $filterConfigs = null)
- * @method static \Illuminate\Database\Eloquent\Builder|BaseModel orFilterWhere($conditions)
+ * @method static Builder|BaseModel andFilterWhere($conditions)
+ * @method static Builder|BaseModel dateBetween($dates, $column = 'created_at', $format = 'd-m-Y', $boolean = 'and', $not = false)
+ * @method static Builder|BaseModel filters($filterDatas, $boolean = 'and', $filterConfigs = null)
+ * @method static Builder|BaseModel orFilterWhere($conditions)
  */
-class BaseModel extends \Illuminate\Database\Eloquent\Model
+class BaseModel extends Model
 {
     use Responsible, Labelable, Queryable, Linkable, Modelable;
 

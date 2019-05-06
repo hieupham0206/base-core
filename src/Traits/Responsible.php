@@ -9,6 +9,7 @@
 namespace Cloudteam\BaseCore\Traits;
 
 use Cloudteam\BaseCore\Models\ActivityLog;
+use function get_class;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 trait Responsible
@@ -21,7 +22,7 @@ trait Responsible
     {
         return $this->hasOne(ActivityLog::class, 'subject_id')
                     ->with(['causer'])
-                    ->where('subject_type', \get_class($this))
+                    ->where('subject_type', get_class($this))
                     ->where('description', 'like', '%' . __(' has been created by ') . '%')
                     ->orderBy('id', 'desc')->limit(1);
     }
@@ -34,7 +35,7 @@ trait Responsible
     {
         return $this->hasOne(ActivityLog::class, 'subject_id')
                     ->with(['causer'])
-                    ->where('subject_type', \get_class($this))
+                    ->where('subject_type', get_class($this))
                     ->where('description', 'like', '%' . __(' has been updated by ') . '%')
                     ->orderBy('id', 'desc')->limit(1);
     }
@@ -47,7 +48,7 @@ trait Responsible
     {
         return $this->hasOne(ActivityLog::class, 'subject_id')
                     ->with(['causer'])
-                    ->where('subject_type', \get_class($this))
+                    ->where('subject_type', get_class($this))
                     ->where('description', 'like', '%' . __(' has been deleted by ') . '%')
                     ->orderBy('id', 'desc')->limit(1);
     }

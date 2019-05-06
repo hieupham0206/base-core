@@ -46,7 +46,7 @@ class BaseCoreServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/basecore.php', 'basecore');
 
         // Register the service the package provides.
-        $this->app->singleton('basecore', function ($app) {
+        $this->app->singleton('basecore', static function () {
             return new BaseCore;
         });
     }

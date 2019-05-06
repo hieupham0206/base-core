@@ -2,9 +2,12 @@
 
 namespace Cloudteam\BaseCore\Console\Commands;
 
+use function dirname;
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
+use function in_array;
 
 /**
  * Class CrudAllCommand
@@ -31,7 +34,7 @@ class CrudMakeCommand extends Command
      * Execute the console command.
      *
      * @return mixed
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public function handle()
     {
@@ -52,7 +55,7 @@ class CrudMakeCommand extends Command
      * @param $crud
      * @param $namespace
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public function generateCrud($crud, $namespace): void
     {
@@ -167,7 +170,7 @@ class CrudMakeCommand extends Command
             return true;
         }
 
-        if ( ! \in_array($table, $permissionConfigs[$namespace], true)) {
+        if ( ! in_array($table, $permissionConfigs[$namespace], true)) {
             $permissionConfigs[$namespace]['modules'][$table]['actions'] = $permissions;
         }
 
@@ -189,7 +192,7 @@ class CrudMakeCommand extends Command
             return true;
         }
 
-        if ( ! \in_array($table, $routes[$jsonKey], true)) {
+        if ( ! in_array($table, $routes[$jsonKey], true)) {
             $routes[$jsonKey][] = $table;
         }
 
@@ -240,7 +243,7 @@ class CrudMakeCommand extends Command
      * @param $route
      * @param $model
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     private function makeJs($crud, $namespace, $route, $model): void
     {
@@ -257,7 +260,7 @@ class CrudMakeCommand extends Command
         foreach ($jsFiles as $jsFile) {
             $fileJsName = str_replace('.stub', '', $jsFile);
             $file       = new Filesystem();
-            $stubPath   = str_replace('\\', '/', \dirname(__DIR__) . "/stubs/views/js/{$jsFile}");
+            $stubPath   = str_replace('\\', '/', dirname(__DIR__) . "/stubs/views/js/{$jsFile}");
             $stub       = $file->get($stubPath);
 
             $this->replaceRoute($stub, $crud)

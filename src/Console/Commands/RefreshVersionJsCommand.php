@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 
 class RefreshVersionJsCommand extends Command
 {
@@ -21,23 +22,10 @@ class RefreshVersionJsCommand extends Command
     protected $description = 'Command description';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
-     *
-     * @return mixed
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function handle()
     {
-        \Cache::delete('asset_version');
+        Cache::delete('asset_version');
     }
 }

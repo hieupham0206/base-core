@@ -8,6 +8,8 @@
 
 namespace Cloudteam\BaseCore\Traits;
 
+use Cloudteam\BaseCore\App\Enums\Confirmation;
+
 trait Modelable
 {
     public function getCreatedAtTextAttribute(): string
@@ -22,7 +24,7 @@ trait Modelable
 
     public function getConfirmationsAttribute()
     {
-        return \Cloudteam\BaseCore\App\Enums\Confirmation::toSelectArray();
+        return Confirmation::toSelectArray();
     }
 
     /**

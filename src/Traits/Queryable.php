@@ -10,7 +10,7 @@ trait Queryable
     private $conditions = [];
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param array $conditions
      *
      * @return \Illuminate\Database\Query\Builder
@@ -21,7 +21,7 @@ trait Queryable
             return $query;
         }
 
-        if (\is_array($conditions[0])) {
+        if (is_array($conditions[0])) {
             foreach ($conditions as $condition) {
                 $this->addCondition($condition);
             }
@@ -34,7 +34,7 @@ trait Queryable
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param array $conditions
      *
      * @return \Illuminate\Database\Query\Builder
@@ -45,7 +45,7 @@ trait Queryable
             return $query;
         }
 
-        if (\is_array($conditions[0])) {
+        if (is_array($conditions[0])) {
             foreach ($conditions as $condition) {
                 $this->addCondition($condition, 'or');
             }
@@ -58,7 +58,7 @@ trait Queryable
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      * @param array $dates
      * @param string $column
      * @param string $format
@@ -93,7 +93,7 @@ trait Queryable
      */
     public function scopeFilters($query, $filterDatas, $boolean = 'and', array $filterConfigs = null)
     {
-        if (isValueEmpty($filterDatas) || ! property_exists($this, 'filters')) {
+        if ( ! property_exists($this, 'filters') || isValueEmpty($filterDatas)) {
             return $query;
         }
 
@@ -141,15 +141,15 @@ trait Queryable
             foreach ($this->conditions as $condition) {
                 [$column, $value, $boolean, $operator, $isForeignKey, $relation, $table] = $condition;
                 if ($isForeignKey) {
-                    $subQuery->whereHas($relation, function (Builder $q) use ($column, $value, $operator, $boolean, $table) {
-                        if (\is_array($value)) {
+                    $subQuery->whereHas($relation, static function (Builder $q) use ($column, $value, $operator, $boolean, $table) {
+                        if (is_array($value)) {
                             $q->whereIn($column, $value, $boolean, $operator === '!=');
                         } else {
                             $q->where("$table.$column", $operator, $value, $boolean);
                         }
                     });
                 } else {
-                    if (\is_array($value) && $value) {
+                    if (is_array($value) && $value) {
                         $subQuery->whereIn($column, $value, $boolean, $operator === '!=');
                     }
 
