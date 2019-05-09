@@ -6,7 +6,7 @@
         @method('put')
     @endisset
     <div class="m-portlet__body">
-        <div class="form-group m-form__group row">
+        <div class="form-group row">
 			%%formFieldsHtml%%
 		</div>
     </div>

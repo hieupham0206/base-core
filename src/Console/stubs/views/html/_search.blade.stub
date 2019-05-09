@@ -1,7 +1,7 @@
 <form id="%%crudName%%_search_form" autocomplete="off">
     <div class="form-group m-form__group row">
         %%formSearchHtml%%
-        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 m-form__group-sub mt-6">
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-6">
             <button class="btn btn-brand m-btn m-btn--custom m-btn--icon" id="btn_filter"><span> <i class="fa fa-search"></i> <span>@lang('Search')</span> </span></button>
             <button type="button" class="btn btn-secondary m-btn m-btn--custom m-btn--icon" id="btn_reset_filter"><span> <i class="fa fa-undo-alt"></i> <span>@lang('Reset')</span> </span></button>
         </div>
