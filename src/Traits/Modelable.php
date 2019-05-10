@@ -2,6 +2,8 @@
 
 namespace Cloudteam\BaseCore\Traits;
 
+use Illuminate\Support\Str;
+
 trait Modelable
 {
     public function getCreatedAtTextAttribute(): string
@@ -12,6 +14,28 @@ trait Modelable
     public function getUpdatedAtTextAttribute(): string
     {
         return $this->updated_at->format(config('basecore.datetime_format', 'd-m-Y H:i:s'));
+    }
+
+    public function getCanBeEditedAttribute()
+    {
+        $name = Str::singular($this->getTable());
+
+        try {
+            return can("edit_$name");
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    public function getCanBeEDeletedAttribute()
+    {
+        $name = Str::singular($this->getTable());
+
+        try {
+            return can("delete_$name");
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     /**
