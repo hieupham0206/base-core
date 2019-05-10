@@ -21,7 +21,7 @@ class {{modelName}}Table extends DataTable {
 
 		/** @var {{modelName}}[] ${{crudNameSingular}}s */
 		foreach ( ${{crudNameSingular}}s as ${{crudNameSingular}} ) {
-		    $htmlAction = $this->generateButton($modelName, ${{crudNameSingular}}, $canUpdate{{modelName}}, $canDelete{{modelName}});
+		    $htmlAction = $this->generateButton($modelName, ${{crudNameSingular}}, [$canUpdate{{modelName}}, $canDelete{{modelName}}]);
 
 			$dataArray[] = [
 				'<label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand"><input type="checkbox" value="'.${{crudNameSingular}}->id.'"><span></span></label>',
@@ -72,7 +72,9 @@ class {{modelName}}Table extends DataTable {
      *
      * @return string
      */
-	protected function generateButton($modelName, ${{crudNameSingular}}, $canUpdate{{modelName}}, $canDelete{{modelName}}): string {
+	protected function generateButton($modelName, ${{crudNameSingular}}, $permissions): string {
+	    [$canUpdate{{modelName}}, $canDelete{{modelName}}] = $permissions;
+
 	    $btnEdit = $btnDelete = '';
 
         if ($canUpdate{{modelName}}) {
