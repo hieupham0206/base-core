@@ -17,8 +17,6 @@ class DummyClass extends Controller
 	 protected $name = '{{crudNameSingular}}';
 
     /**
-     * Hiển thị trang danh sách {{modelName}}.
-     *
      * @return \Illuminate\View\View
      */
     public function index()
@@ -27,7 +25,6 @@ class DummyClass extends Controller
     }
 
     /**
-     * Lấy danh sách {{modelName}} cho trang table ở trang index
      * @return string
      */
     public function table() {
@@ -35,8 +32,6 @@ class DummyClass extends Controller
     }
 
     /**
-     * Trang tạo mới {{modelName}}.
-     *
      * @return \Illuminate\View\View
      */
     public function create()
@@ -48,8 +43,6 @@ class DummyClass extends Controller
     }
 
     /**
-     * Lưu {{modelName}} mới.
-     *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Illuminate\Validation\ValidationException
@@ -71,8 +64,6 @@ class DummyClass extends Controller
     }
 
     /**
-     * Trang xem chi tiết {{modelName}}.
-     *
      * @param  {{modelName}} ${{crudNameSingular}}
      * @return \Illuminate\View\View
      */
@@ -82,8 +73,6 @@ class DummyClass extends Controller
     }
 
     /**
-     * Trang cập nhật {{modelName}}.
-     *
      * @param  {{modelName}} ${{crudNameSingular}}
      * @return \Illuminate\View\View
      */
@@ -97,8 +86,6 @@ class DummyClass extends Controller
     }
 
     /**
-     * Cập nhật {{modelName}} tương ứng.
-     *
      * @param \Illuminate\Http\Request $request
      * @param  {{modelName}} ${{crudNameSingular}}
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -121,8 +108,6 @@ class DummyClass extends Controller
     }
 
     /**
-     * Xóa {{modelName}}.
-     *
      * @param {{modelName}} ${{crudNameSingular}}
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -142,8 +127,6 @@ class DummyClass extends Controller
     }
 
     /**
-     * Xóa nhiều {{modelName}}.
-     *
      * @return mixed|\Symfony\Component\HttpFoundation\ParameterBag
      * @throws \Exception
      */
