@@ -67,8 +67,7 @@ class {{modelName}}Table extends DataTable {
     /**
      * @param $modelName
      * @param {{modelName}} ${{crudNameSingular}}
-     * @param $canUpdate{{modelName}}
-     * @param $canDelete{{modelName}}
+     * @param $permissions
      *
      * @return string
      */

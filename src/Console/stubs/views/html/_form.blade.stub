@@ -1,6 +1,6 @@
 @php /** @var \App\Models\%%modelNameCap%% $%%crudNameSingular%% */ @endphp
 
-<form id="%%crudName%%_form" class="m-form m-form--label-align-right m-form--group-seperator-dashed m-form--state" method="post" action="{{ $action }}" autocomplete="off">
+<form id="%%crudName%%_form" class="m-form m-form--state" method="post" action="{{ $action }}" autocomplete="off">
     @csrf
     @isset($method)
         @method('put')
