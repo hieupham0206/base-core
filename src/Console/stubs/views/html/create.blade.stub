@@ -12,7 +12,7 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.create', 'model' => $%%crudNameSingul
 
 @section('content')
     <div class="m-content">
-        <div class="m-portlet">
+        <div class="m-portlet m-portlet--rounded m-portlet--bordered-semi">
 			@include('%%userViewPath%%._form')
         </div>
     </div>

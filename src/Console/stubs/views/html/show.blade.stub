@@ -12,7 +12,7 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.show', 'model' => $%%crudNameSingular
 
 @section('content')
     <div class="m-content">
-        <div class="m-portlet">
+        <div class="m-portlet m-portlet--rounded m-portlet--bordered-semi">
             <div class="m-portlet__body">
                 <div class="table-responsive">
                     <table class="table table-bordered">
