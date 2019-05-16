@@ -11,7 +11,7 @@ class {{modelName}}Test extends TestCase {
 
 	use DatabaseMigrations;
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->{{crudNameSingular}} = factory( {{modelName}}::class )->create();
@@ -45,8 +45,7 @@ class {{modelName}}Test extends TestCase {
 		$this->get( route( '{{crudNameSingular}}s.create' ) )->assertStatus( 200 );
 
 		${{crudNameSingular}} = make({{modelName}}::class);
-		$this->post( route( '{{crudNameSingular}}s.store' ), ${{crudNameSingular}}->toArray() )
-		     ->assertRedirect( route( '{{crudNameSingular}}s.index' ) );
+		$this->post( route( '{{crudNameSingular}}s.store' ), ${{crudNameSingular}}->toArray() );
 	}
 
 	public function test_authorized_user_can_edit_{{crudNameSingular}}() {
@@ -58,7 +57,8 @@ class {{modelName}}Test extends TestCase {
 
 		${{crudNameSingular}} = create({{modelName}}::class);
 
-		$this->put( route( '{{crudNameSingular}}s.update', ${{crudNameSingular}}->id ), ${{crudNameSingular}}->toArray())->assertRedirect( route( '{{crudNameSingular}}s.index' ) );
+		$this->put( route( '{{crudNameSingular}}s.update', ${{crudNameSingular}}->id ), ${{crudNameSingular}}->toArray())
+		    ->assertRedirect( route( '{{crudNameSingular}}s.show', ${{crudNameSingular}} ) );
 
 		$this->assertDatabaseHas( '{{crudNameSingular}}s', [
 			'id' => ${{crudNameSingular}}->id

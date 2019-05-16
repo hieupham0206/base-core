@@ -40,7 +40,7 @@ class CrudControllerCommand extends GeneratorCommand
 
     protected $modelName = '';
 
-    protected $namespace = 'app\\Http\\Controllers';
+    protected $namespace = 'App\\Http\\Controllers';
 
     protected $crudName = '';
 
