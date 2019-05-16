@@ -363,10 +363,8 @@ class CrudViewCommand extends Command
             $value                         = '{{ $' . $this->crudNameSingular . '->' . $field . ' }}';
             $this->formHeadingHtml         .= '<th>' . $label . '</th>';
             $this->formSearchHtml          .= '<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 form-group">
-                                                    <div class="form-group">
-                                                        <label for="txt_' . $field . '">' . $label . '</label>
-                                                        <input class="form-control" name="' . $field . '" id="txt_' . $field . '">
-                                                    </div>
+                                                    <label for="txt_' . $field . '">' . $label . '</label>
+                                                    <input class="form-control" name="' . $field . '" id="txt_' . $field . '">
                                                </div>' . "\n";
             $this->formBodyHtmlForShowView .= '<tr>
                                                 <th class="w-25"> ' . $label . ' </th>
