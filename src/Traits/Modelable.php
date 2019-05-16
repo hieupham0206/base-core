@@ -27,7 +27,7 @@ trait Modelable
         }
     }
 
-    public function getCanBeEDeletedAttribute()
+    public function getCanBeDeletedAttribute()
     {
         $name = Str::singular($this->getTable());
 
