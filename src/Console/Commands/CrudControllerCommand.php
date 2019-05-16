@@ -109,6 +109,7 @@ class CrudControllerCommand extends GeneratorCommand
             ->replaceRouteName($stub, $routeName)
             ->replaceCrudName($stub, $this->crudName)
             ->replaceCrudNameSingular($stub, Str::singular(Str::studly($this->crudName)))
+            ->replaceTableNameSingular($stub, Str::singular($this->crudName))
             ->replaceModelName($stub, $this->modelName)
             ->replaceValidationRules($stub, $validationRules)
             ->replaceClass($stub, $name);
@@ -257,6 +258,21 @@ class CrudControllerCommand extends GeneratorCommand
     protected function replaceCrudNameSingular(&$stub, $crudNameSingular): self
     {
         $stub = str_replace('{{crudNameSingular}}', lcfirst($crudNameSingular), $stub);
+
+        return $this;
+    }
+
+    /**
+     * Replace the crudNameSingular for the given stub.
+     *
+     * @param  string $stub
+     * @param  string $crudNameSingular
+     *
+     * @return $this
+     */
+    protected function replaceTableNameSingular(&$stub, $crudNameSingular): self
+    {
+        $stub = str_replace('{{tableNameSingular}}', lcfirst($crudNameSingular), $stub);
 
         return $this;
     }

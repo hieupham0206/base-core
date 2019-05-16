@@ -9,6 +9,7 @@ class {{modelName}}Table extends DataTable {
     /**
      * @return array
      * @throws \ReflectionException
+     * @throws \Exception
      */
 	public function getData(): array {
 		$this->column = $this->getSortColumn();
@@ -16,8 +17,8 @@ class {{modelName}}Table extends DataTable {
 		$dataArray    = [];
 		$modelName    = (new {{modelName}})->classLabel(true);
 
-        $canUpdate{{modelName}} = can('update_{{crudNameSingular}}');
-        $canDelete{{modelName}} = can('delete_{{crudNameSingular}}');
+        $canUpdate{{modelName}} = can('update_{{crudName}}');
+        $canDelete{{modelName}} = can('delete_{{crudName}}');
 
 		/** @var {{modelName}}[] ${{crudNameSingular}}s */
 		foreach ( ${{crudNameSingular}}s as ${{crudNameSingular}} ) {

@@ -14,7 +14,7 @@ class DummyClass extends Controller
       * Tên dùng để phân quyền
       * @var string
       */
-	 protected $name = '{{crudNameSingular}}';
+	 protected $name = '{{tableNameSingular}}';
 
     /**
      * @return \Illuminate\View\View
