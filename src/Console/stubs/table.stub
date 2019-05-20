@@ -17,8 +17,8 @@ class {{modelName}}Table extends DataTable {
 		$dataArray    = [];
 		$modelName    = (new {{modelName}})->classLabel(true);
 
-        $canUpdate{{modelName}} = can('update_{{crudName}}');
-        $canDelete{{modelName}} = can('delete_{{crudName}}');
+        $canUpdate{{modelName}} = can('update_{{permissionName}}');
+        $canDelete{{modelName}} = can('delete_{{permissionName}}');
 
 		/** @var {{modelName}}[] ${{crudNameSingular}}s */
 		foreach ( ${{crudNameSingular}}s as ${{crudNameSingular}} ) {

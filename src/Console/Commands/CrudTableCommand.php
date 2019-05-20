@@ -75,6 +75,7 @@ class CrudTableCommand extends GeneratorCommand
         return $this
             ->replaceTableNamespace($stub, $tableNamespace, $dataTableNamespace)
             ->replaceCrudName($stub, $crudName)
+            ->replacePermissionName($stub, Str::singular($crudName))
             ->replaceCrudNameSingular($stub, $crudNameSingular)
             ->replaceModelName($stub, $this->modelName)
             ->replaceTableValue($stub, $tableValue)
@@ -130,6 +131,21 @@ class CrudTableCommand extends GeneratorCommand
     protected function replaceCrudName(&$stub, $crudName): self
     {
         $stub = str_replace('{{crudName}}', $crudName, $stub);
+
+        return $this;
+    }
+
+    /**
+     * Replace the crudName for the given stub.
+     *
+     * @param  string $stub
+     * @param  string $crudName
+     *
+     * @return $this
+     */
+    protected function replacePermissionName(&$stub, $crudName): self
+    {
+        $stub = str_replace('{{permissionName}}', $crudName, $stub);
 
         return $this;
     }
