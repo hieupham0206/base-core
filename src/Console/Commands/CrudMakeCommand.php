@@ -12,7 +12,7 @@ use function in_array;
 /**
  * Class CrudAllCommand
  *
- * php artisan crud:make --crud=brands --namespace=Business --fields=name#string;type#select#options=1_New**2_NotNew --validations=name#required --permissions=view,create,update,delete
+ * php artisan crud:make --crud=brands --namespace=Business --fields=name#string --validations=name#required --permissions=view,create,edit,delete
  *
  * @package App\Console\Commands
  */
@@ -23,7 +23,7 @@ class CrudMakeCommand extends Command
                             {--fields= : Tên các column để hiện trong view (Default: --fields=name#string.}
                             {--validations= : Khai báo field validation trong controller. (Default: --validations=name#required).}
                             {--namespace= : Tên namespace của controller (Default: --namespace=Common).}
-                            {--permissions= : Quyền của model (Default: --permissions=view,create,update,delete).}
+                            {--permissions= : Quyền của model (Default: --permissions=view,create,edit,delete).}
     ';
 
     protected $description = 'Trigger all CRUD command';
