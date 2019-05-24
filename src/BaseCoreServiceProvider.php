@@ -2,12 +2,12 @@
 
 namespace Cloudteam\BaseCore;
 
-use App\Console\Commands\RefreshVersionJsCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudControllerCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudMakeCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudTableCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudTestCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudViewCommand;
+use Cloudteam\BaseCore\Console\Commands\RefreshVersionJsCommand;
 use Illuminate\Support\ServiceProvider;
 
 class BaseCoreServiceProvider extends ServiceProvider
