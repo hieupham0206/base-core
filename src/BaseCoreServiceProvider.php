@@ -2,6 +2,7 @@
 
 namespace Cloudteam\BaseCore;
 
+use App\Console\Commands\RefreshVersionJsCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudControllerCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudMakeCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudTableCommand;
@@ -95,6 +96,7 @@ class BaseCoreServiceProvider extends ServiceProvider
             CrudTableCommand::class,
             CrudViewCommand::class,
             CrudTestCommand::class,
+            RefreshVersionJsCommand::class
         ]);
     }
 }
