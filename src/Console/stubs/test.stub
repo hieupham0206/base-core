@@ -24,11 +24,11 @@ class {{modelName}}Test extends TestCase {
 
 		$this->get( route( '{{crudNameSingular}}s.create' ) )->assertStatus( 403 );
 
-		$this->get( route( '{{crudNameSingular}}s.edit', $this->{{crudNameSingular}}->id ) )->assertStatus( 403 );
+		$this->get( route( '{{crudNameSingular}}s.edit', $this->{{crudNameSingular}} ) )->assertStatus( 403 );
 
-		$this->get( route( '{{crudNameSingular}}s.show', $this->{{crudNameSingular}}->id ) )->assertStatus( 403 );
+		$this->get( route( '{{crudNameSingular}}s.show', $this->{{crudNameSingular}} ) )->assertStatus( 403 );
 
-		$this->post( route( '{{crudNameSingular}}s.destroy', $this->{{crudNameSingular}}->id ), ['_method' => 'delete'] )->assertStatus( 403 );
+		$this->post( route( '{{crudNameSingular}}s.destroy', $this->{{crudNameSingular}} ), ['_method' => 'delete'] )->assertStatus( 403 );
 	}
 
 	public function test_authorized_user_can_read_{{crudNameSingular}}() {
@@ -36,7 +36,7 @@ class {{modelName}}Test extends TestCase {
 
 		$this->get( route( '{{crudNameSingular}}s.index' ) )->assertStatus( 200 );
 
-		$this->get( route( '{{crudNameSingular}}s.show', $this->{{crudNameSingular}}->id ) )->assertStatus( 200 );
+		$this->get( route( '{{crudNameSingular}}s.show', $this->{{crudNameSingular}} ) )->assertStatus( 200 );
 	}
 
 	public function test_authorized_user_can_create_{{crudNameSingular}}() {
@@ -51,13 +51,13 @@ class {{modelName}}Test extends TestCase {
 	public function test_authorized_user_can_edit_{{crudNameSingular}}() {
 		$this->authorizedUserSignIn();
 
-		$this->get( route( '{{crudNameSingular}}s.edit', $this->{{crudNameSingular}}->id ) )
+		$this->get( route( '{{crudNameSingular}}s.edit', $this->{{crudNameSingular}} ) )
 		     ->assertStatus( 200 )
 		     ->assertSee( $this->{{crudNameSingular}}->title );
 
 		${{crudNameSingular}} = create({{modelName}}::class);
 
-		$this->put( route( '{{crudNameSingular}}s.update', ${{crudNameSingular}}->id ), ${{crudNameSingular}}->toArray())
+		$this->put( route( '{{crudNameSingular}}s.update', ${{crudNameSingular}} ), ${{crudNameSingular}}->toArray())
 		    ->assertRedirect( route( '{{crudNameSingular}}s.show', ${{crudNameSingular}} ) );
 
 		$this->assertDatabaseHas( '{{crudNameSingular}}s', [
@@ -70,7 +70,7 @@ class {{modelName}}Test extends TestCase {
 
 		${{crudNameSingular}} = create( {{modelName}}::class );
 
-		$this->delete( route( '{{crudNameSingular}}s.destroy', ${{crudNameSingular}}->id ))->assertStatus( 200 );
+		$this->delete( route( '{{crudNameSingular}}s.destroy', ${{crudNameSingular}} ))->assertStatus( 200 );
 
 		$this->assertSoftDeleted( '{{crudNameSingular}}s', [
 			'id' => ${{crudNameSingular}}->id
