@@ -17,12 +17,12 @@ class {{modelName}}Table extends DataTable {
 		$dataArray    = [];
 		$modelName    = (new {{modelName}})->classLabel(true);
 
-        $canUpdate{{modelName}} = can('edit_{{permissionName}}');
+        $canEdit{{modelName}} = can('edit_{{permissionName}}');
         $canDelete{{modelName}} = can('delete_{{permissionName}}');
 
 		/** @var {{modelName}}[] ${{crudNameSingular}}s */
 		foreach ( ${{crudNameSingular}}s as ${{crudNameSingular}} ) {
-		    $htmlAction = $this->generateButton($modelName, ${{crudNameSingular}}, [$canUpdate{{modelName}}, $canDelete{{modelName}}]);
+		    $htmlAction = $this->generateButton($modelName, ${{crudNameSingular}}, [$canEdit{{modelName}}, $canDelete{{modelName}}]);
 
 			$dataArray[] = [
 				'<label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand"><input type="checkbox" value="'.${{crudNameSingular}}->id.'"><span></span></label>',
@@ -73,11 +73,11 @@ class {{modelName}}Table extends DataTable {
      * @return string
      */
 	protected function generateButton($modelName, ${{crudNameSingular}}, $permissions): string {
-	    [$canUpdate{{modelName}}, $canDelete{{modelName}}] = $permissions;
+	    [$canEdit{{modelName}}, $canDelete{{modelName}}] = $permissions;
 
 	    $btnEdit = $btnDelete = '';
 
-        if ($canUpdate{{modelName}}) {
+        if ($canEdit{{modelName}}) {
             $btnEdit = ' <a href="' . route( '{{crudName}}.edit', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-outline-primary m-btn m-btn--icon" title="' . __( 'Edit' ) . '">
                 <i class="fa fa-edit"></i>
             </a>';
