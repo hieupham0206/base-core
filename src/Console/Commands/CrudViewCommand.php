@@ -315,7 +315,7 @@ class CrudViewCommand extends Command
                         //options=enum**className
                         $options        = explode('**', $options);
                         $enumClassName  = ucfirst(collect($options)->last());
-                        $enumAttribute  = lcfirst(Str::singular($enumClassName));
+                        $enumAttribute  = Str::snake(Str::plural($enumClassName));
                         $enumVariable   = lcfirst($enumClassName);
                         $modelEnumField = $this->crudNameSingular . '->' . $this->formFields[$idx]['name'];
 
@@ -324,9 +324,13 @@ class CrudViewCommand extends Command
                         $optionValues .= '@endforeach' . "\n";
 
                         //tạo file class enum
-                        $this->call('make:enum', [
-                            'name' => $enumClassName,
-                        ]);
+
+                        if ( ! class_exists("App\Enums\{$enumClassName}")) {
+                            $this->call('make:enum', [
+                                'name' => $enumClassName,
+                            ]);
+                        }
+
                     } elseif (\strpos($options, '**', true) !== false) {
                         //options=1_value1**2_value2
                         $options = explode('**', $options);
@@ -447,8 +451,8 @@ class CrudViewCommand extends Command
     /**
      * Form field wrapper.
      *
-     * @param  string $item
-     * @param  string $field
+     * @param string $item
+     * @param string $field
      *
      * @return string
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
@@ -465,7 +469,7 @@ class CrudViewCommand extends Command
     /**
      * Form field generator.
      *
-     * @param  array $item
+     * @param array $item
      *
      * @return string
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
@@ -493,7 +497,7 @@ class CrudViewCommand extends Command
     /**
      * Create a specific field using the form helper.
      *
-     * @param  array $item
+     * @param array $item
      *
      * @return string
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
@@ -517,7 +521,7 @@ class CrudViewCommand extends Command
     /**
      * Create a generic input field using the form helper.
      *
-     * @param  array $item
+     * @param array $item
      *
      * @return string
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
@@ -554,7 +558,7 @@ class CrudViewCommand extends Command
     /**
      * Create a yes/no radio button group using the form helper.
      *
-     * @param  array $item
+     * @param array $item
      *
      * @return string
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
@@ -572,7 +576,7 @@ class CrudViewCommand extends Command
     /**
      * Create a textarea field using the form helper.
      *
-     * @param  array $item
+     * @param array $item
      *
      * @return string
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
@@ -597,7 +601,7 @@ class CrudViewCommand extends Command
     /**
      * Create a select field using the form helper.
      *
-     * @param  array $item
+     * @param array $item
      *
      * @return string
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
