@@ -78,19 +78,19 @@ class {{modelName}}Table extends DataTable {
 	    $btnEdit = $btnDelete = '';
 
         if ($canEdit{{modelName}}) {
-            $btnEdit = ' <a href="' . route( '{{crudName}}.edit', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-outline-primary m-btn m-btn--icon" title="' . __( 'Edit' ) . '">
+            $btnEdit = ' <a href="' . route( '{{crudName}}.edit', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-primary m-btn m-btn--icon m-btn--pill m-btn--icon-only" title="' . __( 'Edit' ) . '">
                 <i class="fa fa-edit"></i>
             </a>';
         }
 
         if ($canDelete{{modelName}}) {
-            $btnDelete = ' <button type="button" data-title="'.__('Delete').' ' . $modelName . ' ' . ${{crudNameSingular}}->name . ' !!!" class="btn btn-sm btn-outline-danger btn-delete m-btn m-btn--icon"  title="' . __( 'Delete' ). '"
+            $btnDelete = ' <button type="button" data-title="'.__('Delete').' ' . $modelName . ' ' . ${{crudNameSingular}}->name . ' !!!" class="btn btn-sm btn-danger btn-delete m-btn m-btn--icon m-btn--pill m-btn--icon-only"  title="' . __( 'Delete' ). '"
             data-url="' . route( '{{crudName}}.destroy', ${{crudNameSingular}}, false ) . '">
                 <i class="fa fa-trash"></i>
             </button>';
         }
 
-        $htmlAction = '<a href="' . route( '{{crudName}}.show', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-outline-info m-btn m-btn--icon" title="' . __( 'View' ) . '">
+        $htmlAction = '<a href="' . route( '{{crudName}}.show', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-info m-btn m-btn--icon m-btn--pill m-btn--icon-only" title="' . __( 'View' ) . '">
                       					<i class="fa fa-eye"></i>
                       				</a>' . $btnEdit . $btnDelete;
 
