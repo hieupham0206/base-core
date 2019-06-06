@@ -38,7 +38,7 @@ class DummyClass extends Controller
     {
         return view('{{viewName}}.create', [
             '{{crudNameSingular}}' => new {{modelName}},
-            'action' => route('{{routeName}}.store')
+            'action' => route('{{routeName}}.store', [], false)
         ]);
     }
 
@@ -81,7 +81,7 @@ class DummyClass extends Controller
         return view('{{viewName}}.edit', [
             '{{crudNameSingular}}' => ${{crudNameSingular}},
             'method' => 'put',
-            'action' => route('{{routeName}}.update', ${{crudNameSingular}})
+            'action' => route('{{routeName}}.update', ${{crudNameSingular}}, [], false)
         ]);
     }
 
