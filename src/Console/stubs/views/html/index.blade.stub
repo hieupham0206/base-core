@@ -1,4 +1,4 @@
-@php /** @var \App\Models\%%modelName%% $%%crudNameSingular%% */
+@php /** @var \App\Models\%%modelNameCap%% $%%crudNameSingular%% */
 $breadcrumbs = ['breadcrumb' => '%%route%%.index'];
 @endphp
 
