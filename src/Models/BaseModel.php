@@ -6,7 +6,6 @@ use Cloudteam\BaseCore\Traits\Labelable;
 use Cloudteam\BaseCore\Traits\Linkable;
 use Cloudteam\BaseCore\Traits\Modelable;
 use Cloudteam\BaseCore\Traits\Queryable;
-use Cloudteam\BaseCore\Traits\Responsible;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class BaseModel extends Model
 {
-    use Responsible, Labelable, Queryable, Linkable, Modelable;
+    use Labelable, Queryable, Linkable, Modelable;
 
     /**
      * Tên custom action dùng để lưu log hoạt động
