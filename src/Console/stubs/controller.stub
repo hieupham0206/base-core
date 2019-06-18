@@ -81,7 +81,7 @@ class DummyClass extends Controller
         return view('{{viewName}}.edit', [
             '{{crudNameSingular}}' => ${{crudNameSingular}},
             'method' => 'put',
-            'action' => route('{{routeName}}.update', ${{crudNameSingular}}, [], false)
+            'action' => route('{{routeName}}.update', ${{crudNameSingular}}, false)
         ]);
     }
 

@@ -481,15 +481,14 @@ class CrudViewCommand extends Command
             case 'datetime-local':
             case 'date':
             case 'time':
-            case 'number':
-                return $this->createInputField($item);
+                return $this->createDateTimeField($item);
             case 'radio':
                 return $this->createRadioField($item);
             case 'textarea':
                 return $this->createTextareaField($item);
             case 'select':
                 return $this->createSelectField($item);
-            default: // text
+            default: // text, number, email, phone, mobile-phone
                 return $this->createFormField($item);
         }
     }
@@ -508,9 +507,22 @@ class CrudViewCommand extends Command
 
         $required = $item['required'] ? 'required' : '';
 
+        $customClass = ' text-string';
+
+        if ($item['type'] === 'number') {
+            $customClass = ' text-numeric';
+        } elseif ($item['type'] === 'phone') {
+            $customClass = ' text-phone';
+        } elseif ($item['type'] === 'mobile-phone') {
+            $customClass = ' text-mobile-phone';
+        }
+
         $type   = str_replace("'", '', $item['type']);
         $markup = File::get($this->viewDirectoryPath . 'form-fields/form-field.blade.stub');
-        $markup = str_replace([$start . 'required' . $end, $start . 'fieldType' . $end, $start . 'itemName' . $end, $start . 'crudNameSingular' . $end], [$required, $this->typeLookup[$type], $item['name'], $this->crudNameSingular], $markup);
+        $markup = str_replace(
+            [$start . 'required' . $end, $start . 'fieldType' . $end, $start . 'itemName' . $end, $start . 'crudNameSingular' . $end, $start . 'customClass' . $end], 
+            [$required, $this->typeLookup[$type], $item['name'], $this->crudNameSingular], 
+            $markup);
 
         return $this->wrapField(
             $item,
@@ -526,7 +538,7 @@ class CrudViewCommand extends Command
      * @return string
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    protected function createInputField($item)
+    protected function createDateTimeField($item)
     {
         [$start, $end] = $this->delimiter;
 
@@ -539,8 +551,6 @@ class CrudViewCommand extends Command
             $customClass = 'text-datetimepicker';
         } elseif ($item['type'] === 'time') {
             $customClass = 'text-timepicker';
-        } elseif ($item['type'] === 'number') {
-            $customClass = 'numeric';
         }
 
         $markup = File::get($this->viewDirectoryPath . 'form-fields/input-field.blade.stub');

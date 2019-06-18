@@ -13,7 +13,7 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.edit', 'model' => $%%crudNameSingular
 @section('content')
     <div class="m-content">
         <div class="m-portlet m-portlet--rounded m-portlet--bordered-semi">
-            @include('%%userViewPath%%._form')
+            @include('%%userViewPath%%._form', ['caption' => __('action.Edit Model', ['model' => $%%crudNameSingular%%->classLabel(true)])])
         </div>
     </div>
 @endsection
