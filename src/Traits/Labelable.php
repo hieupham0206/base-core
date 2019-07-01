@@ -23,7 +23,10 @@ trait Labelable
     {
         $label = __(ucfirst(camel2words(strtolower($field))));
 
-        if (property_exists(get_class($this), 'labels') && is_array($this->labels) && array_key_exists($field, $this->labels)) {
+        if (property_exists(get_class($this), 'labels')
+            && is_array($this->labels)
+            && array_key_exists($field, $this->labels)
+        ) {
             $label = $this->labels[$field];
             $label = is_callable($label) ? $label($field) : (string) $label;
         }
@@ -56,7 +59,7 @@ trait Labelable
      */
     public function contextLabel($text, $context = 'success'): string
     {
-        return '<span class="font-weight-bold m--font-' . $context . '">' . $text . '</span>';
+        return '<span class="font-weight-bold kt--font-' . $context . '">' . $text . '</span>';
     }
 
     /**
@@ -67,7 +70,7 @@ trait Labelable
      */
     public function contextBadge($text, $context = 'success'): string
     {
-        return '<span class="font-weight-bold m-badge m-badge--wide m-badge--rounded m-badge--' . $context . '">' . $text . '</span>';
+        return '<span class="font-weight-bold kt-badge kt-badge--wide kt-badge--rounded kt-badge--' . $context . '">' . $text . '</span>';
     }
 
     /**
@@ -78,6 +81,6 @@ trait Labelable
      */
     public function contextBadgeUnified($text, $context = 'success'): string
     {
-        return '<span class="font-weight-bold m-badge m-badge--wide m-badge--rounded m-badge--unified-' . $context . '">' . $text . '</span>';
+        return '<span class="font-weight-bold kt-badge kt-badge--wide kt-badge--rounded kt-badge--unified-' . $context . '">' . $text . '</span>';
     }
 }
