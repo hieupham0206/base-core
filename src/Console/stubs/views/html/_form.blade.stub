@@ -1,28 +1,24 @@
 @php /** @var \App\Models\%%modelNameCap%% $%%crudNameSingular%% */ @endphp
 
-<form id="%%crudName%%_form" class="m-form m-form--state" method="post" action="{{ $action }}" autocomplete="off">
+<form id="%%crudName%%_form" class="kt-form" method="post" action="{{ $action }}" autocomplete="off">
     @csrf
     @isset($method)
         @method('put')
     @endisset
-    <div class="m-portlet__head">
-        <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-                <h3 class="m-portlet__head-text">
-                    {{ $caption }}
-                </h3>
-            </div>
+    <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">{{ $%%crudNameSingular%%->label('info') }}</h3>
         </div>
     </div>
-    <div class="m-portlet__body">
+    <div class="kt-portlet__body">
         <div class="form-group row">
 			%%formFieldsHtml%%
 		</div>
     </div>
-    <div class="m-portlet__foot m-portlet__foot--fit m-portlet__foot-no-border">
-        <div class="m-form__actions m-form__actions--right">
-            <button class="btn btn-brand m-btn m-btn--icon m-btn--custom"><span><i class="fa fa-save"></i><span>@lang('Save')</span></span></button>
-            <a href="{{ route('%%route%%.index') }}" class="btn btn-brand m-btn m-btn--icon m-btn--custom"><span><i class="fa fa-arrow-left"></i><span>@lang('Back')</span></span></a>
+    <div class="kt-portlet__foot kt-portlet__foot--solid">
+        <div class="kt-form__actions kt-form__actions--right">
+            <button class="btn btn-brand btn-wide"><span><i class="fa fa-save"></i><span>@lang('Save')</span></span></button>
+            <a href="{{ route('%%route%%.index') }}" class="btn btn-light btn-wide"><span><i class="fa fa-arrow-left"></i><span>@lang('Back')</span></span></a>
         </div>
     </div>
 </form>

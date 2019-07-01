@@ -25,7 +25,7 @@ class {{modelName}}Table extends DataTable {
 		    $htmlAction = $this->generateButton($modelName, ${{crudNameSingular}}, [$canEdit{{modelName}}, $canDelete{{modelName}}]);
 
 			$dataArray[] = [
-				'<label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand"><input type="checkbox" value="'.${{crudNameSingular}}->id.'"><span></span></label>',
+				'<label class="kt-checkbox kt-checkbox--single kt-checkbox--brand"><input type="checkbox" value="'.${{crudNameSingular}}->id.'"><span></span></label>',
 				{{tableValue}}
 				$htmlAction
 			];
@@ -78,19 +78,19 @@ class {{modelName}}Table extends DataTable {
 	    $btnEdit = $btnDelete = '';
 
         if ($canEdit{{modelName}}) {
-            $btnEdit = ' <a href="' . route( '{{crudName}}.edit', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-primary m-btn m-btn--icon m-btn--pill m-btn--icon-only" title="' . __( 'Edit' ) . '">
+            $btnEdit = ' <a href="' . route( '{{crudName}}.edit', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-primary btn-circle btn-icon btn-edit" title="' . __( 'Edit' ) . '">
                 <i class="fa fa-edit"></i>
             </a>';
         }
 
         if ($canDelete{{modelName}}) {
-            $btnDelete = ' <button type="button" data-title="'.__('Delete').' ' . $modelName . ' ' . ${{crudNameSingular}}->name . ' !!!" class="btn btn-sm btn-danger btn-delete m-btn m-btn--icon m-btn--pill m-btn--icon-only"  title="' . __( 'Delete' ). '"
+            $btnDelete = ' <button type="button" data-title="'.__('Delete').' ' . $modelName . ' ' . ${{crudNameSingular}}->name . ' !!!" class="btn btn-sm btn-danger btn-circle btn-icon btn-delete"  title="' . __( 'Delete' ). '"
             data-url="' . route( '{{crudName}}.destroy', ${{crudNameSingular}}, false ) . '">
                 <i class="fa fa-trash"></i>
             </button>';
         }
 
-        $htmlAction = '<a href="' . route( '{{crudName}}.show', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-info m-btn m-btn--icon m-btn--pill m-btn--icon-only" title="' . __( 'View' ) . '">
+        $htmlAction = '<a href="' . route( '{{crudName}}.show', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-info btn-circle btn-icon" title="' . __( 'View' ) . '">
                       					<i class="fa fa-eye"></i>
                       				</a>' . $btnEdit . $btnDelete;
 

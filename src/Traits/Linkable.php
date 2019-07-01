@@ -32,7 +32,7 @@ trait Linkable
 
         $route = $this->getViewLink();
 
-        return "<a target='_blank' class='m-link m--font-bolder m--font-{$font}' href='$route'>$modelValName</a>";
+        return "<a target='_blank' class='kt-link kt-font-bolder kt-font-{$font}' href='$route'>$modelValName</a>";
     }
 
     /**
@@ -47,6 +47,6 @@ trait Linkable
 
         $route = $this->getEditLink();
 
-        return "<a target='_blank' class='m-link m--font-bolder m--font-{$font}' href='$route'>$modelValName</a>";
+        return "<a target='_blank' class='kt-link kt-font-bolder kt-font-{$font}' href='$route'>$modelValName</a>";
     }
 }

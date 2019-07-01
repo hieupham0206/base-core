@@ -11,15 +11,15 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.index'];
 @section('title', $%%crudNameSingular%%->classLabel())
 
 @section('content')
-    <div class="m-content">
-        <div class="m-portlet m-portlet--rounded m-portlet--bordered-semi">
+    <div class="kt-content kt-form">
+         <div class="kt-portlet kt-portlet--rounded">
             @include('layouts.partials.index_header', ['modelName' => $%%crudNameSingular%%->classLabel(true), 'model' => '%%crudNameSingular%%', 'createUrl' => route('%%route%%.create')])
-            <div class="m-portlet__body">
+            <div class="kt-portlet__body">
                 @include('layouts.partials.search', ['form' => view('%%userViewPath%%._search', ['%%crudNameSingular%%' => $%%crudNameSingular%%])])
                 <table class="table table-hover nowrap" id="table_%%crudName%%" style="width: 100%">
                     <thead>
                         <tr>
-                            <th style="width: 5%"><label class="m-checkbox m-checkbox--all m-checkbox--solid m-checkbox--brand"><input type="checkbox"><span></span></label></th>
+                            <th style="width: 5%"><label class="kt-checkbox kt-checkbox--single kt-checkbox--all kt-checkbox--brand"><input type="checkbox"><span></span></label></th>
                             %%formHeadingHtml%%
                             <th>@lang('Actions')</th>
                         </tr>
@@ -27,11 +27,9 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.index'];
                     <tbody></tbody>
                 </table>
             </div>
-            <div class="m-form m-form--fit m-form--label-align-right">
-                <div class="m-portlet__foot m-portlet__foot--fit m-portlet__foot-no-border">
-                    <div class="m-form__actions m-form__actions--right">
-                        <a href="{{ route('home') }}" class="btn btn-brand m-btn m-btn--icon m-btn--custom"><span><i class="fa fa-arrow-left"></i><span>@lang('Back')</span></span></a>
-                    </div>
+            <div class="kt-portlet__foot kt-portlet__foot--solid">
+                <div class="kt-form__actions kt-form__actions--right">
+                    <a href="{{ route('home') }}" class="btn btn-brand"><span><i class="fa fa-arrow-left"></i><span>@lang('Back')</span></span></a>
                 </div>
             </div>
         </div>
