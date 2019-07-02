@@ -19,7 +19,9 @@ $(function() {
         table{{ modelNameCap }}.reloadTable()
         return false
     })
-    $('#btn_reset_filter').on('click', function() {
+    $('.btn-refresh-table, #btn_reset_filter').on('click', function(e) {
+        e.stopPropagation()
+
         $('#{{ route }}_search_form').resetForm()
         table{{ modelNameCap }}.reloadTable()
     })

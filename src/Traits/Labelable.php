@@ -23,6 +23,12 @@ trait Labelable
     {
         $label = __(ucfirst(camel2words(strtolower($field))));
 
+        $locale = \App::getLocale();
+
+        if ($locale === 'en') {
+            return $label;
+        }
+
         if (property_exists(get_class($this), 'labels')
             && is_array($this->labels)
             && array_key_exists($field, $this->labels)
