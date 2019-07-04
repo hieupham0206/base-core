@@ -26,13 +26,6 @@ $(function() {
         table{{ modelNameCap }}.reloadTable()
     })
 
-    //Export tools
-    $('#btn_export_excel').on('click', function() {
-        table{{ modelNameCap }}.exportExcel()
-    })
-    $('#btn_export_pdf').on('click', function() {
-        table{{ modelNameCap }}.exportPdf()
-    })
     //Quick actions
     $('#link_delete_selected_rows').on('click', function() {
         let ids = $(".m-checkbox--single > input[type='checkbox']:checked").getValues()

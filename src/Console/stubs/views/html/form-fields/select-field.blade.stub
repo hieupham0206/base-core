@@ -1,4 +1,4 @@
 <select name="%%itemName%%" class="form-control select" id="select_%%itemName%%" %%required%%>
     %%options%%
 </select>
-<span class="invalid-feedback">{!! $errors->first('%%itemName%%') !!}</span>
+<span class="form-text text-danger">{!! $errors->first('%%itemName%%') !!}</span>

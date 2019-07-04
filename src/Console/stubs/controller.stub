@@ -21,7 +21,17 @@ class DummyClass extends Controller
      */
     public function index()
     {
-        return view( '{{viewName}}.index' )->with('{{crudNameSingular}}', new {{modelName}});
+        ${{crudNameSingular}} = new {{modelName}};
+
+        return view( '{{viewName}}.index', [
+            '{{crudNameSingular}}' => ${{crudNameSingular}},
+            'headerConfigs' => [
+                'model' => ${{crudNameSingular}},
+                'caption' => ${{crudNameSingular}}->label('list'),
+                'createUrl' => route('{{routeName}}.create'),
+                'buttons' => []
+            ]
+        ] );
     }
 
     /**
@@ -69,7 +79,9 @@ class DummyClass extends Controller
      */
     public function show({{modelName}} ${{crudNameSingular}})
     {
-        return view('{{viewName}}.show', compact('{{crudNameSingular}}'));
+        return view('{{viewName}}.show', [
+            '{{crudNameSingular}}' => ${{crudNameSingular}}
+        );
     }
 
     /**
@@ -146,8 +158,6 @@ class DummyClass extends Controller
     }
 
     /**
-     * Lấy danh sách {{modelName}} theo dạng json
-     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function {{crudName}}() {
