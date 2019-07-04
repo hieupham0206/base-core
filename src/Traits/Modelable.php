@@ -6,14 +6,15 @@ use Illuminate\Support\Str;
 
 trait Modelable
 {
-    public function getCreatedAtTextAttribute(): string
+    public function getCanBeCreatedAttribute()
     {
-        return $this->created_at->format(config('basecore.datetime_format', 'd-m-Y H:i:s'));
-    }
+        $name = Str::singular($this->getTable());
 
-    public function getUpdatedAtTextAttribute(): string
-    {
-        return $this->updated_at->format(config('basecore.datetime_format', 'd-m-Y H:i:s'));
+        try {
+            return can("create_$name");
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function getCanBeEditedAttribute()
@@ -38,18 +39,26 @@ trait Modelable
         }
     }
 
+    public function getCreatedAtTextAttribute(): string
+    {
+        return $this->created_at->format(config('basecore.datetime_format', 'd-m-Y H:i:s'));
+    }
+
+    public function getUpdatedAtTextAttribute(): string
+    {
+        return $this->updated_at->format(config('basecore.datetime_format', 'd-m-Y H:i:s'));
+    }
+
     /**
      * @inheritdoc
      */
     public function getDescriptionEvent(string $eventName): string
     {
-        $modelValName = '';
-        if ( ! empty($this->{'name'})) {
+        $displayAttribute = $this->displayAttribute;
+        if ( ! empty($this->{$displayAttribute})) {
+            $modelValName = $this->{$displayAttribute};
+        } else {
             $modelValName = $this->{'name'};
-        } elseif ( ! empty($this->{'code'})) {
-            $modelValName = $this->{'code'};
-        } elseif ( ! empty($this->{'title'})) {
-            $modelValName = $this->{'title'};
         }
 
         if ($this->action) {
