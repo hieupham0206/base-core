@@ -1,5 +1,5 @@
 $(function() {
-    const $app = $('#app')
+    const $body = $('body')
     const table{{ modelNameCap }} = $('#table_{{ route }}').DataTable({
         'serverSide': true,
         'paging': true,
@@ -9,12 +9,11 @@ $(function() {
                 q.filters = JSON.stringify($('#{{ route }}_search_form').serializeArray())
             },
         }),
-        conditionalPaging: true,
-        lengthChange: true,
     })
-    $app.on('click', '.btn-delete', function () {
+    $body.on('click', '.btn-delete', function () {
         table{{ modelNameCap }}.actionDelete({btnDelete: $(this)})
     })
+    //note: Tìm kiếm
     $('#{{ route }}_search_form').on('submit', function() {
         table{{ modelNameCap }}.reloadTable()
         return false
@@ -26,7 +25,7 @@ $(function() {
         table{{ modelNameCap }}.reloadTable()
     })
 
-    //Quick actions
+    //note: thao tác nhanh
     $('#link_delete_selected_rows').on('click', function() {
         let ids = $(".m-checkbox--single > input[type='checkbox']:checked").getValues()
 
