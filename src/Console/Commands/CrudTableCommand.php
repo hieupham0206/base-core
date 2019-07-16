@@ -42,7 +42,7 @@ class CrudTableCommand extends GeneratorCommand
     /**
      * Build the model class with the given name.
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return string
      * @throws FileNotFoundException
@@ -65,11 +65,17 @@ class CrudTableCommand extends GeneratorCommand
         $fields      = $this->option('fields');
         $fieldsArray = explode(';', $fields);
         foreach ($fieldsArray as $key => $fieldOptions) {
-            $items = explode('#', $fieldOptions);
-            $tableValue .= '$' . $crudNameSingular . '->' . $items[0] . ',' . "\n";
+            $items       = explode('#', $fieldOptions);
+            $columnName  = $items[0];
+            $placeholder = '$' . $crudNameSingular . '->';
 
-            $keyPlus1  = ++$key;
-            $tableSort .= "case '{$keyPlus1}': " . '$column = ' . "'$crudName.{$items[0]}'; break;";
+            $tableValue .= $placeholder . $columnName . ',' . "\n";
+            if (strpos($columnName, '_id') !== false) {
+                $relationName = Str::camel(str_replace('_id', '', $columnName));
+                $tableValue   .= "optional({$placeholder}{$relationName})" . '->name,' . "\n";
+            }
+
+            $tableSort .= "$crudName.{$columnName}, ";
         }
 
         return $this
@@ -115,7 +121,7 @@ class CrudTableCommand extends GeneratorCommand
      */
     protected function replaceTableNamespace(&$stub, $name, $dataTableNamespace)
     {
-        $stub = str_replace(array('DummyNamespace', 'TableNamespace'), array($name, $dataTableNamespace), $stub);
+        $stub = str_replace(['DummyNamespace', 'TableNamespace'], [$name, $dataTableNamespace], $stub);
 
         return $this;
     }
@@ -123,8 +129,8 @@ class CrudTableCommand extends GeneratorCommand
     /**
      * Replace the crudName for the given stub.
      *
-     * @param  string $stub
-     * @param  string $crudName
+     * @param string $stub
+     * @param string $crudName
      *
      * @return $this
      */
@@ -138,8 +144,8 @@ class CrudTableCommand extends GeneratorCommand
     /**
      * Replace the crudName for the given stub.
      *
-     * @param  string $stub
-     * @param  string $crudName
+     * @param string $stub
+     * @param string $crudName
      *
      * @return $this
      */
@@ -153,8 +159,8 @@ class CrudTableCommand extends GeneratorCommand
     /**
      * Replace the crudNameSingular for the given stub.
      *
-     * @param  string $stub
-     * @param  string $crudNameSingular
+     * @param string $stub
+     * @param string $crudNameSingular
      *
      * @return $this
      */
@@ -168,8 +174,8 @@ class CrudTableCommand extends GeneratorCommand
     /**
      * Replace the modelName for the given stub.
      *
-     * @param  string $stub
-     * @param  string $modelName
+     * @param string $stub
+     * @param string $modelName
      *
      * @return $this
      */
@@ -183,8 +189,8 @@ class CrudTableCommand extends GeneratorCommand
     /**
      * Replace the modelName for the given stub.
      *
-     * @param  string $stub
-     * @param  string $tableValue
+     * @param string $stub
+     * @param string $tableValue
      *
      * @return $this
      */
@@ -198,8 +204,8 @@ class CrudTableCommand extends GeneratorCommand
     /**
      * Replace the modelName for the given stub.
      *
-     * @param  string $stub
-     * @param  string $tableValue
+     * @param string $stub
+     * @param string $tableValue
      *
      * @return $this
      */

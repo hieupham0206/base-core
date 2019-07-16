@@ -22,7 +22,7 @@ abstract class DataTable
     public $length = 10;
     public $start = 0;
     public $searchValue = '';
-    public $column = 'id';
+    public $column = 0;
     public $direction = 'desc';
     public $totalRecords = 0;
     public $totalFilteredRecords = 0;

@@ -6,9 +6,14 @@ use Illuminate\Support\Str;
 
 trait Modelable
 {
+    public function getTableNameSingularAttribute()
+    {
+        return Str::singular($this->getTable());
+    }
+
     public function getCanBeCreatedAttribute()
     {
-        $name = Str::singular($this->getTable());
+        $name = $this->table_name_singular;
 
         try {
             return can("create_$name");
@@ -19,7 +24,7 @@ trait Modelable
 
     public function getCanBeEditedAttribute()
     {
-        $name = Str::singular($this->getTable());
+        $name = $this->table_name_singular;
 
         try {
             return can("edit_$name");
@@ -30,7 +35,7 @@ trait Modelable
 
     public function getCanBeDeletedAttribute()
     {
-        $name = Str::singular($this->getTable());
+        $name = $this->table_name_singular;
 
         try {
             return can("delete_$name");

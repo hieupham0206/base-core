@@ -35,16 +35,10 @@ class {{modelName}}Table extends DataTable {
 	}
 
 	public function getSortColumn(): string {
-		$column = $this->column;
+		$column  = $this->column;
+        $columns = ['{{crudName}}.id', {{tableSort}}];
 
-		switch ( $column ) {
-		    {{tableSort}}
-			default:
-				$column = '{{crudName}}.id';
-				break;
-		}
-
-		return $column;
+        return $columns[$column];
 	}
 
 	/**
