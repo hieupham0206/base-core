@@ -72,22 +72,22 @@ class {{modelName}}Table extends DataTable {
 	    $btnEdit = $btnDelete = '';
 
         if ($canEdit{{modelName}}) {
-            $btnEdit = ' <a href="' . route( '{{crudName}}.edit', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-primary btn-circle btn-icon btn-edit" title="' . __( 'Edit' ) . '">
+            $btnEdit = ' <a href="' . ${{crudNameSingular}}->getEditLink() . '" class="btn btn-sm btn-primary btn-icon btn-edit" title="' . __( 'Edit' ) . '">
                 <i class="fa fa-edit"></i>
             </a>';
         }
 
         if ($canDelete{{modelName}}) {
-            $btnDelete = ' <button type="button" data-title="'.__('Delete').' ' . $modelName . ' ' . ${{crudNameSingular}}->name . ' !!!" class="btn btn-sm btn-danger btn-circle btn-icon btn-delete"  title="' . __( 'Delete' ). '"
-            data-url="' . route( '{{crudName}}.destroy', ${{crudNameSingular}}, false ) . '">
+            $btnDelete = ' <button type="button" data-title="'.__('Delete').' ' . $modelName . ' ' . ${{crudNameSingular}}->name . ' !!!" class="btn btn-sm btn-danger btn-icon btn-delete"  title="' . __( 'Delete' ). '"
+            data-url="' . ${{crudNameSingular}}->getDestroyLink() . '">
                 <i class="fa fa-trash"></i>
             </button>';
         }
 
-        $htmlAction = '<a href="' . route( '{{crudName}}.show', ${{crudNameSingular}}, false ) . '" class="btn btn-sm btn-info btn-circle btn-icon" title="' . __( 'View' ) . '">
-                      					<i class="fa fa-eye"></i>
-                      				</a>' . $btnEdit . $btnDelete;
+        $btnView = '<a href="' . ${{crudNameSingular}}->getViewLink() . '" class="btn btn-sm btn-info btn-icon" title="' . __( 'View' ) . '">
+                                         					<i class="fa fa-eye"></i>
+                                         				</a>';
 
-        return $htmlAction;
+        return $btnView . $btnEdit . $btnDelete;
 	}
 }
