@@ -21,6 +21,14 @@ trait Linkable
     }
 
     /**
+     * @return string
+     */
+    public function getDestroyLink(): string
+    {
+        return route("{$this->route}.destroy", $this, false);
+    }
+
+    /**
      * @param string $text
      * @param string $font
      *
