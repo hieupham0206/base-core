@@ -5,19 +5,22 @@ namespace Cloudteam\BaseCore\Traits;
 trait Linkable
 {
     /**
+     * @param bool $absolute: Đường dẫn tuyệt đối
+     *
      * @return string
      */
-    public function getViewLink(): string
+    public function getViewLink($absolute = false): string
     {
-        return route("{$this->route}.show", $this, false);
+        return route("{$this->route}.show", $this, $absolute);
     }
 
     /**
+     * @param bool $absolute: Đường dẫn tuyệt đối
      * @return string
      */
-    public function getEditLink(): string
+    public function getEditLink($absolute = false): string
     {
-        return route("{$this->route}.edit", $this, false);
+        return route("{$this->route}.edit", $this, $absolute);
     }
 
     /**
