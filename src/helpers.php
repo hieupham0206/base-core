@@ -207,7 +207,7 @@ if ( ! function_exists('numberToWord')) {
 
                 if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
                     trigger_error(
-                        'only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX,
+                        'Chỉ chấp nhận trong khoảng từ -' . PHP_INT_MAX . ' đến ' . PHP_INT_MAX,
                         E_USER_WARNING
                     );
 
@@ -215,7 +215,7 @@ if ( ! function_exists('numberToWord')) {
                 }
 
                 if ($number < 0) {
-                    return 'âm ' . $this->numberToWord(abs($number));
+                    return 'Âm ' . $this->numberToWord(abs($number));
                 }
 
                 return $this->processNumber($number);
@@ -263,9 +263,9 @@ if ( ! function_exists('numberToWord')) {
                 $string = self::DICTIONARY[$tens];
                 if ($units) {
                     $tmpText = $this->seperator . self::DICTIONARY[$units];
-                    if ($units == 1) {
+                    if ($units === 1) {
                         $tmpText = $this->seperator . 'mốt';
-                    } elseif ($units == 5) {
+                    } elseif ($units === 5) {
                         $tmpText = $this->seperator . 'lăm';
                     }
                     $string .= $tmpText;
@@ -283,7 +283,7 @@ if ( ! function_exists('numberToWord')) {
                     $tmpText = $this->seperator . $this->numberToWord($remainder);
                     if ($remainder < 10) {
                         $tmpText = $this->seperator . 'lẻ ' . $this->numberToWord($remainder);
-                    } elseif ($remainder % 10 == 5) {
+                    } elseif ($remainder % 10 === 5) {
                         $tmpText = $this->seperator . $this->numberToWord($remainder - 5) . ' lăm';
                     }
 

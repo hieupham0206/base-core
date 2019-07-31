@@ -61,16 +61,33 @@ class DummyClass extends Controller
     {
         {{validationRules}}
         $requestData = $request->all();
-        ${{crudNameSingular}} = {{modelName}}::create($requestData);
 
-        if ($request->wantsJson()) {
-            return $this->asJson([
-                'message' => __('Data created successfully'),
-                'redirect_url' => route('{{routeName}}.show', ${{crudNameSingular}})
-            ]);
+        try {
+            \DB::beginTransaction();
+
+            ${{crudNameSingular}} = {{modelName}}::create($requestData);
+
+            if ($request->wantsJson()) {
+                return $this->asJson([
+                    'message' => __('Data created successfully'),
+                    'redirect_url' => route('{{routeName}}.show', ${{crudNameSingular}})
+                ]);
+            }
+
+            \DB::commit();
+
+            return redirect(route('{{routeName}}.index', ${{crudNameSingular}}))->with('message', __( 'Data created successfully' ));
+        } catch (Exception $e) {
+            \DB::rollBack();
+
+            if ($request->wantsJson()) {
+                return $this->asJson([
+                    'message'      => "{$e->getMessage()} - {$e->getFile()}} - {$e->getLine()}",
+                ], 500);
+            }
+
+            report($e);
         }
-
-        return redirect(route('{{routeName}}.show', ${{crudNameSingular}}))->with('message', __( 'Data created successfully' ));
     }
 
     /**
@@ -106,17 +123,34 @@ class DummyClass extends Controller
     public function update(Request $request, {{modelName}} ${{crudNameSingular}})
     {
         {{validationRules}}
-        $requestData = $request->all();
-        ${{crudNameSingular}}->update($requestData);
 
-        if ($request->wantsJson()) {
-            return $this->asJson([
-                'message' => __('Data edited successfully'),
-                'redirect_url' => route('{{routeName}}.show', ${{crudNameSingular}})
-            ]);
+        try {
+            \DB::beginTransaction();
+
+            $requestData = $request->all();
+            ${{crudNameSingular}}->update($requestData);
+
+            if ($request->wantsJson()) {
+                return $this->asJson([
+                    'message' => __('Data edited successfully'),
+                    'redirect_url' => route('{{routeName}}.show', ${{crudNameSingular}})
+                ]);
+            }
+
+            \DB::commit();
+
+            return redirect(route('{{routeName}}.index', ${{crudNameSingular}}))->with('message', __( 'Data edited successfully' ));
+        } catch (Exception $e) {
+            \DB::rollBack();
+
+            if ($request->wantsJson()) {
+                return $this->asJson([
+                    'message'      => "{$e->getMessage()} - {$e->getFile()}} - {$e->getLine()}",
+                ], 500);
+            }
+
+            report($e);
         }
-
-        return redirect(route('{{routeName}}.show', ${{crudNameSingular}}))->with('message', __( 'Data edited successfully' ));
     }
 
     /**

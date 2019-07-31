@@ -4,6 +4,7 @@ namespace Cloudteam\BaseCore\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 trait Queryable
 {
@@ -185,6 +186,16 @@ trait Queryable
                 $tableAndColumn->pop();
                 $relation = $tableAndColumn->pop();
                 $table    = $tableAndColumn->first();
+            }
+
+            $callClass  = static::class;
+            $classNames = explode('\\', $callClass);
+            $className  = end($classNames);
+            $tableName  = Str::plural(Str::snake($className));
+
+            if ($tableName === $relation) {
+                $isForeignKey = false;
+                $column       = "$relation.$column";
             }
         }
 
