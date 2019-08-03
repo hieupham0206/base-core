@@ -2,12 +2,8 @@
 
 namespace Cloudteam\BaseCore\Models;
 
-use Cloudteam\BaseCore\Traits\Labelable;
-use Cloudteam\BaseCore\Traits\Linkable;
-use Cloudteam\BaseCore\Traits\Modelable;
-use Cloudteam\BaseCore\Traits\Queryable;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Cloudteam\BaseCore\Traits\{Labelable, Linkable, Modelable, Queryable};
+use Illuminate\{Database\Eloquent\Builder, Database\Eloquent\Model};
 
 /**
  * App\Models\BaseModel
@@ -26,19 +22,13 @@ class BaseModel extends Model
      * Tên custom action dùng để lưu log hoạt động
      * @var string
      */
-    public $action = '';
+    public $logAction = '';
 
     /**
      * Custom message log
      * @var string
      */
-    public $message = '';
-
-    /**
-     * Route của model dùng cho Linkable trait (tên table của model)
-     * @var string
-     */
-    public $route = '';
+    public $logMessage = '';
 
     /**
      * Column dùng để hiển thị cho model (Default là name)

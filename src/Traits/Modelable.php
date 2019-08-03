@@ -63,15 +63,15 @@ trait Modelable
         if ( ! empty($this->{$displayAttribute})) {
             $modelValName = $this->{$displayAttribute};
         } else {
-            $modelValName = $this->{'name'};
+            $modelValName = $this->{'code'};
         }
 
         if ($this->action) {
-            $eventName = $this->action;
+            $eventName = $this->logAction;
         }
         $user     = auth()->user();
         $username = $user ? $user->username : 'admin';
 
-        return sprintf('%s %s%s %s. %s', __(ucfirst(static::$logName)), $modelValName, __(" has been {$eventName} by "), $username, $this->message);
+        return sprintf('%s %s%s %s. %s', __(ucfirst(static::$logName)), $modelValName, __(" has been {$eventName} by "), $username, $this->logMessage);
     }
 }
