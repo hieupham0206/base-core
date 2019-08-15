@@ -66,7 +66,7 @@ trait Modelable
             $modelValName = $this->{'code'};
         }
 
-        if ($this->action) {
+        if ($this->logAction) {
             $eventName = $this->logAction;
         }
         $user     = auth()->user();

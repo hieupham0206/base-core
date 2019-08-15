@@ -18,6 +18,8 @@ class BaseModel extends Model
 {
     use Labelable, Queryable, Linkable, Modelable;
 
+    use \Spatie\Activitylog\Traits\LogsActivity;
+
     /**
      * Tên custom action dùng để lưu log hoạt động
      * @var string
