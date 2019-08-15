@@ -208,19 +208,17 @@ class DummyClass extends Controller
         ${{crudName}}  = {{modelName}}::query()->select( [ 'id', 'name' ] );
 
         if ($excludeIds) {
-            $excludeIds = is_array($excludeIds) ? $excludeIds : explode(',', $excludeIds);
-            ${{crudName}}->whereNotIn('id', $excludeIds);
+            ${{crudName}}->exclude($excludeIds);
         }
 
         if ($includeIds) {
-            $includeIds = is_array($includeIds) ? $includeIds : explode(',', $includeIds);
-            ${{crudName}}->whereIn('id', $includeIds);
+            ${{crudName}}-include($includeIds);
         }
 
         if ($query) {
-            $filters = explode(',', $queryBy);
+            $fields = explode(',', $queryBy);
 
-            $filters = collect($filters)->mapWithKeys(static function ($key, $idx) use ($query) {
+            $filters = collect($fields)->mapWithKeys(static function ($key, $idx) use ($query) {
                 return [$idx => [$key, 'like', $query]];
             })->all();
 

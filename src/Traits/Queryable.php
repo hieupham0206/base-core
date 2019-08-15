@@ -115,6 +115,34 @@ trait Queryable
     }
 
     /**
+     * @param Builder $query
+     * @param $excludes
+     * @param string $field
+     *
+     * @return Builder|\Illuminate\Database\Query\Builder
+     */
+    public function scopeExclude(Builder $query, $excludes, $field = 'id')
+    {
+        $excludes = is_array($excludes) ? $excludes : explode(',', $excludes);
+
+        return $query->whereNotIn($field, $excludes);
+    }
+
+    /**
+     * @param Builder $query
+     * @param $includes
+     * @param string $field
+     *
+     * @return Builder
+     */
+    public function scopeInclude(Builder $query, $includes, $field = 'id')
+    {
+        $includes = is_array($includes) ? $includes : explode(',', $includes);
+
+        return $query->whereIn($field, $includes);
+    }
+
+    /**
      * @param $configs
      * @param string $boolean
      *
