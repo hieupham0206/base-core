@@ -24,11 +24,12 @@ trait Linkable
     }
 
     /**
+     * @param bool $absolute: Đường dẫn tuyệt đối
      * @return string
      */
-    public function getDestroyLink(): string
+    public function getDestroyLink($absolute = false): string
     {
-        return route("{$this->getTable()}.destroy", $this, false);
+        return route("{$this->getTable()}.destroy", $this, $absolute);
     }
 
     /**

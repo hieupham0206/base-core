@@ -115,9 +115,10 @@ trait Queryable
     }
 
     /**
+     * Query theo điều kiện giá trị field không thuộc khoảng từ start => end
      * @param Builder $query
-     * @param $excludes
-     * @param string $field
+     * @param array|string $excludes
+     * @param string $field: Tên field muốn query
      *
      * @return Builder|\Illuminate\Database\Query\Builder
      */
@@ -129,11 +130,12 @@ trait Queryable
     }
 
     /**
+     * Query theo điều kiện giá trị field thuộc khoảng từ start => end
      * @param Builder $query
-     * @param $includes
-     * @param string $field
+     * @param array|string $includes
+     * @param string $field: Tên field muốn query
      *
-     * @return Builder
+     * @return Builder|\Illuminate\Database\Query\Builder
      */
     public function scopeInclude(Builder $query, $includes, $field = 'id')
     {
