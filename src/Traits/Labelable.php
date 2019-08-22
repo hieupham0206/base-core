@@ -60,10 +60,11 @@ trait Labelable
     /**
      * @param $text
      * @param string $context
+     * @param string $size
      *
      * @return string
      */
-    public function contextLabel($text, $context = 'success'): string
+    public function contextLabel($text, $context = 'success', $size = 'lg'): string
     {
         return '<span class="font-weight-bold kt-font-' . $context . '">' . $text . '</span>';
     }
@@ -71,22 +72,25 @@ trait Labelable
     /**
      * @param $text
      * @param string $context
+     * @param string $size
      *
      * @return string
      */
-    public function contextBadge($text, $context = 'success'): string
+    public function contextBadge($text, $context = 'success', $size = 'lg'): string
     {
-        return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--' . $context . '">' . $text . '</span>';
+        return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--' . $context . ' kt-badge--'.$size.'">' . $text . '</span>';
     }
 
     /**
      * @param $text
      * @param string $context
      *
+     * @param string $size
+     *
      * @return string
      */
-    public function contextBadgeUnified($text, $context = 'success'): string
+    public function contextBadgeUnified($text, $context = 'success', $size = 'lg'): string
     {
-        return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--unified-' . $context . '">' . $text . '</span>';
+        return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--unified-' . $context . ' kt-badge--'.$size.'">' . $text . '</span>';
     }
 }
