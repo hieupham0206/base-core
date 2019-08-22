@@ -68,25 +68,19 @@ class {{modelName}}Table extends DataTable {
 	protected function generateButton($modelName, ${{crudNameSingular}}, $permissions): string {
 	    [$canEdit{{modelName}}, $canDelete{{modelName}}] = $permissions;
 
-	    $btnEdit = $btnDelete = '';
+	    $buttonEdit = $buttonDelete = '';
 
         if ($canEdit{{modelName}}) {
-            $btnEdit = ' <a href="' . ${{crudNameSingular}}->getEditLink() . '" class="btn btn-sm btn-primary btn-icon btn-edit" title="' . __( 'Edit' ) . '">
-                <i class="fa fa-edit"></i>
-            </a>';
+            $buttonEdit = sprintf(" <a href='%s' class='btn-index-edit' title='%s'><i class='fa fa-edit'></i></a>", ${{crudNameSingular}}->getEditLink(), __('Edit'));
         }
 
         if ($canDelete{{modelName}}) {
-            $btnDelete = ' <button type="button" data-title="'.__('Delete').' ' . $modelName . ' ' . ${{crudNameSingular}}->name . ' !!!" class="btn btn-sm btn-danger btn-icon btn-delete"  title="' . __( 'Delete' ). '"
-            data-url="' . ${{crudNameSingular}}->getDestroyLink() . '">
-                <i class="fa fa-trash"></i>
-            </button>';
+            $buttonDelete = sprintf(" <button type='button' class='btn-index-delete' data-title='%s' data-url='%s' title='%s'><i class='fa fa-trash'></i></button>",
+                            __('Delete') . " $modelName  ${{crudNameSingular}}->username", ${{crudNameSingular}}->getDestroyLink(), __('Delete'));
         }
 
-        $btnView = '<a href="' . ${{crudNameSingular}}->getViewLink() . '" class="btn btn-sm btn-info btn-icon" title="' . __( 'View' ) . '">
-                                         					<i class="fa fa-eye"></i>
-                                         				</a>';
+        $buttonView = sprintf(' <a href="%s" class="btn-index-view" title="%s"><i class="fa fa-eye"></i></a>', ${{crudNameSingular}}->getViewLink(), __('View'));
 
-        return $btnView . $btnEdit . $btnDelete;
+        return $buttonView . $buttonEdit . $buttonDelete;
 	}
 }
