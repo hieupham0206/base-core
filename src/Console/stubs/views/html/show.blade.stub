@@ -14,8 +14,8 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.show', 'model' => $%%crudNameSingular
     <div class="kt-content">
         <div class="kt-portlet kt-portlet--rounded">
             <div class="kt-portlet__body">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+                <div class="form-group">
+                    <table class="table table-bordered table-striped">
                         <tbody>
                         %%formBodyHtmlForShowView%%
                         </tbody>
