@@ -71,15 +71,15 @@ class {{modelName}}Table extends DataTable {
 	    $buttonEdit = $buttonDelete = '';
 
         if ($canEdit{{modelName}}) {
-            $buttonEdit = sprintf(" <a href='%s' class='btn-index-edit' title='%s'><i class='fa fa-edit'></i></a>", ${{crudNameSingular}}->getEditLink(), __('Edit'));
+            $buttonEdit = sprintf(" <a href='%s' class='btn-index-edit' title='%s'><i class='far fa-edit'></i></a>", ${{crudNameSingular}}->getEditLink(), __('Edit'));
         }
 
         if ($canDelete{{modelName}}) {
-            $buttonDelete = sprintf(" <button type='button' class='btn-index-delete' data-title='%s' data-url='%s' title='%s'><i class='fa fa-trash'></i></button>",
+            $buttonDelete = sprintf(" <button type='button' class='btn-index-delete' data-title='%s' data-url='%s' title='%s'><i class='far fa-trash'></i></button>",
                             __('Delete') . " $modelName  ${{crudNameSingular}}->username", ${{crudNameSingular}}->getDestroyLink(), __('Delete'));
         }
 
-        $buttonView = sprintf(' <a href="%s" class="btn-index-view" title="%s"><i class="fa fa-eye"></i></a>', ${{crudNameSingular}}->getViewLink(), __('View'));
+        $buttonView = sprintf(' <a href="%s" class="btn-index-view" title="%s"><i class="far fa-eye"></i></a>', ${{crudNameSingular}}->getViewLink(), __('View'));
 
         return $buttonView . $buttonEdit . $buttonDelete;
 	}
