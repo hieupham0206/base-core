@@ -6,6 +6,7 @@ use Cloudteam\BaseCore\Models\QuickSearch;
 use Illuminate\Database\Eloquent\Builder;
 use ReflectionClass;
 use function strlen;
+use Illuminate\Support\Str;
 
 trait Searchable
 {
@@ -21,7 +22,7 @@ trait Searchable
                 $searchText = $model->{'username'};
             }
             $reflect   = new ReflectionClass($model);
-            $tableName = str_plural(snake_case($reflect->getShortName()));
+            $tableName = Str::plural(Str::snake($reflect->getShortName()));
 
             if ($searchText !== '') {
                 $datas = [
@@ -36,7 +37,7 @@ trait Searchable
 
         static::deleted(static function ($model) {
             $reflect   = new ReflectionClass($model);
-            $tableName = str_plural(snake_case($reflect->getShortName()));
+            $tableName = Str::plural(Str::snake($reflect->getShortName()));
 
             QuickSearch::query()->where([
                 'route' => route("{$tableName}.show", $model->id)

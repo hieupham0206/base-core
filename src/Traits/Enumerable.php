@@ -9,6 +9,7 @@
 namespace Cloudteam\BaseCore\Traits;
 
 use function get_class;
+use Illuminate\Support\Str;
 
 trait Enumerable
 {
@@ -63,7 +64,7 @@ trait Enumerable
     {
         if ($this->enums) {
             $filtered   = collect($this->enums)->filter(static function ($enum, $enumAttribute) use ($key) {
-                return $key === str_plural($enumAttribute) || $key === "{$enumAttribute}_name";
+                return $key === Str::plural($enumAttribute) || $key === "{$enumAttribute}_name";
             });
             $isNotEmpty = $filtered->isNotEmpty();
 
@@ -88,14 +89,14 @@ trait Enumerable
     {
         $result = $this->enums[$key];
         if (strpos($result, '@')) {
-            $class  = str_before($result, '@');
-            $method = str_after($result, '@');
+            $class  = Str::before($result, '@');
+            $method = Str::after($result, '@');
             // If no namespace was set, prepend the Model's namespace to the
             // class that resolves the enum class. Prevent this behavior,
             // by setting the resolver class with a leading backslash
-            if (class_basename($class) == $class) {
+            if (class_basename($class) === $class) {
                 $class =
-                    str_replace_last(
+                    Str::replaceLast(
                         class_basename(get_class($this)),
                         $class,
                         self::class
