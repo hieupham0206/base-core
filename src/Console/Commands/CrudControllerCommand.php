@@ -242,7 +242,7 @@ class CrudControllerCommand extends GeneratorCommand
      */
     protected function replaceCrudName(&$stub, $crudName): self
     {
-        $stub = str_replace('{{crudName}}', lcfirst(studly_case($crudName)), $stub);
+        $stub = str_replace('{{crudName}}', lcfirst(Str::studly($crudName)), $stub);
 
         return $this;
     }

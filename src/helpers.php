@@ -53,7 +53,7 @@ if ( ! function_exists('variablize')) {
      */
     function variablize($word)
     {
-        $word = studly_case($word);
+        $word = Illuminate\Support\Str::studly($word);
 
         return strtolower($word[0]) . substr($word, 1);
     }

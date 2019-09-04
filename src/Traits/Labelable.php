@@ -7,6 +7,7 @@ use function is_array;
 use function is_callable;
 use ReflectionClass;
 use ReflectionException;
+use Illuminate\Support\Str;
 
 /**
  * Trait HasLabel
@@ -49,7 +50,7 @@ trait Labelable
     public function classLabel($lcfirst = false)
     {
         $reflect   = new ReflectionClass($this);
-        $tableName = __(camel2words(studly_case($reflect->getShortName())));
+        $tableName = __(camel2words(Str::studly($reflect->getShortName())));
         if (property_exists(get_class($this), 'logName')) {
             $tableName = __($reflect->getStaticPropertyValue('logName'));
         }
