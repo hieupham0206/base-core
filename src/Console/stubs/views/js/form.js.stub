@@ -1,7 +1,9 @@
 $(function() {
-	let isConfirm = $('#{{ modelName }}_form').data('confirm')
+	let ${{ modelName }}Form = $('#{{ modelName }}_form')
+	let isConfirm = ${{ modelName }}Form.data('confirm')
+	let hasFormChanged = false
 
-    $('#{{ modelName }}_form').validate({
+    ${{ modelName }}Form.validate({
         submitHandler: isConfirm && function(form, e) {
             window.blockPage()
             e.preventDefault()
@@ -22,5 +24,26 @@ $(function() {
                 }
             })
         },
+    })
+
+    //note: detect form changed
+    ${{ modelName }}Form.on('change', 'input, textarea, select', function() {
+        hasFormChanged = true
+    })
+
+    $('#link_back').on('click', function(e) {
+        let shouldConfirm = $(this).data('should-confirm')
+        e.preventDefault()
+
+        if (shouldConfirm && hasFormChanged) {
+            $(this).swal(result => {
+                if (result.value) {
+                    location.href = $(this).attr('href')
+                }
+                window.unblock()
+            }, {type: 'question', title: lang['You have not saved the information!!!']})
+        } else {
+            location.href = $(this).attr('href')
+        }
     })
 })
