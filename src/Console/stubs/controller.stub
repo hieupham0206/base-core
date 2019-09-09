@@ -207,15 +207,7 @@ class DummyClass extends Controller
         $limit      = $request->get('limit', 10);
 
         $offset = ( $page - 1 ) * $limit;
-        ${{crudName}}  = {{modelName}}::query()->selectRaw( 'id, name' );
-
-        if ($excludeIds) {
-            ${{crudName}}->exclude($excludeIds);
-        }
-
-        if ($includeIds) {
-            ${{crudName}}-include($includeIds);
-        }
+        ${{crudName}}  = {{modelName}}::query()->selectRaw( 'id, name' )->exclude($excludeIds)->include($includeIds);
 
         if ($query) {
             $fields = explode(',', $queryBy);
