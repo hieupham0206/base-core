@@ -195,17 +195,19 @@ class DummyClass extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function {{crudName}}() {
-        $query      = request()->get('query', '');
-        $page       = request()->get('page', 1);
-        $excludeIds = request()->get('excludeIds', []);
-        $includeIds = request()->get('includeIds', []);
-        $orderBy    = request()->get('orderBy', 'id');
-        $queryBy    = request()->get('queryBy', 'name');
-        $direction  = request()->get('direction', 'desc');
-        $limit      = request()->get('limit', 10);
+        $request = request();
+
+        $query      = $request->get('query', '');
+        $page       = $request->get('page', 1);
+        $excludeIds = $request->get('excludeIds', []);
+        $includeIds = $request->get('includeIds', []);
+        $orderBy    = $request->get('orderBy', 'id');
+        $queryBy    = $request->get('queryBy', 'name');
+        $direction  = $request->get('direction', 'desc');
+        $limit      = $request->get('limit', 10);
 
         $offset = ( $page - 1 ) * $limit;
-        ${{crudName}}  = {{modelName}}::query()->select( [ 'id', 'name' ] );
+        ${{crudName}}  = {{modelName}}::query()->selectRaw( 'id, name' );
 
         if ($excludeIds) {
             ${{crudName}}->exclude($excludeIds);

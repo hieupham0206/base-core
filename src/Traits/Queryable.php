@@ -126,7 +126,7 @@ trait Queryable
     {
         $excludes = is_array($excludes) ? $excludes : explode(',', $excludes);
 
-        return $query->whereNotIn($field, $excludes);
+        return $excludes ? $query->whereNotIn($field, $excludes) : $query;
     }
 
     /**
@@ -141,7 +141,7 @@ trait Queryable
     {
         $includes = is_array($includes) ? $includes : explode(',', $includes);
 
-        return $query->whereIn($field, $includes);
+        return $includes ? $query->whereIn($field, $includes) : $query;
     }
 
     /**
