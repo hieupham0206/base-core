@@ -77,7 +77,7 @@ class DummyClass extends Controller
             \DB::commit();
 
             return redirect(route('{{routeName}}.index', ${{crudNameSingular}}))->with('message', __( 'Data created successfully' ));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             \DB::rollBack();
 
             if ($request->wantsJson()) {
@@ -98,7 +98,7 @@ class DummyClass extends Controller
     {
         return view('{{viewName}}.show', [
             '{{crudNameSingular}}' => ${{crudNameSingular}}
-        );
+        ]);
     }
 
     /**
@@ -140,7 +140,7 @@ class DummyClass extends Controller
             \DB::commit();
 
             return redirect(route('{{routeName}}.index', ${{crudNameSingular}}))->with('message', __( 'Data edited successfully' ));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             \DB::rollBack();
 
             if ($request->wantsJson()) {

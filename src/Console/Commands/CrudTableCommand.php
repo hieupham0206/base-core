@@ -75,7 +75,7 @@ class CrudTableCommand extends GeneratorCommand
                 $tableValue   .= "optional({$placeholder}{$relationName})" . '->name,' . "\n";
             }
 
-            $tableSort .= "$crudName.{$columnName}, ";
+            $tableSort .= "'$crudName.{$columnName}', ";
         }
 
         return $this

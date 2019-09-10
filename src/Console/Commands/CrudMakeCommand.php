@@ -66,11 +66,11 @@ class CrudMakeCommand extends Command
 
         //optional
         $fields = $this->option('fields');
-        if ($fields == '') {
+        if ($fields === '') {
             $fields = 'name#string';
         }
         $validations = $this->option('validations');
-        if ($validations == '') {
+        if ($validations === '') {
             $validations = 'name#required';
         }
 
@@ -181,7 +181,7 @@ class CrudMakeCommand extends Command
 
     private function makeRoute($namespace, $table): bool
     {
-        $jsonFile = base_path() . '/routes/routes.json';
+        $jsonFile = base_path() . '/routes/config/routes.json';
         $routes   = getRouteConfig();
 
         $jsonKey = lcfirst($namespace);
@@ -203,7 +203,7 @@ class CrudMakeCommand extends Command
 
     private function makeMenu($namespace, $table): bool
     {
-        $jsonFile = base_path() . '/routes/menus.json';
+        $jsonFile = base_path() . '/routes/config/menus.json';
         $menus    = getMenuConfig();
 
         $jsonKey = lcfirst($namespace);

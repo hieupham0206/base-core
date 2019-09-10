@@ -9,6 +9,7 @@ $(function() {
                 q.filters = JSON.stringify($('#{{ route }}_search_form').serializeArray())
             },
         }),
+        'conditionalPaging': true
     })
     $body.on('click', '.btn-delete', function () {
         table{{ modelNameCap }}.actionDelete({btnDelete: $(this)})
