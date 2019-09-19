@@ -45,7 +45,7 @@ class {{modelName}}Test extends TestCase {
 		$this->get( route( '{{crudNameSingular}}s.create' ) )->assertStatus( 200 );
 
 		${{crudNameSingular}} = make({{modelName}}::class);
-		$this->post( route( '{{crudNameSingular}}s.store' ), ${{crudNameSingular}}->toArray() );
+		$this->post( route( '{{crudNameSingular}}s.store' ), ${{crudNameSingular}}->toArray() )->assertStatus(200);
 	}
 
 	public function test_authorized_user_can_edit_{{crudNameSingular}}() {
