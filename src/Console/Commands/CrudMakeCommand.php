@@ -149,6 +149,21 @@ class CrudMakeCommand extends Command
         return $this;
     }
 
+    /**
+     * Replace the modelName for the given stub.
+     *
+     * @param  string $stub
+     * @param  string $modelName
+     *
+     * @return $this
+     */
+    protected function replaceModelNameUnCap(&$stub, $modelName): self
+    {
+        $stub = str_replace('{{ modelNameUnCap }}', lcfirst($modelName), $stub);
+
+        return $this;
+    }
+
     private function makePermission($namespace, $table, $permissions): bool
     {
         $table             = Str::singular($table);
@@ -265,7 +280,8 @@ class CrudMakeCommand extends Command
 
             $this->replaceRoute($stub, $crud)
                  ->replaceModelName($stub, $crud)
-                 ->replaceModelNameCap($stub, $model);
+                 ->replaceModelNameCap($stub, $model)
+                 ->replaceModelNameUnCap($stub, $model);
 
             $file->put($jsPath . "/{$fileJsName}", $stub);
         }

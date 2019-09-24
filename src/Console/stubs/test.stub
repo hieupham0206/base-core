@@ -45,7 +45,7 @@ class {{modelName}}Test extends TestCase {
 		$this->get( route( '{{crudNameSingular}}s.create' ) )->assertStatus( 200 );
 
 		${{crudNameSingular}} = make({{modelName}}::class);
-		$this->post( route( '{{crudNameSingular}}s.store' ), ${{crudNameSingular}}->toArray() )->assertStatus(200);
+		$this->post( route( '{{crudNameSingular}}s.store' ), ${{crudNameSingular}}->toArray() )->assertRedirect( route( '{{crudNameSingular}}s.index') );
 	}
 
 	public function test_authorized_user_can_edit_{{crudNameSingular}}() {
@@ -58,7 +58,7 @@ class {{modelName}}Test extends TestCase {
 		${{crudNameSingular}} = create({{modelName}}::class);
 
 		$this->put( route( '{{crudNameSingular}}s.update', ${{crudNameSingular}} ), ${{crudNameSingular}}->toArray())
-		    ->assertRedirect( route( '{{crudNameSingular}}s.show', ${{crudNameSingular}} ) );
+		    ->assertRedirect( route( '{{crudNameSingular}}s.index') );
 
 		$this->assertDatabaseHas( '{{crudNameSingular}}s', [
 			'id' => ${{crudNameSingular}}->id
