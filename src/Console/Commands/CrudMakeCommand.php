@@ -224,6 +224,13 @@ class CrudMakeCommand extends Command
         $jsonKey = lcfirst($namespace);
 
         if (isset($menus[$jsonKey])) {
+
+            if (isset($menus[$jsonKey]['modules'][$table]) && $menus[$jsonKey]['modules'][$table]['icon']) {
+                $this->info('Not update menu');
+
+                return true;
+            }
+
             $menus[$jsonKey]['modules'][$table] = [
                 'icon'   => '',
                 'parent' => '',
