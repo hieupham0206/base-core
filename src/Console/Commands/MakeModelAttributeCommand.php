@@ -20,6 +20,7 @@ class MakeModelAttributeCommand extends GeneratorCommand
      */
     protected $description = 'Create a new model attribute class';
 
+    protected $type = 'Attribute trait';
     /**
      * Get the stub file for the generator.
      *

@@ -20,6 +20,8 @@ class MakeModelRelationshipCommand extends GeneratorCommand
      */
     protected $description = 'Create a new model relationship class';
 
+    protected $type = 'Relationship Trait';
+
     /**
      * Get the stub file for the generator.
      *

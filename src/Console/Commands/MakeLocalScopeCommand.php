@@ -20,6 +20,8 @@ class MakeLocalScopeCommand extends GeneratorCommand
      */
     protected $description = 'Create a new local scope class';
 
+    protected $type = 'Local scope';
+
     /**
      * Get the desired class name from the input.
      *

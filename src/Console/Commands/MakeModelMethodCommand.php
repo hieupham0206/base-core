@@ -20,6 +20,8 @@ class MakeModelMethodCommand extends GeneratorCommand
      */
     protected $description = 'Create a new model method class';
 
+    protected $type = 'Method Trait';
+
     /**
      * Get the stub file for the generator.
      *
