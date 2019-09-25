@@ -58,7 +58,9 @@ abstract class DataTable
             $this->filters = $finalFilters;
         }
 
-        $this->isFilterNotEmpty = collect($this->filters)->filter()->isNotEmpty();
+        $this->isFilterNotEmpty = collect($this->filters)->filter(static function($value) {
+            return $value !== '';
+        })->isNotEmpty();
     }
 
     abstract public function getData(): array;
