@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
  *
  * php artisan crud:controller BrandsController --crud=brands --model=Brand --namespace=Business --validations=name#required
  *
- * @package App\Console\Commands
+ * @package Cloudteam\BaseCore\Console\Commands
  */
 class CrudControllerCommand extends GeneratorCommand
 {

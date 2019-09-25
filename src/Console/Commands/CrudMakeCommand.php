@@ -14,7 +14,7 @@ use function in_array;
  *
  * php artisan crud:make --crud=brands --namespace=Business --fields=name#string --validations=name#required --permissions=view,create,edit,delete
  *
- * @package App\Console\Commands
+ * @package Cloudteam\BaseCore\Console\Commands
  */
 class CrudMakeCommand extends Command
 {

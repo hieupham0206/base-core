@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
  *
  * php artisan crud:view brands --fields=name#string;type#select#options=1_New**2_NotNew --view-path=Business --validations=name#required
  *
- * @package App\Console\Commands
+ * @package Cloudteam\BaseCore\Console\Commands
  */
 class CrudViewCommand extends Command
 {
@@ -520,8 +520,8 @@ class CrudViewCommand extends Command
         $type   = str_replace("'", '', $item['type']);
         $markup = File::get($this->viewDirectoryPath . 'form-fields/form-field.blade.stub');
         $markup = str_replace(
-            [$start . 'required' . $end, $start . 'fieldType' . $end, $start . 'itemName' . $end, $start . 'crudNameSingular' . $end, $start . 'customClass' . $end], 
-            [$required, $this->typeLookup[$type], $item['name'], $this->crudNameSingular], 
+            [$start . 'required' . $end, $start . 'fieldType' . $end, $start . 'itemName' . $end, $start . 'crudNameSingular' . $end, $start . 'customClass' . $end],
+            [$required, $this->typeLookup[$type], $item['name'], $this->crudNameSingular],
             $markup);
 
         return $this->wrapField(

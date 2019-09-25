@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
  *
  * php artisan crud:table BrandTable --crud=brands --model=Brand --namespace=Business --fields=name;email
  *
- * @package App\Console\Commands
+ * @package Cloudteam\BaseCore\Console\Commands
  */
 class CrudTableCommand extends GeneratorCommand
 {

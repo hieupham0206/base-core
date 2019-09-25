@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 /**
  * Class CrudTestCommand
  * php artisan crud:test BrandTest --crud=brand --model=Brand
- * @package App\Console\Commands
+ * @package Cloudteam\BaseCore\Console\Commands
  */
 class CrudTestCommand extends GeneratorCommand
 {
