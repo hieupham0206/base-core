@@ -7,6 +7,10 @@ use Cloudteam\BaseCore\Console\Commands\CrudMakeCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudTableCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudTestCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudViewCommand;
+use Cloudteam\BaseCore\Console\Commands\MakeLocalScopeCommand;
+use Cloudteam\BaseCore\Console\Commands\MakeModelAttributeCommand;
+use Cloudteam\BaseCore\Console\Commands\MakeModelMethodCommand;
+use Cloudteam\BaseCore\Console\Commands\MakeModelRelationshipCommand;
 use Cloudteam\BaseCore\Console\Commands\RefreshVersionJsCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -96,7 +100,12 @@ class BaseCoreServiceProvider extends ServiceProvider
             CrudTableCommand::class,
             CrudViewCommand::class,
             CrudTestCommand::class,
-            RefreshVersionJsCommand::class
+            RefreshVersionJsCommand::class,
+
+            MakeLocalScopeCommand::class,
+            MakeModelMethodCommand::class,
+            MakeModelAttributeCommand::class,
+            MakeModelRelationshipCommand::class,
         ]);
     }
 }
