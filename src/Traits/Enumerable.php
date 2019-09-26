@@ -62,7 +62,7 @@ trait Enumerable
      */
     protected function isEnumAttribute($key)
     {
-        if ($this->enums) {
+        if ($this->isEnumPropertyExist() && $this->enums) {
             $filtered   = collect($this->enums)->filter(static function ($enum, $enumAttribute) use ($key) {
                 return $key === Str::plural($enumAttribute) || $key === "{$enumAttribute}_name";
             });
@@ -87,6 +87,10 @@ trait Enumerable
      */
     private function getEnumClass($key)
     {
+        if (! $this->isEnumPropertyExist()) {
+            return null;
+        }
+
         $result = $this->enums[$key];
         if (strpos($result, '@')) {
             $class  = Str::before($result, '@');
@@ -106,5 +110,10 @@ trait Enumerable
         }
 
         return $result;
+    }
+
+    private function isEnumPropertyExist()
+    {
+        return property_exists(get_class($this), 'enums');
     }
 }
