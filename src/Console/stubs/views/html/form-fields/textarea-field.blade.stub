@@ -1,2 +1,2 @@
 <textarea class="form-control" rows="5" name="%%itemName%%" id="textarea_%%itemName%%" %%required%%>{{ $%%crudNameSingular%%->%%itemName%% ?? ''}}</textarea>
-<span class="m-form__help">{!! $errors->first('%%itemName%%') !!}</span>
+<span class="form-text text-danger">{!! $errors->first('%%itemName%%') !!}</span>
