@@ -2,6 +2,7 @@
 
 namespace Cloudteam\BaseCore;
 
+use Cloudteam\BaseCore\Console\Commands\CreateMultipleMigration;
 use Cloudteam\BaseCore\Console\Commands\CrudControllerCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudMakeCommand;
 use Cloudteam\BaseCore\Console\Commands\CrudTableCommand;
@@ -106,6 +107,8 @@ class BaseCoreServiceProvider extends ServiceProvider
             MakeModelMethodCommand::class,
             MakeModelAttributeCommand::class,
             MakeModelRelationshipCommand::class,
+
+            CreateMultipleMigration::class,
         ]);
     }
 }
