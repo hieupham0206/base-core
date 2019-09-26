@@ -139,7 +139,7 @@ class DummyClass extends Controller
 
             \DB::commit();
 
-            return redirect(route('{{routeName}}.index', ${{crudNameSingular}}))->with('message', __( 'Data edited successfully' ));
+            return redirect(route('{{routeName}}.index'))->with('message', __( 'Data edited successfully' ));
         } catch (\Exception $e) {
             \DB::rollBack();
 
