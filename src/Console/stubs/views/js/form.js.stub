@@ -8,9 +8,9 @@ $(function() {
             window.blockPage()
             e.preventDefault()
 
-            $(form).confirmation(result => {
+            $(form).swal(result => {
                 if (result && (typeof result === 'object' && result.value)) {
-                    $(form).submitForm({returnEarly: true}).then(data => {
+                    $(form).submitData({returnEarly: true}).then(data => {
                         let msg = data.message
                         let redirectUrl = data.redirect_url
                         if (redirectUrl !== undefined) {

@@ -67,14 +67,14 @@ class DummyClass extends Controller
 
             ${{crudNameSingular}} = {{modelName}}::create($requestData);
 
+            \DB::commit();
+
             if ($request->wantsJson()) {
                 return $this->asJson([
                     'message' => __('Data created successfully'),
                     'redirect_url' => route('{{routeName}}.index')
                 ]);
             }
-
-            \DB::commit();
 
             return redirect(route('{{routeName}}.index'))->with('message', __( 'Data created successfully' ));
         } catch (\Exception $e) {
@@ -130,14 +130,14 @@ class DummyClass extends Controller
             $requestData = $request->all();
             ${{crudNameSingular}}->update($requestData);
 
+            \DB::commit();
+
             if ($request->wantsJson()) {
                 return $this->asJson([
                     'message' => __('Data edited successfully'),
                     'redirect_url' => route('{{routeName}}.index')
                 ]);
             }
-
-            \DB::commit();
 
             return redirect(route('{{routeName}}.index'))->with('message', __( 'Data edited successfully' ));
         } catch (\Exception $e) {
