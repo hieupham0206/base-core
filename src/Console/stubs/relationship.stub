@@ -2,10 +2,12 @@
 
 namespace DummyNamespace;
 
+use App\Models\User;
+
 trait DummyClass
 {
     public function createdBy()
     {
-        return $this->belongsTo(App\Models\User::class, 'created_by', 'id');
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 }
