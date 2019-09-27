@@ -1,9 +1,9 @@
 $(function() {
 	let ${{ modelNameUnCap }}Form = $('#{{ modelName }}_form')
-	let isConfirm = ${{ modelName }}Form.data('confirm')
+	let isConfirm = ${{ modelNameUnCap }}Form.data('confirm')
 	let hasFormChanged = false
 
-    ${{ modelName }}Form.validate({
+    ${{ modelNameUnCap }}Form.validate({
         submitHandler: isConfirm && function(form, e) {
             window.blockPage()
             e.preventDefault()
