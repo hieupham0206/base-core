@@ -271,7 +271,7 @@ class CrudMakeCommand extends Command
     {
         $jsPath = resource_path('js/') . $route;
         if ($namespace !== '') {
-            $jsPath = resource_path('js/') . lcfirst($namespace) . '/' . $route;
+            $jsPath = resource_path('js/modules') . lcfirst($namespace) . '/' . $route;
         }
         $jsPath = str_replace('\\', '/', $jsPath);
         $file   = new Filesystem();
