@@ -86,7 +86,7 @@ class DummyClass extends Controller
                 ], 500);
             }
 
-            report($e);
+            throw($e);
         }
     }
 
@@ -149,7 +149,7 @@ class DummyClass extends Controller
                 ], 500);
             }
 
-            report($e);
+            throw($e);
         }
     }
 
