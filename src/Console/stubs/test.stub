@@ -20,47 +20,47 @@ class {{modelName}}Test extends TestCase {
 	public function test_unauthorized_user_cannot_crud_{{crudNameSingular}}() {
 		$this->withExceptionHandling()->unauthorizedUserSignIn();
 
-		$this->get( route( '{{crudNameSingular}}s.index' ) )->assertStatus( 403 );
+		$this->get( route( '{{crudName}}.index' ) )->assertStatus( 403 );
 
-		$this->get( route( '{{crudNameSingular}}s.create' ) )->assertStatus( 403 );
+		$this->get( route( '{{crudName}}.create' ) )->assertStatus( 403 );
 
-		$this->get( route( '{{crudNameSingular}}s.edit', $this->{{crudNameSingular}} ) )->assertStatus( 403 );
+		$this->get( route( '{{crudName}}.edit', $this->{{crudNameSingular}} ) )->assertStatus( 403 );
 
-		$this->get( route( '{{crudNameSingular}}s.show', $this->{{crudNameSingular}} ) )->assertStatus( 403 );
+		$this->get( route( '{{crudName}}.show', $this->{{crudNameSingular}} ) )->assertStatus( 403 );
 
-		$this->post( route( '{{crudNameSingular}}s.destroy', $this->{{crudNameSingular}} ), ['_method' => 'delete'] )->assertStatus( 403 );
+		$this->post( route( '{{crudName}}.destroy', $this->{{crudNameSingular}} ), ['_method' => 'delete'] )->assertStatus( 403 );
 	}
 
 	public function test_authorized_user_can_read_{{crudNameSingular}}() {
 		$this->authorizedUserSignIn();
 
-		$this->get( route( '{{crudNameSingular}}s.index' ) )->assertStatus( 200 );
+		$this->get( route( '{{crudName}}.index' ) )->assertStatus( 200 );
 
-		$this->get( route( '{{crudNameSingular}}s.show', $this->{{crudNameSingular}} ) )->assertStatus( 200 );
+		$this->get( route( '{{crudName}}.show', $this->{{crudNameSingular}} ) )->assertStatus( 200 );
 	}
 
 	public function test_authorized_user_can_create_{{crudNameSingular}}() {
 		$this->authorizedUserSignIn();
 
-		$this->get( route( '{{crudNameSingular}}s.create' ) )->assertStatus( 200 );
+		$this->get( route( '{{crudName}}.create' ) )->assertStatus( 200 );
 
 		${{crudNameSingular}} = make({{modelName}}::class);
-		$this->post( route( '{{crudNameSingular}}s.store' ), ${{crudNameSingular}}->toArray() )->assertRedirect( route( '{{crudNameSingular}}s.index') );
+		$this->post( route( '{{crudName}}.store' ), ${{crudNameSingular}}->toArray() )->assertRedirect( route( '{{crudName}}.index') );
 	}
 
 	public function test_authorized_user_can_edit_{{crudNameSingular}}() {
 		$this->authorizedUserSignIn();
 
-		$this->get( route( '{{crudNameSingular}}s.edit', $this->{{crudNameSingular}} ) )
+		$this->get( route( '{{crudName}}.edit', $this->{{crudNameSingular}} ) )
 		     ->assertStatus( 200 )
 		     ->assertSee( $this->{{crudNameSingular}}->title );
 
 		${{crudNameSingular}} = create({{modelName}}::class);
 
-		$this->put( route( '{{crudNameSingular}}s.update', ${{crudNameSingular}} ), ${{crudNameSingular}}->toArray())
-		    ->assertRedirect( route( '{{crudNameSingular}}s.index') );
+		$this->put( route( '{{crudName}}.update', ${{crudNameSingular}} ), ${{crudNameSingular}}->toArray())
+		    ->assertRedirect( route( '{{crudName}}.index') );
 
-		$this->assertDatabaseHas( '{{crudNameSingular}}s', [
+		$this->assertDatabaseHas( '{{crudName}}', [
 			'id' => ${{crudNameSingular}}->id
 		] );
 	}
@@ -70,9 +70,9 @@ class {{modelName}}Test extends TestCase {
 
 		${{crudNameSingular}} = create( {{modelName}}::class );
 
-		$this->delete( route( '{{crudNameSingular}}s.destroy', ${{crudNameSingular}} ))->assertStatus( 200 );
+		$this->delete( route( '{{crudName}}.destroy', ${{crudNameSingular}} ))->assertStatus( 200 );
 
-		$this->assertSoftDeleted( '{{crudNameSingular}}s', [
+		$this->assertSoftDeleted( '{{crudName}}', [
 			'id' => ${{crudNameSingular}}->id
 		] );
 	}
@@ -83,15 +83,15 @@ class {{modelName}}Test extends TestCase {
   		${{crudNameSingular}}1 = create( {{modelName}}::class, null );
   		${{crudNameSingular}}2 = create( {{modelName}}::class, null );
 
-  		$this->delete( route( '{{crudNameSingular}}s.destroys', [
+  		$this->delete( route( '{{crudName}}.destroys', [
   			'ids' => [${{crudNameSingular}}1->id, ${{crudNameSingular}}2->id]
   		] ) )->assertStatus( 200 );
 
-  		$this->assertSoftDeleted( '{{crudNameSingular}}s', [
+  		$this->assertSoftDeleted( '{{crudName}}', [
   			'id' => ${{crudNameSingular}}1->id
   		] );
 
-  		$this->assertSoftDeleted( '{{crudNameSingular}}s', [
+  		$this->assertSoftDeleted( '{{crudName}}', [
   			'id' => ${{crudNameSingular}}2->id
   		] );
   	}
