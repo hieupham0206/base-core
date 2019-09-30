@@ -47,7 +47,7 @@ class CrudControllerCommand extends GeneratorCommand
     /**
      * Build the model class with the given name.
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return string
      * @throws FileNotFoundException
@@ -66,7 +66,7 @@ class CrudControllerCommand extends GeneratorCommand
         $controllerNamespace = $this->namespace;
 
         if ($namespace !== '') {
-            $controllerNamespace .= "\\$namespace";
+            $controllerNamespace .= "Modules\\$namespace";
             $viewName            = strtolower($namespace) . ".$viewName";
         }
 
@@ -175,8 +175,8 @@ class CrudControllerCommand extends GeneratorCommand
     /**
      * Replace the namespace for the given stub.
      *
-     * @param  string $stub
-     * @param  string $name
+     * @param string $stub
+     * @param string $name
      *
      * @return $this
      */
@@ -190,8 +190,8 @@ class CrudControllerCommand extends GeneratorCommand
     /**
      * Replace the namespace for the given stub.
      *
-     * @param  string $stub
-     * @param  string $name
+     * @param string $stub
+     * @param string $name
      *
      * @return $this
      */
@@ -205,8 +205,8 @@ class CrudControllerCommand extends GeneratorCommand
     /**
      * Replace the namespace for the given stub.
      *
-     * @param  string $stub
-     * @param  string $name
+     * @param string $stub
+     * @param string $name
      *
      * @return $this
      */
@@ -220,8 +220,8 @@ class CrudControllerCommand extends GeneratorCommand
     /**
      * Replace the viewPath for the given stub.
      *
-     * @param  string $stub
-     * @param  string $viewPath
+     * @param string $stub
+     * @param string $viewPath
      *
      * @return $this
      */
@@ -235,8 +235,8 @@ class CrudControllerCommand extends GeneratorCommand
     /**
      * Replace the crudName for the given stub.
      *
-     * @param  string $stub
-     * @param  string $crudName
+     * @param string $stub
+     * @param string $crudName
      *
      * @return $this
      */
@@ -250,8 +250,8 @@ class CrudControllerCommand extends GeneratorCommand
     /**
      * Replace the crudNameSingular for the given stub.
      *
-     * @param  string $stub
-     * @param  string $crudNameSingular
+     * @param string $stub
+     * @param string $crudNameSingular
      *
      * @return $this
      */
@@ -265,8 +265,8 @@ class CrudControllerCommand extends GeneratorCommand
     /**
      * Replace the crudNameSingular for the given stub.
      *
-     * @param  string $stub
-     * @param  string $crudNameSingular
+     * @param string $stub
+     * @param string $crudNameSingular
      *
      * @return $this
      */
@@ -280,8 +280,8 @@ class CrudControllerCommand extends GeneratorCommand
     /**
      * Replace the modelName for the given stub.
      *
-     * @param  string $stub
-     * @param  string $modelName
+     * @param string $stub
+     * @param string $modelName
      *
      * @return $this
      */
@@ -295,8 +295,8 @@ class CrudControllerCommand extends GeneratorCommand
     /**
      * Replace the validationRules for the given stub.
      *
-     * @param  string $stub
-     * @param  string $validationRules
+     * @param string $stub
+     * @param string $validationRules
      *
      * @return $this
      */
