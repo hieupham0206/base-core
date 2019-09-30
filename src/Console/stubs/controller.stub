@@ -3,7 +3,10 @@
 namespace DummyNamespace;
 
 BaseController
-use App\Models\{{modelName}};
+use App\Models\{
+    {{modelName}},
+    Utils\ModelFilter
+};
 use Cloudteam\BaseCore\Tables\TableFacade;
 TableNamespace
 use Illuminate\{Http\Request, Http\JsonResponse, Http\RedirectResponse};
@@ -195,39 +198,16 @@ class DummyClass extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function {{crudName}}() {
-        $request = request();
+        $modelFilter = new ModelFilter({{modelName}}::query());
 
-        $query      = $request->get('query', '');
-        $page       = $request->get('page', 1);
-        $excludeIds = $request->get('excludeIds', []);
-        $includeIds = $request->get('includeIds', []);
-        $orderBy    = $request->get('orderBy', 'id');
-        $queryBy    = $request->get('queryBy', 'name');
-        $direction  = $request->get('direction', 'desc');
-        $limit      = $request->get('limit', 10);
-
-        $offset = ( $page - 1 ) * $limit;
-        ${{crudName}}  = {{modelName}}::query()->selectRaw( 'id, name' )->exclude($excludeIds)->include($includeIds);
-
-        if ($query) {
-            $fields = explode(',', $queryBy);
-
-            $filters = collect($fields)->mapWithKeys(static function ($key, $idx) use ($query) {
-                return [$idx => [$key, 'like', $query]];
-            })->all();
-
-            ${{crudName}}->orFilterWhere($filters);
-        }
+        ${{crudName}} = $modelFilter->filter()->selectRaw('id, name');
 
         $totalCount = ${{crudName}}->count();
-        ${{crudName}} = ${{crudName}}->offset($offset)
-                                     ->limit($limit)
-                                     ->orderBy($orderBy, $direction)
-                                     ->get();
+        ${{crudName}}  = $modelFilter->getData(${{crudName}});
 
-        return $this->asJson( [
+        return $this->asJson([
             'total_count' => $totalCount,
             'items'       => ${{crudName}}->toArray(),
-        ] );
+        ]);
     }
 }
