@@ -1,7 +1,6 @@
 $(function() {
 	let ${{ modelNameUnCap }}Form = $('#{{ modelName }}_form')
 	let isConfirm = ${{ modelNameUnCap }}Form.data('confirm')
-	let hasFormChanged = false
 
     ${{ modelNameUnCap }}Form.validate({
         submitHandler: isConfirm && function(form, e) {
