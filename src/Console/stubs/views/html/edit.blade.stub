@@ -13,7 +13,7 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.edit', 'model' => $%%crudNameSingular
 @section('content')
     <div class="kt-content">
         <div class="kt-portlet kt-portlet--rounded">
-            @include('%%userViewPath%%._form', ['caption' => __('action.Edit Model', ['model' => $%%crudNameSingular%%->classLabel(true)])])
+            @include('modules.%%userViewPath%%._form', ['caption' => __('action.Edit Model', ['model' => $%%crudNameSingular%%->classLabel(true)])])
         </div>
     </div>
 @endsection

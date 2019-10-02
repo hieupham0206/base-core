@@ -15,7 +15,7 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.index'];
          <div class="kt-portlet kt-portlet--rounded">
             @include('layouts.partials.index_header', $headerConfigs)
              <div class="kt-portlet__body">
-                @include('layouts.partials.search', ['form' => view('%%userViewPath%%._search', ['%%crudNameSingular%%' => $%%crudNameSingular%%])])
+                @include('layouts.partials.search', ['form' => view('modules.%%userViewPath%%._search', ['%%crudNameSingular%%' => $%%crudNameSingular%%])])
                 <table class="table table-hover nowrap" id="table_%%crudName%%">
                     <thead>
                         <tr>
