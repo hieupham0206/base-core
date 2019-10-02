@@ -12,6 +12,7 @@ use Cloudteam\BaseCore\Console\Commands\MakeLocalScopeCommand;
 use Cloudteam\BaseCore\Console\Commands\MakeModelAttributeCommand;
 use Cloudteam\BaseCore\Console\Commands\MakeModelMethodCommand;
 use Cloudteam\BaseCore\Console\Commands\MakeModelRelationshipCommand;
+use Cloudteam\BaseCore\Console\Commands\MakeModelServiceCommand;
 use Cloudteam\BaseCore\Console\Commands\RefreshVersionJsCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -107,6 +108,7 @@ class BaseCoreServiceProvider extends ServiceProvider
             MakeModelMethodCommand::class,
             MakeModelAttributeCommand::class,
             MakeModelRelationshipCommand::class,
+            MakeModelServiceCommand::class,
 
             CreateMultipleMigration::class,
         ]);
