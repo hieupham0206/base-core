@@ -40,7 +40,7 @@ class CrudControllerCommand extends GeneratorCommand
 
     protected $modelName = '';
 
-    protected $namespace = 'App\\Http\\Controllers';
+    protected $namespace = 'App\\Http\\Controllers\\Modules';
 
     protected $crudName = '';
 
@@ -66,7 +66,7 @@ class CrudControllerCommand extends GeneratorCommand
         $controllerNamespace = $this->namespace;
 
         if ($namespace !== '') {
-            $controllerNamespace .= "Modules\\$namespace";
+            $controllerNamespace .= $namespace;
             $viewName            = strtolower($namespace) . ".$viewName";
         }
 
