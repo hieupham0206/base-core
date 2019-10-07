@@ -81,6 +81,6 @@ class {{modelName}}Table extends DataTable {
 
         $buttonView = sprintf(' <a href="%s" class="btn-index-view" title="%s"><i class="far fa-eye"></i></a>', ${{crudNameSingular}}->getViewLink(), __('View'));
 
-        return $buttonView . $buttonEdit . $buttonDelete;
+        return $buttonEdit . $buttonDelete;
 	}
 }

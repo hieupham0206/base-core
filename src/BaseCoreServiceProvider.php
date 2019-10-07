@@ -2,18 +2,18 @@
 
 namespace Cloudteam\BaseCore;
 
-use Cloudteam\BaseCore\Console\Commands\CreateMultipleMigration;
-use Cloudteam\BaseCore\Console\Commands\CrudControllerCommand;
-use Cloudteam\BaseCore\Console\Commands\CrudMakeCommand;
-use Cloudteam\BaseCore\Console\Commands\CrudTableCommand;
-use Cloudteam\BaseCore\Console\Commands\CrudTestCommand;
-use Cloudteam\BaseCore\Console\Commands\CrudViewCommand;
-use Cloudteam\BaseCore\Console\Commands\MakeLocalScopeCommand;
-use Cloudteam\BaseCore\Console\Commands\MakeModelAttributeCommand;
-use Cloudteam\BaseCore\Console\Commands\MakeModelMethodCommand;
-use Cloudteam\BaseCore\Console\Commands\MakeModelRelationshipCommand;
-use Cloudteam\BaseCore\Console\Commands\MakeModelServiceCommand;
-use Cloudteam\BaseCore\Console\Commands\RefreshVersionJsCommand;
+use Cloudteam\BaseCore\Console\Commands\{CreateMultipleMigration,
+    CrudControllerCommand,
+    CrudMakeCommand,
+    CrudTableCommand,
+    CrudTestCommand,
+    CrudViewCommand,
+    MakeLocalScopeCommand,
+    MakeModelAttributeCommand,
+    MakeModelMethodCommand,
+    MakeModelRelationshipCommand,
+    MakeModelServiceCommand,
+    RefreshVersionJsCommand};
 use Illuminate\Support\ServiceProvider;
 
 class BaseCoreServiceProvider extends ServiceProvider
