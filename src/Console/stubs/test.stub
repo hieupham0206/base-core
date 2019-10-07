@@ -26,8 +26,6 @@ class {{modelName}}Test extends TestCase {
 
 		$this->get( route( '{{crudName}}.edit', $this->{{crudNameSingular}} ) )->assertStatus( 403 );
 
-		$this->get( route( '{{crudName}}.show', $this->{{crudNameSingular}} ) )->assertStatus( 403 );
-
 		$this->post( route( '{{crudName}}.destroy', $this->{{crudNameSingular}} ), ['_method' => 'delete'] )->assertStatus( 403 );
 	}
 
@@ -36,7 +34,7 @@ class {{modelName}}Test extends TestCase {
 
 		$this->get( route( '{{crudName}}.index' ) )->assertStatus( 200 );
 
-		$this->get( route( '{{crudName}}.show', $this->{{crudNameSingular}} ) )->assertStatus( 200 );
+		//$this->get( route( '{{crudName}}.show', $this->{{crudNameSingular}} ) )->assertStatus( 200 );
 	}
 
 	public function test_authorized_user_can_create_{{crudNameSingular}}() {
