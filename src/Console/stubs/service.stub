@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-trait DummyClass implements IBaseService
+class DummyClass implements IBaseService
 {
     public function store()
     {

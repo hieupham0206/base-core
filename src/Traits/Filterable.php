@@ -73,19 +73,11 @@ trait Filterable
         $isForeignKey = $relation = false;
         $table        = '';
         if (strpos($column, '.') !== false) {
-            $columns = collect(explode('.', $column));
-            $column  = $columns->last();
+            $columns = explode('.', $column);
+            $column  = array_pop($columns);
 
             $isForeignKey = true;
-            $relation     = $columns->implode('.');
-
-            if (strpos($relation, '.') !== false) {
-                $tableAndColumn = collect(explode('.', $relation));
-
-                $tableAndColumn->pop();
-                $relation = $tableAndColumn->pop();
-                $table    = $tableAndColumn->first();
-            }
+            $relation     = implode('.', $columns);
 
             $callClass  = static::class;
             $classNames = explode('\\', $callClass);
