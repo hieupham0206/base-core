@@ -11,7 +11,7 @@ $(function() {
         }),
         'conditionalPaging': true
     })
-    $body.on('click', '.btn-index-delete', function () {
+    $body.on('click', '.btn-action-delete', function () {
         table{{ modelNameCap }}.actionDelete({btnDelete: $(this)})
     })
     //note: Tìm kiếm
