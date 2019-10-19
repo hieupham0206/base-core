@@ -2,7 +2,7 @@
 
 namespace Cloudteam\BaseCore\Models;
 
-use Cloudteam\BaseCore\Traits\{Labelable, Linkable, Modelable, Queryable};
+use Cloudteam\BaseCore\Traits\{Labelable, Linkable, Modelable, Queryable, ModelScope};
 use Illuminate\{Database\Eloquent\Builder, Database\Eloquent\Model};
 
 /**
@@ -16,7 +16,7 @@ use Illuminate\{Database\Eloquent\Builder, Database\Eloquent\Model};
  */
 class BaseModel extends Model
 {
-    use Labelable, Queryable, Linkable, Modelable;
+    use Labelable, Queryable, Linkable, Modelable, ModelScope;
 
     use \Spatie\Activitylog\Traits\LogsActivity;
 
