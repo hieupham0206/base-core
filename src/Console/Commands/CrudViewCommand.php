@@ -311,7 +311,7 @@ class CrudViewCommand extends Command
                     $options      = trim($itemArray[2]);
                     $options      = str_replace('options=', '', $options);
                     $optionValues = "<option></option>\n";
-                    if (starts_with($options, 'enum')) {
+                    if (Str::startsWith($options, 'enum')) {
                         //options=enum**className
                         $options        = explode('**', $options);
                         $enumClassName  = ucfirst(collect($options)->last());
