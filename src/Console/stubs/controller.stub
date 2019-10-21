@@ -4,7 +4,7 @@ namespace DummyNamespace;
 
 BaseController
 use App\Models\{{modelName}};
-use App\Models\Utils\ModelFilter;
+use Cloudteam\BaseCore\Utils\ModelFilter;
 use Cloudteam\BaseCore\Tables\TableFacade;
 TableNamespace
 use Illuminate\{Http\Request, Http\JsonResponse, Http\RedirectResponse};

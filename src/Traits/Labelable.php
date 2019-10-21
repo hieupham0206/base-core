@@ -16,13 +16,17 @@ use Illuminate\Support\Str;
 trait Labelable
 {
     /**
-     * @param $field
+     * @param string $field
+     * @param bool $capitalize
      *
      * @return null|string
      */
-    public function label($field = '')
+    public function label($field = '', $capitalize = false)
     {
         $label = __(ucfirst(camel2words(strtolower($field))));
+        if ($capitalize) {
+            $label = __(Str::title(camel2words(strtolower($field))));
+        }
 
         $locale        = \App::getLocale();
         $propertyLabel = 'labels';
@@ -66,7 +70,7 @@ trait Labelable
      *
      * @return string
      */
-    public function contextLabel($text, $context = 'success', $size = 'lg'): string
+    public function contextLabel($text, $context = 'success', $size = 'md'): string
     {
         return '<span class="font-weight-bold kt-font-' . $context . '">' . $text . '</span>';
     }
@@ -78,7 +82,7 @@ trait Labelable
      *
      * @return string
      */
-    public function contextBadge($text, $context = 'success', $size = 'lg'): string
+    public function contextBadge($text, $context = 'success', $size = 'md'): string
     {
         return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--' . $context . ' kt-badge--'.$size.'">' . $text . '</span>';
     }
@@ -91,7 +95,7 @@ trait Labelable
      *
      * @return string
      */
-    public function contextBadgeUnified($text, $context = 'success', $size = 'lg'): string
+    public function contextBadgeUnified($text, $context = 'success', $size = 'md'): string
     {
         return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--unified-' . $context . ' kt-badge--'.$size.'">' . $text . '</span>';
     }
