@@ -16,7 +16,7 @@ use Illuminate\{Database\Eloquent\Builder, Database\Eloquent\Model};
  */
 class BaseModel extends Model
 {
-    use Labelable, Queryable, Linkable, Modelable, ModelScope;
+    use Labelable, Queryable, Linkable, Modelable;
 
     use \Spatie\Activitylog\Traits\LogsActivity;
 
