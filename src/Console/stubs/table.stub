@@ -3,6 +3,7 @@
 namespace DummyNamespace;
 
 use App\Models\{{modelName}};
+use Cloudteam\BaseCore\Utils\HtmlAction;
 TableNamespace
 
 class {{modelName}}Table extends DataTable {
@@ -71,15 +72,14 @@ class {{modelName}}Table extends DataTable {
 	    $buttonEdit = $buttonDelete = '';
 
         if ($canEdit{{modelName}}) {
-            $buttonEdit = sprintf(" <a href='%s' class='btn-action-edit' title='%s'><i class='far fa-edit'></i></a>", ${{crudNameSingular}}->getEditLink(), __('Edit'));
+            $buttonEdit = HtmlAction::generateButtonEdit(${{crudNameSingular}}->getEditLink());
         }
 
         if ($canDelete{{modelName}}) {
-            $buttonDelete = sprintf(" <button type='button' class='btn-action-delete' data-title='%s' data-url='%s' title='%s'><i class='far fa-trash'></i></button>",
-                            __('Delete') . " $modelName  ${{crudNameSingular}}->username", ${{crudNameSingular}}->getDestroyLink(), __('Delete'));
+            $buttonDelete = HtmlAction::generateButtonDelete(${{crudNameSingular}}->getDestroyLink(), __('Delete') . " $modelName ${{crudNameSingular}}->username");
         }
 
-        $buttonView = sprintf(' <a href="%s" class="btn-action-view" title="%s"><i class="far fa-eye"></i></a>', ${{crudNameSingular}}->getViewLink(), __('View'));
+        $buttonView = HtmlAction::generateButtonView(${{crudNameSingular}}->getViewLink());
 
         return $buttonEdit . $buttonDelete;
 	}
