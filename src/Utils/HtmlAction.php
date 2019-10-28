@@ -31,9 +31,9 @@ class HtmlAction
         return sprintf(' <a href="%s" class="btn-action-view" title="%s"><i class="far fa-eye"></i></a>', $viewLink, __('View'));
     }
 
-    public static function generateCustomButton($cssClass, $dataTitle, $link, $title)
+    public static function generateCustomButton($cssClass, $dataTitle, $link, $title, $icon)
     {
-        return sprintf(' <button type="button" class="btn-action %s" data-title="%s" data-url="%s" title="%s"><i class="far fa-key"></i></button>'
-            , $cssClass, $dataTitle, $link, $title);
+        return sprintf(' <button type="button" class="btn-action %s" data-title="%s" data-url="%s" title="%s"><i class="%s"></i></button>'
+            , $cssClass, $dataTitle, $link, $title, $icon);
     }
 }
