@@ -19,7 +19,8 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.index'];
                 <table class="table table-hover nowrap" id="table_%%crudName%%">
                     <thead>
                         <tr>
-                            <th style="width: 5%"><label class="kt-checkbox kt-checkbox--single kt-checkbox--all kt-checkbox--brand"><input type="checkbox"><span></span></label></th>
+                            {{--<th style="width: 5%"><label class="kt-checkbox kt-checkbox--single kt-checkbox--all kt-checkbox--brand"><input type="checkbox"><span></span></label></th>--}}
+                            <th>@lang('No.')</th>
                             %%formHeadingHtml%%
                             <th>@lang('Actions')</th>
                         </tr>
