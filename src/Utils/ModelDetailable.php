@@ -10,21 +10,16 @@ trait ModelDetailable
         $currentModelDetailIds = $deletedIds = $detailRelations->pluck('id');
 
         if ($detailDatas) {
-            $modelDetails = [];
-
             $deletedIds = $currentModelDetailIds->diff(collect($detailDatas)->pluck('id')->toArray());
 
             foreach ($detailDatas as $detailData) {
                 $modelDetailid = $detailData['id'];
                 if ( ! $modelDetailid) {
-                    $modelDetails[] = array_merge($detailData, $extraDatas);
+                    $modelDetail = array_merge($detailData, $extraDatas);
+                    $detailModel::create($modelDetail);
                 } else {
                     $detailModel::query()->whereKey($modelDetailid)->update($detailData);
                 }
-            }
-
-            if ($modelDetails) {
-                $detailModel::insert($modelDetails);
             }
         }
 
