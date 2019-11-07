@@ -2,11 +2,11 @@
 
 namespace Cloudteam\BaseCore\Console\Commands;
 
-use function dirname;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
+use function dirname;
 use function in_array;
 
 /**
@@ -107,8 +107,8 @@ class CrudMakeCommand extends Command
     /**
      * Replace the modelName for the given stub.
      *
-     * @param  string $stub
-     * @param  string $route
+     * @param string $stub
+     * @param string $route
      *
      * @return $this
      */
@@ -122,8 +122,8 @@ class CrudMakeCommand extends Command
     /**
      * Replace the modelName for the given stub.
      *
-     * @param  string $stub
-     * @param  string $modelName
+     * @param string $stub
+     * @param string $modelName
      *
      * @return $this
      */
@@ -137,8 +137,8 @@ class CrudMakeCommand extends Command
     /**
      * Replace the modelName for the given stub.
      *
-     * @param  string $stub
-     * @param  string $modelName
+     * @param string $stub
+     * @param string $modelName
      *
      * @return $this
      */
@@ -152,8 +152,8 @@ class CrudMakeCommand extends Command
     /**
      * Replace the modelName for the given stub.
      *
-     * @param  string $stub
-     * @param  string $modelName
+     * @param string $stub
+     * @param string $modelName
      *
      * @return $this
      */
@@ -176,9 +176,9 @@ class CrudMakeCommand extends Command
             $permissionConfigs[$namespace] = [
                 'modules' => [
                     $table => [
-                        'actions' => $permissions
-                    ]
-                ]
+                        'actions' => $permissions,
+                    ],
+                ],
             ];
             $this->writeJsonConfig($permissionConfigs, $jsonFile);
 
@@ -234,7 +234,8 @@ class CrudMakeCommand extends Command
             $menus[$jsonKey]['modules'][$table] = [
                 'icon'   => '',
                 'parent' => '',
-                'hide'   => false
+                'route'  => "$table.index",
+                'hide'   => false,
             ];
             $this->info('Update menu successfully');
 
@@ -248,10 +249,11 @@ class CrudMakeCommand extends Command
                 $table => [
                     'icon'   => '',
                     'parent' => '',
-                    'hide'   => false
+                    'route'  => "$table.index",
+                    'hide'   => false,
                 ],
             ],
-            'icon'    => ''
+            'icon'    => '',
         ];
 
         $this->info('Make menu successfully');
@@ -311,7 +313,7 @@ class CrudMakeCommand extends Command
 
         $this->call('make:factory', [
             'name'    => "{$model}Factory",
-            '--model' => "App\\Models\\$model"
+            '--model' => "App\\Models\\$model",
         ]);
     }
 
@@ -359,7 +361,7 @@ class CrudMakeCommand extends Command
     private function makeModel($table): void
     {
         $this->call('code:models', [
-            '--table' => $table
+            '--table' => $table,
         ]);
     }
 
@@ -370,7 +372,7 @@ class CrudMakeCommand extends Command
         $this->call('ide-helper:models', [
             'model' => ["App\\Models\\{$model}"],
             '-W'    => true,
-            '-R'    => true
+            '-R'    => true,
         ]);
     }
 
@@ -378,7 +380,7 @@ class CrudMakeCommand extends Command
     {
         if (class_exists('PermissionSeeder')) {
             $this->call('db:seed', [
-                '--class' => 'PermissionSeeder'
+                '--class' => 'PermissionSeeder',
             ]);
         }
     }
