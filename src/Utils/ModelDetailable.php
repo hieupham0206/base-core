@@ -2,9 +2,19 @@
 
 namespace Cloudteam\BaseCore\Utils;
 
+use Illuminate\Database\Eloquent\Model;
+
 trait ModelDetailable
 {
-    public function saveDetail($detailDatas, $detailModel, $detailRelation, $extraDatas)
+    /**
+     * @param array $detailDatas
+     * @param Model $detailModel
+     * @param $detailRelation
+     * @param array $extraDatas
+     *
+     * @return $this
+     */
+    public function saveDetail($detailDatas, $detailModel, $detailRelation, $extraDatas = [])
     {
         $detailRelations       = $this->$detailRelation;
         $currentModelDetailIds = $deletedIds = $detailRelations->pluck('id');
@@ -16,6 +26,7 @@ trait ModelDetailable
                 $modelDetailid = $detailData['id'];
                 if ( ! $modelDetailid) {
                     $modelDetail = array_merge($detailData, $extraDatas);
+
                     $detailModel::create($modelDetail);
                 } else {
                     $detailModel::query()->whereKey($modelDetailid)->update($detailData);

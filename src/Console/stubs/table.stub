@@ -74,13 +74,15 @@ class {{modelName}}Table extends DataTable {
 
         if ($canEdit{{modelName}}) {
             $buttonEdit = HtmlAction::generateButtonEdit(${{crudNameSingular}}->getEditLink());
+
+            //$buttonChangeState = ${{crudNameSingular}}->generateButtonChangeStateActive($modelName);
         }
 
         if ($canDelete{{modelName}}) {
-            $buttonDelete = HtmlAction::generateButtonDelete(${{crudNameSingular}}->getDestroyLink(), __('Delete') . " $modelName ${{crudNameSingular}}->username");
+            $buttonDelete = ${{crudNameSingular}}->generateButtonDelete($modelName);
         }
 
-        $buttonView = HtmlAction::generateButtonView(${{crudNameSingular}}->getViewLink());
+        //$buttonView = HtmlAction::generateButtonView(${{crudNameSingular}}->getViewLink());
 
         return $buttonEdit . $buttonDelete;
 	}
