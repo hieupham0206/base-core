@@ -49,11 +49,12 @@ trait Filterable
                         }
                     });
                 } else {
+                    $currentTable = $this->getTable();
                     if (is_array($value) && $value) {
-                        $subQuery->whereIn($column, $value, $boolean, $operator === '!=');
+                        $subQuery->whereIn("{$currentTable}.{$column}", $value, $boolean, $operator === '!=');
                     }
 
-                    $subQuery->where($column, $operator, $value, $boolean);
+                    $subQuery->where("{$currentTable}.{$column}", $operator, $value, $boolean);
                 }
             }
 
