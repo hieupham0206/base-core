@@ -1,32 +1,30 @@
 <?php
-/**
- * User: ADMIN
- * Date: 03/10/2019 2:46 CH
- */
 
 namespace Cloudteam\BaseCore\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Str;
 
 trait Filterable
 {
     private $conditions = [];
 
+    private $foreignRelation = false;
+
     /**
      * @param $configs
      * @param string $boolean
+     * @param array $filterDatas
      *
      * @return void
      */
-    private function addCondition($configs, $boolean = 'and'): void
+    public function addCondition($configs, $boolean = 'and', $filterDatas = []): void
     {
         [$column, $operator, $value] = $configs;
 
-        if ( ! isValueEmpty($value)) {
-            [$column, $isForeignKey, $relation, $value, $table] = $this->preparedParam($operator, $column, $value);
+        if ( ! isValueEmpty($value) || is_array($operator)) {
+            [$column, $value] = $this->preparedParam($operator, $column, $value, $filterDatas);
 
-            $this->conditions[] = [$column, $value, $boolean, $operator, $isForeignKey, $relation, $table];
+            $this->conditions[] = [$column, $value, $boolean, $operator];
         }
     }
 
@@ -39,22 +37,14 @@ trait Filterable
     {
         return $query->where(function (Builder $subQuery) {
             foreach ($this->conditions as $condition) {
-                [$column, $value, $boolean, $operator, $isForeignKey, $relation, $table] = $condition;
-                if ($isForeignKey) {
-                    $subQuery->whereHas($relation, static function (Builder $q) use ($column, $value, $operator, $boolean, $table) {
-                        if (is_array($value)) {
-                            $q->whereIn($column, $value, $boolean, $operator === '!=');
-                        } else {
-                            $q->where("$table.$column", $operator, $value, $boolean);
-                        }
+                [$column, $value, $boolean, $operator] = $condition;
+
+                if ($relation = $this->foreignRelation) {
+                    $subQuery->whereHas($relation, static function (Builder $q) use ($column, $value, $operator, $boolean) {
+                        $this->addQueryCondition($q, $value, $operator, $column, $boolean);
                     });
                 } else {
-                    $currentTable = $this->getTable();
-                    if (is_array($value) && $value) {
-                        $subQuery->whereIn("{$currentTable}.{$column}", $value, $boolean, $operator === '!=');
-                    }
-
-                    $subQuery->where("{$currentTable}.{$column}", $operator, $value, $boolean);
+                    $this->addQueryCondition($subQuery, $value, $operator, $column, $boolean);
                 }
             }
 
@@ -62,39 +52,59 @@ trait Filterable
         });
     }
 
+    private function addQueryCondition(&$subQuery, $value, $operator, $column, $boolean)
+    {
+        if (is_array($value) && $value) {
+            if (is_array($operator)) {
+                $subQuery->dateBetween($value, $column);
+            } else {
+                $subQuery->whereIn($column, $value, $boolean, $operator === '!=');
+            }
+        } else {
+            $subQuery->where($column, $operator, $value, $boolean);
+        }
+    }
+
     /**
      * @param $operator
      * @param $column
      * @param $value
+     * @param array $filterDatas
      *
      * @return array
      */
-    private function preparedParam($operator, $column, $value): array
+    private function preparedParam($operator, $column, $value, $filterDatas = []): array
     {
-        $isForeignKey = $relation = false;
-        $table        = '';
+        $tableName = $this->getTable();
+
         if (strpos($column, '.') !== false) {
             $columns = explode('.', $column);
             $column  = array_pop($columns);
 
-            $isForeignKey = true;
-            $relation     = implode('.', $columns);
-
-            $callClass  = static::class;
-            $classNames = explode('\\', $callClass);
-            $className  = end($classNames);
-            $tableName  = Str::plural(Str::snake($className));
-
-            if ($tableName === $relation) {
-                $isForeignKey = false;
-                $column       = "$relation.$column";
-            }
+            $relation              = implode('.', $columns);
+            $column                = "$relation.$column";
+            $this->foreignRelation = $relation;
+        } else {
+            $column = "$tableName.$column";
         }
 
-        if (strtolower($operator) === 'like') {
+        if (is_array($operator)) {
+            //note: filter dateBetween
+            $operatorType = $operator['type'];
+            $params       = $operator['params'];
+
+            if ($operatorType === 'between') {
+                $values = [];
+                foreach ($params as $param) {
+                    $values[] = $filterDatas[$param];
+                }
+
+                $value = $values;
+            }
+        } elseif (strtolower($operator) === 'like') {
             $value = "%$value%";
         }
 
-        return [$column, $isForeignKey, $relation, $value, $table];
+        return [$column, $value];
     }
 }

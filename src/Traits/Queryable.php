@@ -4,7 +4,6 @@ namespace Cloudteam\BaseCore\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
 
 trait Queryable
 {
@@ -36,30 +35,6 @@ trait Queryable
 
     /**
      * @param Builder $query
-     * @param array $conditions
-     *
-     * @return \Illuminate\Database\Query\Builder
-     */
-    public function scopeOrFilterWhere($query, $conditions)
-    {
-        if (isValueEmpty($conditions)) {
-            return $query;
-        }
-
-        if (is_array($conditions[0])) {
-            foreach ($conditions as $condition) {
-                $this->addCondition($condition, 'or');
-            }
-
-            return $this->build($query);
-        }
-        $this->addCondition($conditions, 'or');
-
-        return $this->build($query);
-    }
-
-    /**
-     * @param Builder $query
      * @param array $dates
      * @param string $column
      * @param string $format
@@ -85,6 +60,22 @@ trait Queryable
     }
 
     /**
+     * Query theo điều kiện giá trị field không thuộc khoảng từ start => end
+     *
+     * @param Builder $query
+     * @param array|string $excludes
+     * @param string $field : Tên field muốn query
+     *
+     * @return Builder|\Illuminate\Database\Query\Builder
+     */
+    public function scopeExclude(Builder $query, $excludes, $field = 'id')
+    {
+        $excludes = is_array($excludes) ? $excludes : explode(',', $excludes);
+
+        return $excludes ? $query->whereNotIn($field, $excludes) : $query;
+    }
+
+    /**
      * @param $query
      * @param array $filterDatas   Dữ liệu dùng để filter
      * @param string $boolean
@@ -105,9 +96,9 @@ trait Queryable
         }
 
         foreach ($filters as $column => $operator) {
-            if (isset($filterDatas[$column])) {
-                $filterVal = $filterDatas[$column];
-                $this->addCondition([$column, $operator, $filterVal], $boolean);
+            if (isset($filterDatas[$column]) || is_array($operator)) {
+                $filterVal = $filterDatas[$column] ?? '';
+                $this->addCondition([$column, $operator, $filterVal], $boolean, $filterDatas);
             }
         }
 
@@ -115,25 +106,11 @@ trait Queryable
     }
 
     /**
-     * Query theo điều kiện giá trị field không thuộc khoảng từ start => end
-     * @param Builder $query
-     * @param array|string $excludes
-     * @param string $field: Tên field muốn query
-     *
-     * @return Builder|\Illuminate\Database\Query\Builder
-     */
-    public function scopeExclude(Builder $query, $excludes, $field = 'id')
-    {
-        $excludes = is_array($excludes) ? $excludes : explode(',', $excludes);
-
-        return $excludes ? $query->whereNotIn($field, $excludes) : $query;
-    }
-
-    /**
      * Query theo điều kiện giá trị field thuộc khoảng từ start => end
+     *
      * @param Builder $query
      * @param array|string $includes
-     * @param string $field: Tên field muốn query
+     * @param string $field : Tên field muốn query
      *
      * @return Builder|\Illuminate\Database\Query\Builder
      */
@@ -142,5 +119,29 @@ trait Queryable
         $includes = is_array($includes) ? $includes : explode(',', $includes);
 
         return $includes ? $query->whereIn($field, $includes) : $query;
+    }
+
+    /**
+     * @param Builder $query
+     * @param array $conditions
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
+    public function scopeOrFilterWhere($query, $conditions)
+    {
+        if (isValueEmpty($conditions)) {
+            return $query;
+        }
+
+        if (is_array($conditions[0])) {
+            foreach ($conditions as $condition) {
+                $this->addCondition($condition, 'or');
+            }
+
+            return $this->build($query);
+        }
+        $this->addCondition($conditions, 'or');
+
+        return $this->build($query);
     }
 }
