@@ -93,7 +93,7 @@ trait Filterable
             $operatorType = $operator['type'];
             $params       = $operator['params'];
 
-            if ($operatorType === 'between') {
+            if ($operatorType === 'date_between') {
                 $values = [];
                 foreach ($params as $param) {
                     $values[] = $filterDatas[$param];
