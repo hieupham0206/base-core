@@ -44,14 +44,14 @@ trait Modelable
         }
     }
 
-    public function getCreatedAtTextAttribute(): string
+    public function getCreatedAtTextAttribute()
     {
         return $this->created_at->format(config('basecore.datetime_format', 'd-m-Y H:i:s'));
     }
 
-    public function getUpdatedAtTextAttribute(): string
+    public function getUpdatedAtTextAttribute()
     {
-        return $this->updated_at->format(config('basecore.datetime_format', 'd-m-Y H:i:s'));
+        return optional($this->updated_at)->format(config('basecore.datetime_format', 'd-m-Y H:i:s'));
     }
 
     /**
