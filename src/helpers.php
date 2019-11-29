@@ -413,41 +413,6 @@ if ( ! function_exists('decreaseByPercentage')) {
 }
 //END NUMBER HELPER
 
-if ( ! function_exists('isValueEmpty')) {
-    /**
-     * Returns a value indicating whether the give value is "empty".
-     *
-     * The value is considered "empty", if one of the following conditions is satisfied:
-     *
-     * - it is `null`,
-     * - an empty string (`''`),
-     * - a string containing only whitespace characters,
-     * - or an empty array.
-     *
-     * @param mixed $value
-     *
-     * @return boolean if the value is empty
-     */
-    function isValueEmpty($value)
-    {
-        return $value === '' || $value === [] || $value === null || (\is_string($value) && trim($value) === '');
-    }
-}
-
-if ( ! function_exists('isValueNotEmpty')) {
-    /**-
-     * Phủ định của isValueEmpty
-     *
-     * @param mixed $value
-     *
-     * @return boolean if the value is empty
-     */
-    function isValueNotEmpty($value)
-    {
-        return ! isValueEmpty($value);
-    }
-}
-
 if ( ! function_exists('setEnvValue')) {
     /**
      * Thay đổi giá trị config trong file .env
