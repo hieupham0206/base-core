@@ -13,11 +13,11 @@ trait Queryable
      * @param Builder $query
      * @param array $conditions
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function scopeAndFilterWhere($query, $conditions)
     {
-        if (isValueEmpty($conditions)) {
+        if (blank($conditions)) {
             return $query;
         }
 
@@ -41,12 +41,12 @@ trait Queryable
      * @param string $boolean
      * @param bool $not
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function scopeDateBetween($query, $dates, $column = 'created_at', $format = 'd-m-Y', $boolean = 'and', $not = false)
     {
         [$fromDate, $toDate] = $dates;
-        if (isValueEmpty($fromDate) || isValueEmpty($toDate)) {
+        if (blank($fromDate) || blank($toDate)) {
             return $query;
         }
 
@@ -85,7 +85,7 @@ trait Queryable
      */
     public function scopeFilters($query, $filterDatas, $boolean = 'and', array $filterConfigs = null)
     {
-        if ( ! property_exists($this, 'filters') || isValueEmpty($filterDatas)) {
+        if ( ! property_exists($this, 'filters') || blank($filterDatas)) {
             return $query;
         }
 
@@ -125,11 +125,11 @@ trait Queryable
      * @param Builder $query
      * @param array $conditions
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function scopeOrFilterWhere($query, $conditions)
     {
-        if (isValueEmpty($conditions)) {
+        if (blank($conditions)) {
             return $query;
         }
 

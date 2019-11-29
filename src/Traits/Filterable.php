@@ -21,7 +21,7 @@ trait Filterable
     {
         [$column, $operator, $value] = $configs;
 
-        if ( ! isValueEmpty($value) || is_array($operator)) {
+        if ( ! blank($value) || is_array($operator)) {
             [$column, $value] = $this->preparedParam($operator, $column, $value, $filterDatas);
 
             $this->conditions[] = [$column, $value, $boolean, $operator];
