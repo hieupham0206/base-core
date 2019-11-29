@@ -2,12 +2,12 @@
 
 namespace Cloudteam\BaseCore\Traits;
 
+use Illuminate\Support\Str;
+use ReflectionClass;
+use ReflectionException;
 use function get_class;
 use function is_array;
 use function is_callable;
-use ReflectionClass;
-use ReflectionException;
-use Illuminate\Support\Str;
 
 /**
  * Trait HasLabel
@@ -72,7 +72,7 @@ trait Labelable
      */
     public function contextLabel($text, $context = 'success', $size = 'md'): string
     {
-        return '<span class="font-weight-bold kt-font-' . $context . '">' . $text . '</span>';
+        return '<span class="font-weight-bold kt-font-' . $context . ' kt-badge--' . $size . '">' . $text . '</span>';
     }
 
     /**
@@ -84,7 +84,7 @@ trait Labelable
      */
     public function contextBadge($text, $context = 'success', $size = 'md'): string
     {
-        return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--' . $context . ' kt-badge--'.$size.'">' . $text . '</span>';
+        return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--' . $context . ' kt-badge--' . $size . '">' . $text . '</span>';
     }
 
     /**
@@ -97,6 +97,25 @@ trait Labelable
      */
     public function contextBadgeUnified($text, $context = 'success', $size = 'md'): string
     {
-        return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--unified-' . $context . ' kt-badge--'.$size.'">' . $text . '</span>';
+        return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--unified-' . $context . ' kt-badge--' . $size . '">' . $text . '</span>';
+    }
+
+    public function getModelDisplayTextAttribute()
+    {
+        $displayAttribute = $this->displayAttribute;
+
+        return $this->{$displayAttribute};
+    }
+
+    public function getModelTitleAttribute()
+    {
+        $displayText = $this->model_display_text;
+
+        try {
+            $displayText = $displayText ?: $this->classLabel(true);
+        } catch (\ReflectionException $e) {
+        }
+
+        return $displayText;
     }
 }

@@ -8,7 +8,7 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.edit', 'model' => $%%crudNameSingular
 	<script src="{{ version('js/%%viewTemplateDir%%/form.js') }}"></script>
 @endpush
 
-@section('title', __('action.Edit Model', ['model' => $%%crudNameSingular%%->classLabel(true)]))
+@section('title', __('Edit') . " $%%crudNameSingular%%->model_title")
 
 @section('content')
     <div class="kt-portlet kt-portlet--rounded">
