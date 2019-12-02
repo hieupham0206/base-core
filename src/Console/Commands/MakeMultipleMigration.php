@@ -4,7 +4,7 @@ namespace Cloudteam\BaseCore\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class CreateMultipleMigration extends Command
+class MakeMultipleMigration extends Command
 {
     /**
      * The name and signature of the console command.
@@ -19,16 +19,6 @@ class CreateMultipleMigration extends Command
      * @var string
      */
     protected $description = 'Create multiple migration file';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * Execute the console command.

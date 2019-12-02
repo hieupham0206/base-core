@@ -5,14 +5,14 @@ namespace Cloudteam\BaseCore\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 
-class RefreshVersionJsCommand extends Command
+class CleanJsCacheCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'cache:clean-js-version';
+    protected $signature = 'js:clean-cache';
 
     /**
      * The console command description.
