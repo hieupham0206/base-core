@@ -2,13 +2,11 @@
 
 namespace Cloudteam\BaseCore\Utils;
 
-use Illuminate\Database\Eloquent\Model;
-
 trait ModelDetailable
 {
     /**
      * @param array $detailDatas
-     * @param Model $detailModel
+     * @param string $detailModel
      * @param $detailRelation
      * @param array $extraDatas
      *
