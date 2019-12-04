@@ -5,6 +5,8 @@ namespace Cloudteam\BaseCore\Utils;
 trait ModelDetailable
 {
     /**
+     * Lưu detail cho quan hệ 1 - n
+     *
      * @param array $detailDatas
      * @param string $detailModel
      * @param $detailRelation
@@ -37,5 +39,29 @@ trait ModelDetailable
         }
 
         return $this;
+    }
+
+    /**
+     * Lưu detail cho quan hệ n - n
+     *
+     * @param array $modelIds
+     * @param string $relationName
+     * @param array $extraNewDatas
+     */
+    public function saveMany($modelIds, $relationName, $extraNewDatas = [])
+    {
+        $currentModelDetailIds = $deletedIds = $this->{$relationName}->pluck('id');
+
+        if ($modelIds) {
+            $deletedIds = $currentModelDetailIds->diff(collect($modelIds));
+
+            if ($deletedIds->isNotEmpty()) {
+                $this->{$relationName}()->detach($deletedIds->toArray());
+            }
+
+            $insertedIds = collect($modelIds)->diff($currentModelDetailIds);
+
+            $this->{$relationName}()->attach($insertedIds, $extraNewDatas);
+        }
     }
 }
