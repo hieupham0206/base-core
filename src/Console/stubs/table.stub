@@ -61,9 +61,9 @@ class {{modelName}}Table extends DataTable {
 	}
 
     /**
-     * @param $modelName
+     * @param string $modelName
      * @param {{modelName}} ${{crudNameSingular}}
-     * @param $permissions
+     * @param array $permissions
      *
      * @return string
      */
