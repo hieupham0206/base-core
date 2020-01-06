@@ -11,7 +11,7 @@ $breadcrumbs = ['breadcrumb' => '%%route%%.edit', 'model' => $%%crudNameSingular
 @section('title', __('Edit') . " $%%crudNameSingular%%->model_title")
 
 @section('content')
-    <div class="kt-portlet kt-portlet--rounded">
+    <div class="kt-portlet kt-portlet--rounded kt-portlet--head--noborder">
         @include('backend.modules.%%userViewPath%%._form', ['caption' => __('action.Edit Model', ['model' => $%%crudNameSingular%%->classLabel(true)])])
     </div>
 @endsection
