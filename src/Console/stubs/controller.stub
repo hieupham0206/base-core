@@ -66,7 +66,7 @@ class DummyClass extends Controller
         try {
             \DB::beginTransaction();
 
-            ${{crudNameSingular}} = {{modelName}}::create($requestData);
+            {{modelName}}::create($requestData);
 
             \DB::commit();
 
