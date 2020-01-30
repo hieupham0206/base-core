@@ -36,10 +36,10 @@ trait Labelable
         }
 
         if (property_exists(get_class($this), $propertyLabel)
-            && is_array($this->labels)
-            && array_key_exists($field, $this->labels)
+            && is_array($this->{$propertyLabel})
+            && array_key_exists($field, $this->{$propertyLabel})
         ) {
-            $label = $this->labels[$field];
+            $label = $this->{$propertyLabel}[$field];
             $label = is_callable($label) ? $label($field) : (string) $label;
         }
 
