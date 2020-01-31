@@ -167,7 +167,7 @@ class CrudMakeCommand extends Command
     private function makePermission($namespace, $table, $permissions): bool
     {
         $table             = Str::singular($table);
-        $permissions       = $permissions ?? ['view', 'create', 'update', 'delete'];
+        $permissions       = $permissions ?? ['view', 'create', 'edit', 'delete'];
         $jsonFile          = base_path() . '/database/files/permissions.json';
         $permissionConfigs = getPermissionConfig();
 
