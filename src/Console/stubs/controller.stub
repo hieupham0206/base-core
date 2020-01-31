@@ -57,6 +57,7 @@ class DummyClass extends Controller
      * @param \Illuminate\Http\Request $request
      * @return RedirectResponse|JsonResponse
      * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
      */
     public function store(Request $request)
     {
@@ -120,6 +121,7 @@ class DummyClass extends Controller
      * @param  {{modelName}} ${{crudNameSingular}}
      * @return RedirectResponse|JsonResponse
      * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
      */
     public function update(Request $request, {{modelName}} ${{crudNameSingular}})
     {
