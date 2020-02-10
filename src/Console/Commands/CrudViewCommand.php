@@ -394,7 +394,7 @@ class CrudViewCommand extends Command
     private function defaultTemplating()
     {
         return [
-            'index'   => ['crudName', 'formHeadingHtml', 'route', 'userViewPath', 'viewTemplateDir', 'crudNameSingular'],
+            'index'   => ['crudName', 'formHeadingHtml', 'route', 'userViewPath', 'viewTemplateDir', 'crudNameSingular', 'modelNameCap'],
             '_search' => ['formSearchHtml', 'crudName'],
             'create'  => ['crudName', 'modelNameCap', 'crudNameSingular', 'route', 'userViewPath', 'viewTemplateDir'],
             'edit'    => ['crudName', 'modelNameCap', 'crudNameSingular', 'title', 'route', 'userViewPath', 'viewTemplateDir'],

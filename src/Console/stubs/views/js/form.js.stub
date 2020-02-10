@@ -1,25 +1,34 @@
 $(function() {
-	let ${{ modelNameUnCap }}Form = $('#{{ modelName }}_form')
-	let isConfirm = ${{ modelNameUnCap }}Form.data('confirm')
+	const ${{ modelNameUnCap }}Form = $('#{{ modelName }}_form')
+	const isConfirm = ${{ modelNameUnCap }}Form.data('confirm')
+	const isAjax = ${{ modelNameUnCap }}Form.data('ajax')
 
     ${{ modelNameUnCap }}Form.validate({
-        submitHandler: isConfirm && function(form, e) {
+        submitHandler: isAjax && function(form, e) {
             window.blockPage()
             e.preventDefault()
 
-            $(form).swal(result => {
-                if (result.value) {
-                    let formData = new FormData(form)
+            function save() {
+                let formData = new FormData(form)
 
-                    $(form).submitData({returnEarly: true, formData}).then(data => {
-                        let msg = data.message
-                        let redirectUrl = data.redirect_url
-                        if (redirectUrl !== undefined) {
-                            window.success(() => location.href = redirectUrl, {text: msg})
-                        }
-                    })
-                }
-            })
+                $(form).submitData({returnEarly: true, formData}).then(data => {
+                    let msg = data.message
+                    let redirectUrl = data.redirect_url
+                    if (redirectUrl !== undefined) {
+                        window.success(() => location.href = redirectUrl, {text: msg})
+                    }
+                })
+            }
+
+            if (isConfirm) {
+                $(form).swal(result => {
+                    if (result.value) {
+                        save()
+                    }
+                })
+            } else {
+                save()
+            }
         },
     })
 })
