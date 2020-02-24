@@ -3,6 +3,7 @@
 namespace Cloudteam\BaseCore\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 trait Filterable
 {
@@ -40,8 +41,9 @@ trait Filterable
                 [$column, $value, $boolean, $operator] = $condition;
 
                 if ($relation = $this->foreignRelation) {
-                    $subQuery->whereHas($relation, static function (Builder $q) use ($column, $value, $operator, $boolean) {
-                        $this->addQueryCondition($q, $value, $operator, $column, $boolean);
+                    $self = $this;
+                    $subQuery->whereHas($relation, static function (Builder $q) use ($column, $value, $operator, $boolean, $self) {
+                        $self->addQueryCondition($q, $value, $operator, $column, $boolean);
                     });
                 } else {
                     $this->addQueryCondition($subQuery, $value, $operator, $column, $boolean);
@@ -54,6 +56,19 @@ trait Filterable
 
     private function addQueryCondition(&$subQuery, $value, $operator, $column, $boolean)
     {
+        if (strpos($column, '.') !== false) {
+            $columnNames = explode('.', $column);
+            $tmpStr = '';
+            foreach ($columnNames as $key => $columnName) {
+                if ($key === count($columnNames) - 1) {
+                    break;
+                }
+
+                $tmpStr .= Str::plural($columnName) . '.';
+            }
+            $column = $tmpStr . $columnNames[1];
+        }
+
         if (is_array($value) && $value) {
             if (is_array($operator)) {
                 $subQuery->dateBetween($value, $column);
