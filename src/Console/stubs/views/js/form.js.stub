@@ -15,7 +15,7 @@ $(function() {
                     let msg = data.message
                     let redirectUrl = data.redirect_url
                     if (redirectUrl !== undefined) {
-                        window.success(() => location.href = redirectUrl, {text: msg})
+                        window.success({text: msg, callback: () => location.href = redirectUrl})
                     }
                 })
             }
