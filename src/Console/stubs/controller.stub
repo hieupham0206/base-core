@@ -72,24 +72,14 @@ class DummyClass extends Controller
 
             \DB::commit();
 
-            if ($request->wantsJson()) {
-                return $this->asJson([
-                    'message' => __('Data created successfully'),
-                    'redirect_url' => route('{{routeName}}.index')
-                ]);
-            }
-
-            return redirect(route('{{routeName}}.index'))->with('message', __( 'Data created successfully' ));
+            return $this->redirectResponse([
+                'message'      => __('Data created successfully'),
+                'redirect_url' => route('users.show', $user),
+            ], route('users.show', $user));
         } catch (\Exception $e) {
             \DB::rollBack();
 
-            if ($request->wantsJson()) {
-                return $this->asJson([
-                    'message'      => "{$e->getMessage()} - {$e->getFile()}} - {$e->getLine()}",
-                ], 500);
-            }
-
-            throw($e);
+			return $this->errorResponse($e);
         }
     }
 
@@ -118,7 +108,6 @@ class DummyClass extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
      * @param  {{modelName}} ${{crudNameSingular}}
      * @return RedirectResponse|JsonResponse
      * @throws \Illuminate\Validation\ValidationException
@@ -137,63 +126,53 @@ class DummyClass extends Controller
 
             \DB::commit();
 
-            if ($request->wantsJson()) {
-                return $this->asJson([
-                    'message' => __('Data edited successfully'),
-                    'redirect_url' => route('{{routeName}}.index')
-                ]);
-            }
-
-            return redirect(route('{{routeName}}.index'))->with('message', __( 'Data edited successfully' ));
+            return $this->redirectResponse([
+                'message'      => __('Data edited successfully'),
+                'redirect_url' => route('users.show', $user),
+            ], route('users.show', $user));
         } catch (\Exception $e) {
             \DB::rollBack();
 
-            if ($request->wantsJson()) {
-                return $this->asJson([
-                    'message'      => "{$e->getMessage()} - {$e->getFile()}} - {$e->getLine()}",
-                ], 500);
-            }
-
-            throw($e);
+			return $this->errorResponse($e);
         }
     }
 
     /**
+     * @param \Illuminate\Http\Request $request
+     *
      * @param {{modelName}} ${{crudNameSingular}}
      * @return JsonResponse
      */
-    public function destroy({{modelName}} ${{crudNameSingular}})
+    public function destroy(Request $request, {{modelName}} ${{crudNameSingular}})
     {
         try {
-        	  ${{crudNameSingular}}->delete();
-        } catch ( \Exception $e ) {
-            return $this->asJson( [
-                'message' => "Error: {$e->getMessage()}"
-            ], $e->getCode() );
-        }
+        	${{crudNameSingular}}->delete();
 
-        return $this->asJson( [
-            'message' => __('Data deleted successfully')
-        ] );
+            return $this->asJson( [
+                'message' => __('Data deleted successfully')
+            ] );
+        } catch ( \Exception $e ) {
+			return $this->errorResponse($e);
+        }
     }
 
     /**
+	 * @param Request $request
+	 *
      * @return mixed|\Symfony\Component\HttpFoundation\ParameterBag
      * @throws \Exception
      */
-    public function destroys() {
+    public function destroys(Request $request) {
         try {
             $ids = \request()->get( 'ids' );
             {{modelName}}::destroy( $ids );
-        } catch ( \Exception $e ) {
-            return $this->asJson( [
-                'message' => "Error: {$e->getMessage()}"
-            ], $e->getCode() );
-        }
 
-        return $this->asJson( [
-            'message' => __( 'Data deleted successfully' )
-        ] );
+            return $this->asJson( [
+                'message' => __( 'Data deleted successfully' )
+            ] );
+        } catch ( \Exception $e ) {
+			return $this->errorResponse($e);
+        }
     }
 
     /**
