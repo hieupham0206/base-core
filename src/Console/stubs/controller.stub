@@ -63,19 +63,19 @@ class DummyClass extends Controller
     public function store(Request $request)
     {
         {{validationRules}}
-        $requestData = $request->all();
 
         try {
             \DB::beginTransaction();
 
-            {{modelName}}::create($requestData);
+            $requestDatas = $request->all();
+            {{modelName}}::create($requestDatas);
 
             \DB::commit();
 
             return $this->redirectResponse([
                 'message'      => __('Data created successfully'),
-                'redirect_url' => route('users.show', $user),
-            ], route('users.show', $user));
+                'redirect_url' => route('{{routeName}}.index'),
+            ], route('{{routeName}}.index'));
         } catch (\Exception $e) {
             \DB::rollBack();
 
@@ -108,6 +108,7 @@ class DummyClass extends Controller
     }
 
     /**
+	 * @param Request $request
      * @param  {{modelName}} ${{crudNameSingular}}
      * @return RedirectResponse|JsonResponse
      * @throws \Illuminate\Validation\ValidationException
@@ -121,15 +122,15 @@ class DummyClass extends Controller
         try {
             \DB::beginTransaction();
 
-            $requestData = $request->all();
-            ${{crudNameSingular}}->update($requestData);
+            $requestDatas = $request->all();
+            ${{crudNameSingular}}->update($requestDatas);
 
             \DB::commit();
 
             return $this->redirectResponse([
                 'message'      => __('Data edited successfully'),
-                'redirect_url' => route('users.show', $user),
-            ], route('users.show', $user));
+                'redirect_url' => route('{{routeName}}.index'),
+            ], route('{{routeName}}.index'));
         } catch (\Exception $e) {
             \DB::rollBack();
 
@@ -138,12 +139,10 @@ class DummyClass extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
      * @param {{modelName}} ${{crudNameSingular}}
      * @return JsonResponse
      */
-    public function destroy(Request $request, {{modelName}} ${{crudNameSingular}})
+    public function destroy({{modelName}} ${{crudNameSingular}})
     {
         try {
         	${{crudNameSingular}}->delete();
@@ -157,12 +156,10 @@ class DummyClass extends Controller
     }
 
     /**
-	 * @param Request $request
-	 *
      * @return mixed|\Symfony\Component\HttpFoundation\ParameterBag
      * @throws \Exception
      */
-    public function destroys(Request $request) {
+    public function destroys() {
         try {
             $ids = \request()->get( 'ids' );
             {{modelName}}::destroy( $ids );

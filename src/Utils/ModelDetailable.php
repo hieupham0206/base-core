@@ -23,7 +23,7 @@ trait ModelDetailable
             $deletedIds = $currentModelDetailIds->diff(collect($detailDatas)->pluck('id')->toArray());
 
             foreach ($detailDatas as $detailData) {
-                $modelDetailid = $detailData['id'];
+                $modelDetailid = $detailData['id'] ?? '';
                 if ( ! $modelDetailid) {
                     $modelDetail = array_merge($detailData, $extraDatas);
 
