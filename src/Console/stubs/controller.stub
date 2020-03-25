@@ -28,7 +28,7 @@ class DummyClass extends Controller
             '{{crudNameSingular}}' => ${{crudNameSingular}},
             'headerConfigs' => [
                 'model' => ${{crudNameSingular}},
-                'caption' => ${{crudNameSingular}}->label('list'),
+                'caption' => '',
                 'createUrl' => route('{{routeName}}.create'),
                 'buttons' => []
             ]
