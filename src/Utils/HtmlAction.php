@@ -8,39 +8,26 @@ namespace Cloudteam\BaseCore\Utils;
 
 class HtmlAction
 {
-    private static function createCustomButtonClass($btnClass = '')
+    public static function generateButtonChangeState($params, $btnClass = 'btn-warning')
     {
-        return $btnClass ?: "btn-action $btnClass";
-    }
-
-    public static function generateButtonChangeState($params, $btnClass = '')
-    {
-        $btnClass = self::createCustomButtonClass($btnClass);
-
         [$state, $message, $title, $url, $elementTitle, $icon] = $params;
 
         return sprintf(' <button type="button" class="btn-action-change-state %s" data-state="%s" data-message="%s" data-title="%s" data-url="%s" title="%s"><i class="%s"></i></button>',
             $btnClass, $state, $message, $title, $url, $elementTitle, $icon);
     }
 
-    public static function generateButtonDelete($deleteLink, $dataTitle, $btnClass = '')
+    public static function generateButtonDelete($deleteLink, $dataTitle, $btnClass = 'btn-danger')
     {
-        $btnClass = self::createCustomButtonClass($btnClass);
-
         return sprintf(" <button type='button' class='btn-action-delete %s' data-title='%s' data-url='%s' title='%s'><i class='far fa-trash'></i></button>", $btnClass, $dataTitle, $deleteLink, __('Delete'));
     }
 
-    public static function generateButtonEdit($editLink, $btnClass = '')
+    public static function generateButtonEdit($editLink, $btnClass = 'btn-primary')
     {
-        $btnClass = self::createCustomButtonClass($btnClass);
-
         return sprintf(" <a href='%s' class='btn-action-edit %s' title='%s'><i class='far fa-edit'></i></a>", $editLink, $btnClass, __('Edit'));
     }
 
-    public static function generateButtonView($viewLink, $btnClass = '')
+    public static function generateButtonView($viewLink, $btnClass = 'btn-info')
     {
-        $btnClass = self::createCustomButtonClass($btnClass);
-
         return sprintf(' <a href="%s" class="btn-action-view %s" title="%s"><i class="far fa-eye"></i></a>', $viewLink, $btnClass, __('View'));
     }
 
