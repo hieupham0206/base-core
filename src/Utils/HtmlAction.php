@@ -1,8 +1,4 @@
 <?php
-/**
- * User: ADMIN
- * Date: 23/10/2019 9:50 SA
- */
 
 namespace Cloudteam\BaseCore\Utils;
 
