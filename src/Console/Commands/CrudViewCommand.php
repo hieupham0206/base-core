@@ -520,7 +520,7 @@ class CrudViewCommand extends Command
         $markup = File::get($this->viewDirectoryPath . 'form-fields/form-field.blade.stub');
         $markup = str_replace(
             [$start . 'required' . $end, $start . 'fieldType' . $end, $start . 'itemName' . $end, $start . 'crudNameSingular' . $end, $start . 'customClass' . $end],
-            [$required, $this->typeLookup[$type], $item['name'], $this->crudNameSingular],
+            [$required, $this->typeLookup[$type], $item['name'], $this->crudNameSingular, $customClass],
             $markup);
 
         return $this->wrapField(
