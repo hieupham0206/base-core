@@ -6,8 +6,6 @@ use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionException;
 use function get_class;
-use function is_array;
-use function is_callable;
 
 /**
  * Trait HasLabel
@@ -23,27 +21,21 @@ trait Labelable
      */
     public function label($field = '', $capitalize = false)
     {
-        $label = __(ucfirst(camel2words(strtolower($field))));
+        $field = ucfirst(camel2words(strtolower($field)));
+        $label = __($field);
         if ($capitalize) {
             $label = __(Str::title(camel2words(strtolower($field))));
         }
 
-        $locale        = \App::getLocale();
-        $propertyLabel = 'labels';
+        $modelName       = $this->table_name_singular;
+        $translayKey     = "{$modelName}.{$field}";
+        $labelFromModule = __($translayKey);
 
-        if ($locale === 'en') {
-            $propertyLabel = 'engLabels';
+        if ($labelFromModule === $translayKey) {
+            return $label;
         }
 
-        if (property_exists(get_class($this), $propertyLabel)
-            && is_array($this->{$propertyLabel})
-            && array_key_exists($field, $this->{$propertyLabel})
-        ) {
-            $label = $this->{$propertyLabel}[$field];
-            $label = is_callable($label) ? $label($field) : (string) $label;
-        }
-
-        return $label;
+        return $labelFromModule;
     }
 
     /**
