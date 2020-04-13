@@ -50,9 +50,9 @@ abstract class DataTable
             foreach ($filters as $filter) {
                 if (isset($finalFilters[$filter['name']])) {
                     $currentVal = is_array($finalFilters[$filter['name']]) ? $finalFilters[$filter['name']] : [$finalFilters[$filter['name']]];
-                    $finalFilters[$filter['name']] = array_merge([$filter['value']], $currentVal);
+                    $finalFilters[$filter['name']] = array_merge([trim($filter['value'])], trim($currentVal));
                 } else {
-                    $finalFilters[$filter['name']] = $filter['value'];
+                    $finalFilters[$filter['name']] = trim($filter['value']);
                 }
             }
             $this->filters = $finalFilters;
