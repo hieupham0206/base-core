@@ -56,19 +56,6 @@ trait Filterable
 
     private function addQueryCondition(&$subQuery, $value, $operator, $column, $boolean)
     {
-        if (strpos($column, '.') !== false) {
-            $columnNames = explode('.', $column);
-            $tmpStr = '';
-            foreach ($columnNames as $key => $columnName) {
-                if ($key === count($columnNames) - 1) {
-                    break;
-                }
-
-                $tmpStr .= Str::plural($columnName) . '.';
-            }
-            $column = $tmpStr . $columnNames[1];
-        }
-
         if (is_array($value) && $value) {
             if (is_array($operator)) {
                 $subQuery->dateBetween($value, $column);
@@ -76,7 +63,12 @@ trait Filterable
                 $subQuery->whereIn($column, $value, $boolean, $operator === '!=');
             }
         } else {
-            $subQuery->where($column, $operator, $value, $boolean);
+            if ($this->foreignRelation) {
+                $columns = explode('.', $column);
+                $subQuery->where(end($columns), $operator, $value, $boolean);
+            } else {
+                $subQuery->where($column, $operator, $value, $boolean);
+            }
         }
     }
 
