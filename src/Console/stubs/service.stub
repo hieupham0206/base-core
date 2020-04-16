@@ -4,26 +4,32 @@ namespace DummyNamespace;
 
 class DummyClass implements IBaseService
 {
-    public function store()
-    {
-        $request = request();
-    }
-
     /**
-     * @param Model $model
+     * @param array $datas
      *
      * @return mixed
      */
-    public function update($model)
+    public function store(array $datas)
     {
-        $request = request();
+        // TODO: Implement store() functionality.
     }
 
     /**
-     * @param Model $model
+     * @param array $datas
+     * @param $model
+     *
+     * @return mixed
+     */
+    public function update(array $datas, $model)
+    {
+        // TODO: Implement update() functionality.
+    }
+
+    /**
+     * @param $model
      */
     public function delete($model)
     {
-        // TODO: Implement delete() method.
+        // TODO: Implement delete() functionality.
     }
 }
