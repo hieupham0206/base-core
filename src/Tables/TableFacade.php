@@ -37,13 +37,11 @@ class TableFacade
 
     public function getDataTable(): string
     {
-        $data = [
+        return json_encode([
             'data'            => $this->getData(),
             'draw'            => $this->getDraw(),
             'recordsTotal'    => $this->getTotalRecord(),
             'recordsFiltered' => $this->getTotalFiltered(),
-        ];
-
-        return json_encode($data);
+        ]);
     }
 }

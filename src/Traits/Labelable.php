@@ -7,10 +7,6 @@ use ReflectionClass;
 use ReflectionException;
 use function get_class;
 
-/**
- * Trait HasLabel
- * @package App\Traits
- */
 trait Labelable
 {
     /**
@@ -56,7 +52,7 @@ trait Labelable
     }
 
     /**
-     * @param $text
+     * @param string $text
      * @param string $context
      * @param string $size
      *
@@ -68,7 +64,7 @@ trait Labelable
     }
 
     /**
-     * @param $text
+     * @param string $text
      * @param string $context
      * @param string $size
      *
@@ -82,7 +78,6 @@ trait Labelable
     /**
      * @param $text
      * @param string $context
-     *
      * @param string $size
      *
      * @return string
@@ -92,6 +87,9 @@ trait Labelable
         return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--unified-' . $context . ' kt-badge--' . $size . '">' . $text . '</span>';
     }
 
+    /**
+     * @return string
+     */
     public function getModelDisplayTextAttribute()
     {
         $displayAttribute = $this->displayAttribute;
@@ -99,6 +97,9 @@ trait Labelable
         return $this->{$displayAttribute};
     }
 
+    /**
+     * @return string|null
+     */
     public function getModelTitleAttribute()
     {
         $displayText = $this->model_display_text;
@@ -106,6 +107,7 @@ trait Labelable
         try {
             $displayText = $displayText ?: $this->classLabel(true);
         } catch (\ReflectionException $e) {
+            $displayText = '';
         }
 
         return $displayText;

@@ -54,9 +54,6 @@ trait Modelable
         return optional($this->updated_at)->format(config('basecore.datetime_format', 'd-m-Y H:i:s'));
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getDescriptionEvent(string $eventName): string
     {
         $displayText = $this->model_display_text;
