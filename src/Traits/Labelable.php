@@ -62,7 +62,7 @@ trait Labelable
      *
      * @return string
      */
-    public function contextLabel($text, $context = 'success', $size = 'md'): string
+    public function contextLabel($text, $context = 'success', $size = 'sm'): string
     {
         return '<span class="font-weight-bold kt-font-' . $context . ' kt-badge--' . $size . '">' . $text . '</span>';
     }
@@ -74,7 +74,7 @@ trait Labelable
      *
      * @return string
      */
-    public function contextBadge($text, $context = 'success', $size = 'md'): string
+    public function contextBadge($text, $context = 'success', $size = 'sm'): string
     {
         return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--' . $context . ' kt-badge--' . $size . '">' . $text . '</span>';
     }
@@ -87,7 +87,7 @@ trait Labelable
      *
      * @return string
      */
-    public function contextBadgeUnified($text, $context = 'success', $size = 'md'): string
+    public function contextBadgeUnified($text, $context = 'success', $size = 'sm'): string
     {
         return '<span class="font-weight-bold kt-badge kt-badge--inline kt-badge--rounded kt-badge--unified-' . $context . ' kt-badge--' . $size . '">' . $text . '</span>';
     }
