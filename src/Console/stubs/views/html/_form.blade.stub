@@ -7,7 +7,7 @@
     @endisset
     <div class="kt-portlet__head">
         <div class="kt-portlet__head-label">
-            <span class="kt-portlet__head-title text-capitalize">{{ $%%crudNameSingular%%->label('%%crudNameSingular%%_info') }}</span>
+            <span class="kt-portlet__head-title text-capitalize">{{ $%%crudNameSingular%%->label('info') }}</span>
         </div>
     </div>
     <div class="kt-portlet__body">
@@ -17,7 +17,9 @@
     </div>
     <div class="kt-portlet__foot kt-portlet__foot--solid">
         <div class="kt-form__actions kt-form__actions--right">
-            <button class="btn-main btn-wide"><span><i class="far fa-save"></i><span>@lang('Save')</span></span></button>
+            <button class="btn-main btn-wide">
+                <span><i class="far fa-save"></i><span>@lang('Save')</span></span>
+            </button>
             <a href="{{ route('%%route%%.index') }}" class="btn-sub btn-wide" id="link_back" data-should-confirm="{{ ! $%%crudNameSingular%%->exists }}">
                 <span><i class="far fa-arrow-left"></i><span>@lang('Back')</span></span>
             </a>
