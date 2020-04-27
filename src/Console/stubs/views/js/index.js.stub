@@ -1,3 +1,7 @@
+window.vueApp = new Vue({
+	el: '#app',
+})
+
 $(function() {
     const $body = $('body')
     const table{{ modelNameCap }} = $('#table_{{ route }}').DataTable({
