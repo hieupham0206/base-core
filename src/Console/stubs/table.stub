@@ -26,7 +26,7 @@ class {{modelName}}Table extends DataTable {
 
 			$dataArray[] = [
 				//'<label class="kt-checkbox kt-checkbox--single kt-checkbox--brand"><input type="checkbox" value="'.${{crudNameSingular}}->id.'"><span></span></label>',
-				++$key,
+				++$key + $this->start,
 				{{tableValue}}
 				$htmlAction
 			];
