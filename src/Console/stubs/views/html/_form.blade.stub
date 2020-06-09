@@ -17,7 +17,7 @@
     </div>
     <div class="kt-portlet__foot kt-portlet__foot--solid">
         <div class="kt-form__actions kt-form__actions--right">
-            @if ($%%crudNameSingular%%->can_be_created || $%%crudNameSingular%%->can_be_edited)
+            @if ($%%crudNameSingular%%->canBeSaved())
                 <button class="btn-main btn-wide"><span><i class="far fa-save"></i>
                     <span>@lang('Save')</span></span>
                 </button>
