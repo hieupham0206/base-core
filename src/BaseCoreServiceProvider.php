@@ -2,6 +2,7 @@
 
 namespace Cloudteam\BaseCore;
 
+use App\Console\Commands\MakeEnumCommand;
 use Cloudteam\BaseCore\Console\Commands\{MakeMultipleMigration,
     CrudControllerCommand,
     CrudMakeCommand,
@@ -109,6 +110,7 @@ class BaseCoreServiceProvider extends ServiceProvider
             MakeModelAttributeCommand::class,
             MakeModelRelationshipCommand::class,
             MakeModelServiceCommand::class,
+            MakeEnumCommand::class,
 
             MakeMultipleMigration::class,
             MakeMultipleModel::class,

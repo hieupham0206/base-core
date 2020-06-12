@@ -70,10 +70,10 @@ class {{modelName}}Table extends DataTable {
 	protected function generateButton($modelName, ${{crudNameSingular}}, $permissions): string {
 	    [$canEdit{{modelName}}, $canDelete{{modelName}}] = $permissions;
 
-	    $buttonEdit = $buttonDelete = '';
+	    $buttonDelete = '';
 
+        $buttonEdit = HtmlAction::generateButtonEdit(${{crudNameSingular}}->getEditLink());
         if ($canEdit{{modelName}}) {
-            $buttonEdit = HtmlAction::generateButtonEdit(${{crudNameSingular}}->getEditLink());
 
             //$buttonChangeState = ${{crudNameSingular}}->generateButtonChangeStateActive($modelName);
         }

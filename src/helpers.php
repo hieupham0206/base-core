@@ -17,7 +17,7 @@ if ( ! function_exists('camel2words')) {
             '-',
             '_',
             '.',
-        ], ' ', preg_replace('/(?<![A-Z])[A-Z]/', ' \0', $name)));
+        ], ' ', preg_replace('/(?<![A-Z])[A-Z]/', '\0', $name)));
 
         return $toLower ? strtolower($label) : $label;
     }
