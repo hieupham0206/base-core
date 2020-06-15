@@ -29,9 +29,9 @@ class MakeEnumCommand extends GeneratorCommand
 				$optionDesc = ucfirst(camel2words($option));
 
 				$constOption      .= "public const $option = $value;" . "\n";
-				$constDescription .= "if (self::$option === $value) {
+				$constDescription .= "if (self::$option === ".'$value'.") {
 										return __('{$optionDesc}');
-										}" . "\n";
+									}" . "\n";
 			}
 		}
 		$stub = $this->files->get($this->getStub());
