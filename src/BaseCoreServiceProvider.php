@@ -2,8 +2,8 @@
 
 namespace Cloudteam\BaseCore;
 
-use App\Console\Commands\MakeEnumCommand;
-use Cloudteam\BaseCore\Console\Commands\{MakeMultipleMigration,
+use Cloudteam\BaseCore\Console\Commands\{MakeEnumCommand,
+    MakeMultipleMigration,
     CrudControllerCommand,
     CrudMakeCommand,
     CrudTableCommand,
