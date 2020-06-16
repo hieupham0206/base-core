@@ -181,6 +181,8 @@ if ( ! function_exists('numberToWord')) {
                     return false;
                 }
 
+                $number = (int) $number;
+
                 if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
                     trigger_error(
                         'only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX,
