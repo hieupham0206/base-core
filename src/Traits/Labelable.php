@@ -17,17 +17,17 @@ trait Labelable
      */
     public function label($field = '', $capitalize = false)
     {
-        $field = ucfirst(camel2words(strtolower($field)));
-        $label = __($field);
-        if ($capitalize) {
-            $label = __(Str::title(camel2words(strtolower($field))));
-        }
-
         $modelName       = $this->table_name_singular;
-        $translayKey     = "{$modelName}.{$field}";
-        $labelFromModule = __($translayKey);
+        $translateKey     = "{$modelName}.{$field}";
+        $labelFromModule = __($translateKey);
 
-        if ($labelFromModule === $translayKey) {
+        if ($labelFromModule === $translateKey) {
+            $field = ucfirst(camel2words(strtolower($field)));
+            $label = __($field);
+            if ($capitalize) {
+                $label = __(Str::title(camel2words(strtolower($field))));
+            }
+
             return $label;
         }
 
