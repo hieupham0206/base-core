@@ -162,8 +162,8 @@ if ( ! function_exists('numberToWord')) {
                 1000                => 'nghìn',
                 1000000             => 'triệu',
                 1000000000          => 'tỷ',
-                1000000000000       => 'nghìn', //ngìn tỷ
-                1000000000000000    => 'nghìn triệu triệu',
+                1000000000000       => 'nghìn tỷ', //ngìn tỷ
+                1000000000000000    => 'triệu tỷ',
                 1000000000000000000 => 'tỷ tỷ',
             ];
             private $seperator = ' ', $number;
