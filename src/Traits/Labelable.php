@@ -18,7 +18,7 @@ trait Labelable
     public function label($field = '', $capitalize = false)
     {
         $modelName       = $this->table_name_singular;
-        $translateKey     = "{$modelName}.{$field}";
+        $translateKey    = "{$modelName}.{$field}";
         $labelFromModule = __($translateKey);
 
         if ($labelFromModule === $translateKey) {
@@ -42,13 +42,20 @@ trait Labelable
      */
     public function classLabel($lcfirst = false)
     {
-        $reflect   = new ReflectionClass($this);
-        $tableName = __(camel2words(Str::studly($reflect->getShortName())));
+        $reflect = new ReflectionClass($this);
+
         if (property_exists(get_class($this), 'logName')) {
-            $tableName = __($reflect->getStaticPropertyValue('logName'));
+            $nameInModel = $reflect->getStaticPropertyValue('logName');
+            $tableName   = __($nameInModel);
+
+            if (is_array($tableName)) {
+                $tableName = $nameInModel;
+            }
+
+            return $lcfirst ? mb_strtolower($tableName) : $tableName;
         }
 
-        return $lcfirst ? mb_strtolower($tableName) : $tableName;
+        return __(ucfirst(camel2words(Str::studly($reflect->getShortName()))));
     }
 
     /**
