@@ -2,6 +2,9 @@
 
 namespace DummyNamespace;
 
+/**
+ * @link https://laravel.com/docs/master/eloquent-mutators
+ */
 trait DummyClass
 {
     public function getStateTextAttribute()

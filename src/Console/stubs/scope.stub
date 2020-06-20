@@ -4,12 +4,15 @@ namespace DummyNamespace;
 
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @link https://laravel.com/docs/master/eloquent#query-scopes
+ */
 trait DummyClass
 {
     /**
      * Scope a query to .
      *
-     * @param  Builder  $query
+     * @param  Builder $query
      * @return Builder
     */
     public function scope($query)

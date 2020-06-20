@@ -2,6 +2,9 @@
 
 namespace DummyNamespace;
 
+/**
+ * @link https://laravel.com/docs/master/eloquent-relationships
+ */
 trait DummyClass
 {
 

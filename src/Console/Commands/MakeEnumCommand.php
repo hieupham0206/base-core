@@ -9,8 +9,8 @@ class MakeEnumCommand extends GeneratorCommand
 {
 	protected $signature = 'make:enum
 						{name : Tên file enum}
-						{--option= : Option của enum}
-						{--force= :}';
+						{--option= : Option của enum (VD: COMPANY,1;BRANCH,2)}
+						{--force=}';
 
 	protected $description = 'Tạo file enum';
 
@@ -44,13 +44,6 @@ class MakeEnumCommand extends GeneratorCommand
 	protected function getStub()
 	{
 		return __DIR__ . '/../stubs/enum.stub';
-	}
-
-	protected function replaceClassName(&$stub, $className): self
-	{
-		$stub = str_replace('{$enumClass}', $className, $stub);
-
-		return $this;
 	}
 
 	protected function getPath($name)

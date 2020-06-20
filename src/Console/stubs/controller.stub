@@ -6,6 +6,7 @@ BaseController
 use App\Models\{{modelName}};
 use Cloudteam\BaseCore\Utils\ModelFilter;
 use Cloudteam\BaseCore\Tables\TableFacade;
+use App\Http\Actions\ChangeModelState;
 TableNamespace
 use Illuminate\{Http\Request, Http\JsonResponse, Http\RedirectResponse};
 
@@ -186,6 +187,30 @@ class DummyClass extends Controller
         return $this->asJson([
             'total_count' => $totalCount,
             'items'       => ${{crudName}}->toArray(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param ChangeModelState $action
+     * @param {{modelName}} ${{crudNameSingular}}
+     *
+     * @return JsonResponse
+     */
+    public function changeState(Request $request, ChangeModelState $action, {{modelName}} ${{crudNameSingular}})
+    {
+        $state = $request->post('state');
+
+        $result = $action->execute(${{crudNameSingular}}, $state);
+
+        if ($result) {
+            return $this->asJson([
+                'message' => __('Data edited successfully'),
+            ]);
+        }
+
+        return $this->asJson([
+            'message' => __('Data edited unsuccessfully'),
         ]);
     }
 }
