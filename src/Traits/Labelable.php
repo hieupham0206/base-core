@@ -28,7 +28,15 @@ trait Labelable
                 $label = __(Str::title(camel2words(strtolower($field))));
             }
 
+            if (is_array($label)) {
+                return $field;
+            }
+
             return $label;
+        }
+
+        if (is_array($labelFromModule)) {
+            return $field;
         }
 
         return $labelFromModule;
