@@ -9,13 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
  */
 trait DummyClass
 {
-    /**
-     * Scope a query to .
-     *
-     * @param  Builder $query
-     * @return Builder
-    */
-    public function scope($query)
+    public function scope(Builder $query): Builder
     {
         return $query;
     }

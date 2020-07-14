@@ -9,6 +9,7 @@ use Cloudteam\BaseCore\Tables\TableFacade;
 use App\Http\Actions\ChangeModelState;
 TableNamespace
 use Illuminate\{Http\Request, Http\JsonResponse, Http\RedirectResponse};
+use Illuminate\View\View;
 
 class DummyClass extends Controller
 {
@@ -36,17 +37,12 @@ class DummyClass extends Controller
         ] );
     }
 
-    /**
-     * @return string
-     */
-    public function table() {
+    public function table(): string
+    {
     	return ( new TableFacade( new {{modelName}}Table() ) )->getDataTable();
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
-    public function create()
+    public function create(): View
     {
         return view('{{viewName}}.create', [
             '{{crudNameSingular}}' => new {{modelName}},
@@ -84,22 +80,14 @@ class DummyClass extends Controller
         }
     }
 
-    /**
-     * @param  {{modelName}} ${{crudNameSingular}}
-     * @return \Illuminate\View\View
-     */
-    public function show({{modelName}} ${{crudNameSingular}})
+    public function show({{modelName}} ${{crudNameSingular}}): View
     {
         return view('{{viewName}}.show', [
             '{{crudNameSingular}}' => ${{crudNameSingular}}
         ]);
     }
 
-    /**
-     * @param  {{modelName}} ${{crudNameSingular}}
-     * @return \Illuminate\View\View
-     */
-    public function edit({{modelName}} ${{crudNameSingular}})
+    public function edit({{modelName}} ${{crudNameSingular}}): View
     {
         return view('{{viewName}}.edit', [
             '{{crudNameSingular}}' => ${{crudNameSingular}},
@@ -139,11 +127,7 @@ class DummyClass extends Controller
         }
     }
 
-    /**
-     * @param {{modelName}} ${{crudNameSingular}}
-     * @return JsonResponse
-     */
-    public function destroy({{modelName}} ${{crudNameSingular}})
+    public function destroy({{modelName}} ${{crudNameSingular}}): JsonResponse
     {
         try {
         	${{crudNameSingular}}->delete();
@@ -156,11 +140,8 @@ class DummyClass extends Controller
         }
     }
 
-    /**
-     * @return mixed|\Symfony\Component\HttpFoundation\ParameterBag
-     * @throws \Exception
-     */
-    public function destroys() {
+    public function destroys(): JsonResponse
+    {
         try {
             $ids = \request()->get( 'ids' );
             {{modelName}}::destroy( $ids );
@@ -173,10 +154,8 @@ class DummyClass extends Controller
         }
     }
 
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function {{crudName}}() {
+    public function {{crudName}}(): JsonResponse
+    {
         $modelFilter = new ModelFilter({{modelName}}::query());
 
         ${{crudName}} = $modelFilter->filter()->selectRaw('id, name');
@@ -190,14 +169,7 @@ class DummyClass extends Controller
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @param ChangeModelState $action
-     * @param {{modelName}} ${{crudNameSingular}}
-     *
-     * @return JsonResponse
-     */
-    public function changeState(Request $request, ChangeModelState $action, {{modelName}} ${{crudNameSingular}})
+    public function changeState(Request $request, ChangeModelState $action, {{modelName}} ${{crudNameSingular}}): JsonResponse
     {
         $state = $request->post('state');
 
